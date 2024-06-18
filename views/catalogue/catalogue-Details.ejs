@@ -1,0 +1,274 @@
+<%- include('../include/header') %>
+    <!-- Breadcrumb Section Start -->
+    <section class="breadcrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-contain">
+                        <h2>
+                            <%= foundProduct.name %>
+                        </h2>
+                        <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="/">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+
+                                <li class="breadcrumb-item active">
+                                    Product Detail
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Product Left Sidebar Start -->
+    <section class="product-section">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-xxl-12 col-xl-8 col-lg-7 wow fadeInUp">
+                    <div class="row g-4">
+                        <div class="col-xl-6 wow fadeInUp">
+                            <div class="product-left-box">
+                                <div class="row g-2">
+                                    <div class="col-xxl-10 col-lg-12 col-md-10 order-xxl-2 order-lg-1 order-md-2">
+                                        <div class="product-main-2 no-arrow">
+                                            <% if (foundProduct) { %>
+                                                <div>
+                                                    <div class="slider-image">
+                                                        <img src="<%= foundProduct.image %>" id="img-1"
+                                                            data-zoom-image="<%= foundProduct.image %>"
+                                                            class="img-fluid image_zoom_cls-0 blur-up lazyload" alt=""
+                                                            onerror="handleImageError(this)">
+                                                    </div>
+                                                </div>
+                                                <% } else { %>
+                                                    <!-- Render a placeholder image or any other content when the image is not available -->
+                                                    <div>
+                                                        <div class="slider-image">
+                                                            <img src="https://shopmefast.com/images/product-no-image.jpg"
+                                                                id="img-1"
+                                                                data-zoom-image="https://shopmefast.com/images/product-no-image.jpg"
+                                                                class="img-fluid image_zoom_cls-0 blur-up lazyload"
+                                                                alt="" onerror="handleImageError(this)">
+                                                        </div>
+                                                    </div>
+                                                    <% } %>
+
+
+
+
+
+
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="right-box-contain">
+                                <!-- <h6 class="offer-top">30% Off</h6> -->
+                                <h4 class="name">
+                                    <%= foundProduct.name %>
+                                </h4>
+
+
+                                <div class="product-contain">
+                                    <p>
+                                        <%= foundProduct.item_code %>
+                                    </p>
+                                </div>
+
+                                <div class="product-package">
+                                    <div class="product-title">
+                                        <h4 id="conversionRateDisplay">
+                                        </h4>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="product-section-box">
+                                <ul class="nav nav-tabs custom-nav" id="myTab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="description-tab" data-bs-toggle="tab"
+                                            data-bs-target="#description" type="button" role="tab">Description</button>
+                                    </li>
+
+
+                                </ul>
+
+                                <div class="tab-content custom-tab" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="description" role="tabpanel">
+                                        <div class="product-description">
+                                            <div class="nav-desh">
+                                                <p>
+                                                    <%= foundProduct.description %>
+                                                </p>
+                                            </div>
+
+
+
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+    <!-- Product Left Sidebar End -->
+
+
+
+
+
+
+
+
+    <%- include('../include/footer.ejs') %>
+
+        <script>
+            // Event listener for form submission
+            $('.cartForm').submit(function (event) {
+                event.preventDefault(); // Prevent default form submission
+
+                // Retrieve form data
+                var formData = $(this).serialize();
+                var productId = $(this).data('product-id');
+
+                $('#loader-overlay').fadeIn();
+
+
+                // Send AJAX request to add item to cart
+                $.ajax({
+                    url: '/add-to-cart/' + productId,
+                    type: 'POST',
+                    data: formData,
+                    success: function (response) {
+                        $('#loader-overlay').fadeOut();
+
+                        // Optionally, you can perform additional actions after successfully adding the item to cart
+                        $.notify({
+                            icon: "fa fa-check",
+                            title: "Success!",
+                            message: "Item added to cart successfully",
+                        }, {
+                            element: "body",
+                            position: null,
+                            type: "info",
+                            allow_dismiss: true,
+                            newest_on_top: false,
+                            showProgressbar: true,
+                            placement: {
+                                from: "top",
+                                align: "right",
+                            },
+                            offset: 20,
+                            spacing: 10,
+                            z_index: 1031,
+                            delay: 1000,
+                            animate: {
+                                enter: "animated fadeInDown",
+                                exit: "animated fadeOutUp",
+                            },
+                            icon_type: "class",
+                            template: '<div data-notify="container" class="col-xxl-3 col-lg-5 col-md-6 col-sm-7 col-12 alert alert-{0}" role="alert">' +
+                                '<button type="button" aria-hidden="true" class="btn-close" data-notify="dismiss"></button>' +
+                                '<span data-notify="icon"></span> ' +
+                                '<span data-notify="title">{1}</span> ' +
+                                '<span data-notify="message">{2}</span>' +
+                                '<div class="progress" data-notify="progressbar">' +
+                                '<div class="progress-bar progress-bar-info progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+                                "</div>" +
+                                '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                                "</div>",
+                        });
+
+
+
+                        // Optionally, you can perform additional actions after successfully adding the item to cart
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Failed to add item to cart:', error);
+                        alert('Failed to add item to cart');
+                        // Optionally, you can handle the error and perform additional actions
+                    }
+                });
+            });
+
+            // Event listeners for clicking on plus and minus buttons (same as your existing code)
+            // Event listener for clicking on the add to cart button (same as your existing code)
+        </script>
+
+
+        <script>
+
+            // Event listener for clicking on the plus button
+            $('.qty-right-plus').click(function () {
+                var $quantityInput = $(this).siblings('.qty-input');
+                var currentVal = parseInt($quantityInput.val());
+
+                if (currentVal < 9) {
+                    $quantityInput.val(currentVal + 1);
+                    // Retrieve the updated quantity value
+                    var quantity = $quantityInput.val();
+                    //("Updated quantity:", quantity);
+                }
+            });
+
+            // Event listener for clicking on the minus button
+            $('.qty-left-minus').click(function () {
+                var $quantityInput = $(this).siblings('.qty-input');
+                var currentVal = parseInt($quantityInput.val());
+
+                if (currentVal > 0) {
+                    $quantityInput.val(currentVal - 1);
+                    // Retrieve the updated quantity value
+                    var quantity = $quantityInput.val();
+                    //("Updated quantity:", quantity);
+                }
+            });
+
+
+
+        </script>
+
+        <script>
+            // Get references to the select element and the container for displaying conversion rate
+            const uomSelect = document.getElementById('uomSelect');
+            const conversionRateDisplay = document.getElementById('conversionRateDisplay');
+
+            // Add event listener for change event on the select element
+            uomSelect.addEventListener('change', function () {
+                // Get the selected option
+                const selectedOption = uomSelect.options[uomSelect.selectedIndex];
+                // Get the conversion rate from the selected option's value
+                const conversionRate = selectedOption.value;
+                // Update the display with the selected conversion rate
+                conversionRateDisplay.textContent = `AED : ${conversionRate}`;
+            });
+
+            // Trigger the change event to display the initial conversion rate
+            uomSelect.dispatchEvent(new Event('change'));
+        </script>

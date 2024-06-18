@@ -1,0 +1,550 @@
+<%- include('../include/header') %>
+
+    <style>
+        .showhide_id {
+            display: none;
+        }
+    </style>
+
+
+    <style>
+        /* For the Reveal Effect */
+        /* Initial styling for read more */
+        .more {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            padding: 7px;
+            color: black;
+            font-weight: bold;
+            background: white;
+            z-index: 1;
+        }
+
+
+
+
+
+
+        .post {
+            box-shadow: 3px 3px 3px #424242;
+            background: #ffffff;
+            border: 1px solid lightgrey;
+        }
+
+        .date {
+            color: cadetblue;
+        }
+
+        .article {
+            color: grey;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        }
+
+        .content {
+            margin-top: 100px;
+            padding-top: 20px;
+        }
+
+        .post {
+            position: relative;
+            /*for more link*/
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 40px;
+            padding: 15px;
+            max-width: 100%;
+        }
+
+        .article-title,
+        .date {
+            padding-top: 2px;
+            padding-bottom: 2px;
+        }
+
+        .date {
+            border-bottom: 1px solid #424242;
+        }
+
+        .article-title {
+            margin-bottom: 20px;
+        }
+
+        .article {
+            position: relative;
+        }
+
+        .post-photo {
+            text-align: center;
+            line-height: 100px;
+            float: left;
+            width: 200px;
+            height: 200px;
+            margin: 0 20px 10px 0;
+        }
+
+        @media (min-width: 100px) and (max-width: 650px) {
+            .post-photo {
+                text-align: center;
+                line-height: 100px;
+
+                width: 100%;
+                height: 200px;
+                margin: 0 20px 10px 0;
+            }
+
+            body {
+                font-size: 15px;
+                background-color: lightblue !important;
+            }
+
+            .tableclass {
+                text-align: center;
+                max-width: 100% !important;
+                width: 1200px;
+            }
+        }
+
+        .tableclass {
+            /* text-align: center; */
+            max-width: 998px;
+            float: inline-start;
+        }
+    </style>
+    <style>
+        .custom-checkbox {
+            /* Hide the default checkbox */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            width: 15px;
+            /* Initial width */
+            height: 15px;
+            /* Initial height */
+            border: 2px solid #bfa881;
+            border-radius: 3px;
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+        }
+
+
+
+        .scale-checkbox {
+            transform: scale(1.5);
+            /* Adjust the scale to change the size */
+            margin: 10px;
+            /* Adjust the margin as needed */
+        }
+    </style>
+
+    <style>
+        @media (max-width: 576px) {
+            .form-check {
+                /* float: right; */
+                margin-top: 20px;
+                position: absolute;
+                right: 46px;
+            }
+
+            .table-xs tr,
+            .table-xs td,
+            .table-xs tbody,
+            .table-xs thead,
+            .table-xs tfoot,
+            .table-xs th {
+                display: table;
+                width: 100%;
+                border-collapse: separate;
+            }
+
+
+
+            .table-xs>tbody tr:first-child {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            .table-xs td[title]:before {
+                content: attr(title) ": ";
+            }
+
+            .table-xs td:before {
+                white-space: nowrap;
+                width: 50%;
+                display: table-cell;
+                text-align: left;
+                font-weight: bold;
+            }
+
+            .table-xs .item-row td:first-child,
+            .table-xs .item-row td:nth-child(2) {
+                border: 0 none;
+            }
+
+            .table-xs .item-row td:first-child {
+                border: 0 none;
+            }
+
+            .table-xs .item-row td:last-child {
+                background: #eee;
+                border-bottom: 2px solid #a2a2a2;
+                font-weight: bold;
+            }
+
+            .table-xs .item-row img {
+                margin-bottom: 1em;
+            }
+
+            .table-xs .total-row td {
+                display: table-cell;
+                width: 1%;
+                border-top: 0 none;
+                border-bottom: 3px double #a2a2a2;
+                font-weight: bold;
+                font-size: 1.5em;
+            }
+
+            .table-xs .total-row td:first-child {
+                width: 99%;
+            }
+        }
+    </style>
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadcrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-contain">
+                        <h2>User Dashboard</h2>
+                        <!-- <nav>
+                                <ol class="breadcrumb mb-0">
+                                    <li class="breadcrumb-item">
+                                        <a href="/">
+                                            <i class="fa-solid fa-house"></i>
+                                        </a>
+                                    </li>
+                                    <li class="breadcrumb-item active">User Dashboard</li>
+                                </ol>
+                            </nav> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+
+
+    <section class="user-dashboard-section section-b-space">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-xxl-12 col-lg-12">
+
+
+                    <div class="dashboard-right-sidebar">
+                        <div class="tab-content" id="pills-tabContent">
+
+                            <div class="dashboard-order">
+
+                                <div class="title">
+
+                                    <h2>Product Details</h2>
+
+
+                                </div>
+
+                                <div class="section-t-space">
+                                    <div class="banner-contain">
+
+                                        <div class="rowf">
+
+
+
+                                            <div class="col-md-6">
+
+                                                <% if (return_data && return_data.customer_detail) { %>
+                                                    <ul>
+                                                        <li>
+                                                            Order Number: <%= return_data.order_no %> ,
+                                                        </li>
+                                                        <li>
+                                                            Invoice Number: <%= return_data.invoice_no %> ,
+                                                        </li>
+                                                        <li>Invoice Date: <%= return_data.invoice_date %> ,
+                                                        </li>
+                                                        <li>AED <%= return_data.grand_total %>
+                                                        </li>
+                                                    </ul>
+                                                    <% } else { %>
+                                                        <ul>
+                                                            <li>
+                                                                Order Number: <%= order_id %> ,
+                                                            </li>
+
+                                                            <li>
+                                                                Invoice Number: <%= customer_trx_id %> ,
+                                                            </li>
+                                                            <li>Invoice Date: ,
+                                                            </li>
+                                                            <li>AED
+                                                            </li>
+                                                        </ul>
+                                                        <% } %>
+
+                                            </div>
+
+                                            <div class="col-md-6 mt-2">
+
+                                                <% if (return_data && return_data.customer_detail) { %>
+                                                    <ul>
+                                                        <h5><strong>Shipped to address:</strong></h5>
+                                                        <li>
+                                                            <%= return_data.customer_detail.customer_name %>
+                                                        </li>
+                                                        <li>
+                                                            <%= return_data.customer_detail.shipping_address %>, <%=
+                                                                    return_data.customer_detail.shipping_area %>,
+                                                                    <%= return_data.customer_detail.shipping_landmark %>
+                                                                        ,
+                                                                        <%= return_data.customer_detail.shipping_region
+                                                                            %>,
+                                                                            <%= return_data.customer_detail.shipping_country
+                                                                                %>
+                                                        </li>
+                                                    </ul>
+                                                    <% } else { %>
+                                                        <h5>Shipped to address:</h5>
+                                                        <% } %>
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-12">
+                                    <div class="product-section-box">
+                                        <div class="product-description">
+
+
+
+                                            <form action="product_Return" method="post">
+                                                <input type="hidden" value="<%= order_id %>" name="order_id"
+                                                    class="text">
+                                                <input type="hidden" value="<%= customer_trx_id %>"
+                                                    name="customer_trx_id" class="text">
+
+                                                <% if (return_data && return_data.product_details &&
+                                                    return_data.product_details.length===0) { %>
+                                                    <tr>
+                                                        <td colspan="6">No data found</td>
+                                                    </tr>
+                                                    <% } else if (return_data && return_data.product_details) { %>
+                                                        <% return_data.product_details.forEach((data, index)=> { %>
+                                                            <div class="post" id="post-<%= index %>">
+                                                                <div class="date">
+                                                                    <div class="d-flex justify-content-between">
+                                                                        <h3>
+                                                                            <p><strong>
+                                                                                    <%= data.item_code %>
+                                                                                </strong></p>
+                                                                        </h3>
+
+
+
+                                                                        <% if (data.qty> data.return_qty) { %>
+                                                                            <input
+                                                                                class="form-check-input custom-checkbox scale-checkbox"
+                                                                                type="checkbox" value="<%= data.id %>"
+                                                                                name="product_id[]"
+                                                                                id="flexCheckChecked-<%= index %>"
+                                                                                data-index="<%= index %>">
+                                                                            <% } else { %>
+
+                                                                                <% } %>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="article-title">
+                                                                    <h3>
+                                                                        <small>Returnable Qty (<%= data.qty -
+                                                                                data.return_qty %>) EA</small>
+                                                                    </h3>
+                                                                </div>
+                                                                <div class="article clearfix">
+                                                                    <div class="post-photo">
+                                                                        <% if (data.image) { %>
+                                                                            <img src="<%= data.image %>"
+                                                                                class="img-fluid blur-up lazyload"
+                                                                                alt="Primary Image"
+                                                                                onerror="handleImageError(this)"
+                                                                                style="height: 100%;">
+                                                                            <% } else { %>
+                                                                                <img src="https://shopmefast.com/images/product-no-image.jpg"
+                                                                                    class="img-fluid blur-up lazyload"
+                                                                                    alt="Fallback Image"
+                                                                                    style="height: 40px;">
+                                                                                <% } %>
+                                                                    </div>
+                                                                    <p class="mt-5">
+                                                                        <%= data.product_name %><br>
+                                                                    </p>
+
+                                                                    <% if (data.qty> data.return_qty) { %>
+                                                                        <div class="col-md-12 showhide_id"
+                                                                            id="showhide-<%= index %>">
+                                                                            <div class="row">
+                                                                                <div class="col-md-6 col-sm-12">
+                                                                                    <div class="theme-form-floating">
+                                                                                        <input type="number"
+                                                                                            class="form-control"
+                                                                                            id="return_qty"
+                                                                                            name="return_qty[]"
+                                                                                            placeholder="Enter Qty, (2)*"
+                                                                                            maxlength="10">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-6 col-sm-12">
+                                                                                    <div class="theme-form-floating">
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            id="batch_no"
+                                                                                            name="batch_no[]"
+                                                                                            placeholder="Batch Number"
+                                                                                            maxlength="10">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-6 col-sm-12">
+                                                                                    <div class="theme-form-floating">
+                                                                                        <select class="form-select"
+                                                                                            id="RETURN_REASON"
+                                                                                            name="reason_id[]">
+                                                                                            <option selected disabled
+                                                                                                value="<%= data.reason_id %>">
+                                                                                                Select Retailer Type
+                                                                                            </option>
+                                                                                            <%
+                                                                                                result_data.forEach(data=>
+                                                                                                { %>
+                                                                                                <option
+                                                                                                    value="<%= data.id %>">
+                                                                                                    <%= data.reason %>
+                                                                                                </option>
+                                                                                                <% }); %>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-6 col-sm-12">
+                                                                                    <div class="theme-form-floating">
+                                                                                        <input type="date"
+                                                                                            class="form-control"
+                                                                                            name="date[]">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <% } %>
+
+                                                                            <div class="col-md-12 tableclass">
+                                                                                <table class="table table-xs">
+                                                                                    <tr>
+                                                                                        <th class="text-right">Qty</th>
+                                                                                        <th class="text-right">Unit
+                                                                                            Price</th>
+                                                                                        <th class="text-right">Total
+                                                                                        </th>
+                                                                                    </tr>
+                                                                                    <tr class="item-row">
+                                                                                        <td class="text-right"
+                                                                                            title="Amount">Qty <%=
+                                                                                                data.qty %> EA</td>
+                                                                                        <td class="text-right"
+                                                                                            title="Price">AED <%=
+                                                                                                data.conv_rate %>
+                                                                                        </td>
+                                                                                        <td class="text-right"
+                                                                                            title="Total">AED <%=
+                                                                                                data.total_amount %>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </div>
+                                                                </div>
+                                                            </div>
+                                                            <% }); %>
+                                                                <% } %>
+                                                                    <button style="float: inline-end;"
+                                                                        class="btn theme-bg-color text-white btn-sm fw-bold mt-lg-0 mt-3">
+                                                                        Submit
+                                                                    </button>
+                                            </form>
+
+
+
+
+
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const checkboxes = document.querySelectorAll('.form-check-input.custom-checkbox.scale-checkbox');
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function () {
+                    const index = this.getAttribute('data-index');
+                    const showhideElement = document.getElementById(`showhide-${index}`);
+                    //(index);
+
+                    // Check if showhideElement is found
+                    //(showhideElement);
+
+                    if (this.checked) {
+                        showhideElement.style.display = 'block';
+                    } else {
+                        showhideElement.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+
+
+
+    <script>
+        <%
+            // Define the formatDate function
+            function formatDate(dateString) {
+                const date = new Date(dateString); // Parse the date string
+                const year = date.getFullYear(); // Get the year
+                const month = String(date.getMonth() + 1).padStart(2, '0'); // Get the month (zero-based) and pad with zero if needed
+                const day = String(date.getDate()).padStart(2, '0'); // Get the day of the month and pad with zero if needed
+                return `${year}-${month}-${day}`; // Return the formatted date
+            }
+            %>
+
+    </script>
+
+    <%- include('../include/footer') %>

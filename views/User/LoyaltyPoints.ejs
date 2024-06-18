@@ -1,0 +1,273 @@
+<%- include('../include/header') %>
+
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadcrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-contain">
+                        <h2>User Dashboard</h2>
+                        <!-- <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="/">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active">User Dashboard</li>
+                            </ol>
+                        </nav> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+
+    <section class="wow ">
+        <div class="container-fluid-lg">
+            <div class=" space shop-box no-arrow">
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="shop-category-box">
+                            <a href="./PreviousOrdersDelivered">
+                                <div class="shop-category-image">
+                                    <img src="<%= baseUrl %>/assets/img/55.png" class="blur-up lazyload" alt="">
+                                </div>
+                                <div class="category-box-name">
+                                    <h6>8000 Earned Points</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="shop-category-box">
+                            <a href="./frequently">
+                                <div class="shop-category-image">
+                                    <img src="<%= baseUrl %>/assets/img/56.png" class="blur-up lazyload" alt="">
+                                </div>
+                                <div class="category-box-name">
+                                    <h6>O Redeemed Points</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="shop-category-box">
+                            <a href="./catalogue">
+                                <div class="shop-category-image">
+                                    <img src="<%= baseUrl %>/assets/img/57.png" class="blur-up lazyload" alt="">
+                                </div>
+                                <div class="category-box-name">
+                                    <h6> O Balance Points</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </section>
+
+
+    <section class="user-dashboard-section section-b-space">
+        <div class="container-fluid-lg">
+            <div class="row">
+
+                <div class="col-xxl-12 col-lg-12">
+
+                    <div class="dashboard-right-sidebar">
+                        <div class="dashboard-order">
+                            <div class="title">
+                                <h2>Loyalty Points</h2>
+                                <span class="title-leaf title-leaf-gray">
+
+                                </span>
+                            </div>
+
+
+                            <div class="col-12">
+                                <div class="product-section-box">
+                                    <ul class="nav nav-tabs custom-nav" id="myTab" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" id="description-tab" data-bs-toggle="tab"
+                                                data-bs-target="#description" type="button" role="tab">Loyalty
+                                                Points</button>
+                                        </li>
+
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="info-tab" data-bs-toggle="tab"
+                                                data-bs-target="#info" type="button" role="tab">Give
+                                                away</button>
+                                        </li>
+
+
+                                    </ul>
+
+                                    <div class="tab-content custom-tab" id="myTabContent">
+                                        <div class="tab-pane fade show active" id="description" role="tabpanel">
+                                            <div class="product-description">
+                                                <div class="table-responsive">
+
+                                                    <table class="table  table-bordered table-striped  table-hover">
+                                                        <thead class="table-dark">
+
+                                                            <tr>
+                                                                <th>Order No</th>
+
+                                                                <th>Amount</th>
+                                                                <th>Date</th>
+                                                                <th>Expiry date</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+
+
+
+
+
+                                                            <% if (!LoyaltyPoint_data || LoyaltyPoint_data.length===0) {
+                                                                %>
+                                                                <tr>
+                                                                    <td colspan="4">No data found</td>
+                                                                </tr>
+                                                                <% } else { %>
+                                                                    <% LoyaltyPoint_data.forEach(Points=> { %>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <%= Points.order_no %>
+                                                                            </td>
+                                                                            <td>
+                                                                                <% if (Points.point_type==="DEBIT" ) {
+                                                                                    %>
+                                                                                    <span
+                                                                                        class="debit-color text-danger"
+                                                                                        style="color: red !important;">
+                                                                                        - <%= Points.loyalty_point %>
+                                                                                    </span>
+                                                                                    <% } else if
+                                                                                        (Points.point_type==="CREDIT" )
+                                                                                        { %>
+                                                                                        <span
+                                                                                            class="credit-color text-success">
+                                                                                            + <%= Points.loyalty_point
+                                                                                                %>
+                                                                                        </span>
+                                                                                        <% } else { %>
+                                                                                            <!-- Render something else or do nothing -->
+                                                                                            <% } %>
+                                                                            </td>
+                                                                            <td>
+                                                                                <%= formatDate(Points.created_date) %>
+                                                                            </td>
+                                                                            <td>
+                                                                                <%= formatDate(Points.expiry_date) %>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <% }) %>
+                                                                            <% } %>
+
+
+
+
+
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+                                        <div class="tab-pane fade" id="info" role="tabpanel">
+                                            <div class="table-responsive">
+
+                                                <table class="table  table-bordered table-striped  table-hover">
+                                                    <thead class="table-dark">
+
+                                                        <tr>
+                                                            <th>Order No</th>
+
+                                                            <th>Amount</th>
+                                                            <th>Date</th>
+                                                            <th>Expiry date</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+
+                                                        <% if (!give_awayPoint_data || give_awayPoint_data.length===0) {
+                                                            %>
+                                                            <tr>
+                                                                <td colspan="4">No data found</td>
+                                                            </tr>
+                                                            <% } else { %>
+                                                                <% give_awayPoint_data.forEach(Points=> { %>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <%= Points.order_no %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= Points.give_away_product %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= formatDate(Points.created_date) %>
+                                                                        </td>
+                                                                        <td>
+
+
+                                                                            <%= formatDate(Points.expiry_date) %>
+
+                                                                        </td>
+                                                                    </tr>
+                                                                    <% }) %>
+                                                                        <% } %>
+
+
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <%- include('../include/footer.ejs') %>
+
+        <script>
+<%
+                // Define the formatDate function
+                function formatDate(dateString) {
+                    const date = new Date(dateString); // Parse the date string
+                    const year = date.getFullYear(); // Get the year
+                    const month = String(date.getMonth() + 1).padStart(2, '0'); // Get the month (zero-based) and pad with zero if needed
+                    const day = String(date.getDate()).padStart(2, '0'); // Get the day of the month and pad with zero if needed
+                    return `${year}-${month}-${day}`; // Return the formatted date
+                }
+                %>
+
+        </script>

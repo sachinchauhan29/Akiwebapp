@@ -1,0 +1,386 @@
+<%- include('../include/header') %>
+
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadcrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-contain">
+                        <h2>Top Brands</h2>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+
+
+
+
+    <section class="section-b-space shop-section">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="row g-sm-4 g-3 row-cols-xxl-5 row-cols-xl-3 row-cols-lg-2 row-cols-md-3 row-cols-2 product-list-section"
+                        id="TopBrands-list">
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Quick View Modal Box Start -->
+    <div class="modal fade theme-modal view-modal" id="view" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-xl modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-header p-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-sm-4 g-2">
+                        <div class="col-lg-6">
+                            <div class="slider-image">
+
+                                <!-- <img id="modalImage" src="" class="img-fluid blur-up lazyload" alt="Modal Image"
+                                    style="height: 250px;"> -->
+
+                                <img id="modalImage" src="../assets/images/product/category/1.jpg"
+                                    class="img-fluid blur-up lazyload" alt="">
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="right-sidebar-modal">
+                                <h5 class="title-name" id="applicableProducts"></h5>
+                                <p id="description"></p>
+
+
+                                <div class="product-detail">
+                                    <h4>Scheme Name</h4>
+                                    <p>Discount Amount Running
+                                        Quantity
+                                    </p>
+                                </div>
+
+                                <div class="product-detail">
+                                    <h5>Validity: <span id="validity"></span></h5>
+
+                                </div>
+
+                                <div class="product-detail">
+                                    <h4>Applicable For</h4>
+                                    <p id="applicableProducts">
+                                    </p>
+                                </div>
+
+                                <div class="product-detail">
+                                    <h5>On Purchase of QTY: <span id="on_purchase_of_qty"></span></h5>
+
+                                </div>
+
+
+                                <div class="product-detail">
+                                    <h5>Discount : <span id="Discount"></span></h5>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Quick View Modal Box End -->
+
+
+    <%- include('../include/footer.ejs') %>
+
+
+        <script>
+
+            $(document).on("click", ".addcart-BestSellers", function () {
+                // Add the "open" class to the next element
+                $(this).next().addClass("open");
+                // Set the value of the quantity input box to 1
+                $(this).closest('.add-to-cart-box').find('.qty-input').val('1');
+                BestSellers.call(this); // Pass `this` as an argument
+
+            });
+
+
+            $(document).on("click", ".BestSellers_qty_plus", function () {
+                var $quantityInput = $(this).siblings('.qty-input');
+                var currentVal = parseInt($quantityInput.val());
+
+                if (currentVal < 9) {
+                    $quantityInput.val(currentVal + 1);
+                    var quantity = $quantityInput.val();
+                    //("Updated quantity:", quantity);
+                    BestSellers.call(this); // Pass `this` as an argument
+
+                } else if (currentVal === 9) {
+                    alert("Maximum quantity reached!"); // Display alert message
+                }
+            });
+            // Event listener for clicking on the minus button
+            $(document).on("click", ".BestSellers_qty_minus", function () {
+                var $quantityInput = $(this).siblings('.qty-input');
+                var currentVal = parseInt($quantityInput.val());
+
+                if (currentVal > 0) {
+                    $quantityInput.val(currentVal - 1);
+                    var quantity = $quantityInput.val();
+                    BestSellers.call(this); // Pass `this` as an argument
+                }
+            });
+
+
+
+            function BestSellers() {
+                var form = $(this).closest('.BestSellers')[0]; // Get the native DOM element
+                // Now you can use formData and productId as needed
+                var formData = new FormData(form);
+                var productId = form.getAttribute('data-product-id');
+                var xhr = new XMLHttpRequest();
+                // Setup AJAX request
+                xhr.open('POST', '/addToCartBestSellers/' + productId);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        // Request completed
+                        if (xhr.status === 200) {
+                            // Success
+                            //(xhr.responseText);
+
+                            // Optionally, you can perform additional actions after successfully adding the item to cart
+                            $.notify({
+                                icon: "fa fa-check",
+                                title: "Success!",
+                                message: "Item added to cart successfully",
+                            }, {
+                                element: "body",
+                                position: null,
+                                type: "info",
+                                allow_dismiss: true,
+                                newest_on_top: false,
+                                showProgressbar: true,
+                                placement: {
+                                    from: "top",
+                                    align: "right",
+                                },
+                                offset: 20,
+                                spacing: 10,
+                                z_index: 1031,
+                                delay: 1000,
+                                animate: {
+                                    enter: "animated fadeInDown",
+                                    exit: "animated fadeOutUp",
+                                },
+                                icon_type: "class",
+                                template: '<div data-notify="container" class="col-xxl-3 col-lg-5 col-md-6 col-sm-7 col-12 alert alert-{0}" role="alert">' +
+                                    '<button type="button" aria-hidden="true" class="btn-close" data-notify="dismiss"></button>' +
+                                    '<span data-notify="icon"></span> ' +
+                                    '<span data-notify="title">{1}</span> ' +
+                                    '<span data-notify="message">{2}</span>' +
+                                    '<div class="progress" data-notify="progressbar">' +
+                                    '<div class="progress-bar progress-bar-info progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+                                    "</div>" +
+                                    '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                                    "</div>",
+                            });
+
+                            // Hide loader overlay
+                            document.getElementById('loader-overlay').style.display = 'none';
+                        } else {
+                            // Error
+                            console.error('Failed to add item to cart:', xhr.statusText);
+                            alert('Failed to add item to cart');
+
+                            // Optionally, you can perform additional actions after unsuccessfully adding the item to cart
+                            $.notify({
+                                icon: "fa fa-times-circle",
+                                // title: "Success!",
+                                message: "Failed to add item to cart",
+                            }, {
+                                element: "body",
+                                position: null,
+                                type: "danger",
+                                allow_dismiss: true,
+                                newest_on_top: false,
+                                showProgressbar: true,
+                                placement: {
+                                    from: "top",
+                                    align: "right",
+                                },
+                                offset: 20,
+                                spacing: 10,
+                                z_index: 1031,
+                                delay: 1000,
+                                animate: {
+                                    enter: "animated fadeInDown",
+                                    exit: "animated fadeOutUp",
+                                },
+                                icon_type: "class",
+                                template: '<div data-notify="container" class="col-xxl-3 col-lg-5 col-md-6 col-sm-7 col-12 alert alert-{0}" role="alert">' +
+                                    '<button type="button" aria-hidden="true" class="btn-close" data-notify="dismiss"></button>' +
+                                    '<span data-notify="icon"></span> ' +
+                                    '<span data-notify="title">{1}</span> ' +
+                                    '<span data-notify="message">{2}</span>' +
+                                    '<div class="progress" data-notify="progressbar">' +
+                                    '<div class="progress-bar progress-bar-info progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+                                    "</div>" +
+                                    '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                                    "</div>",
+                            });
+
+                            // Hide loader overlay
+                            document.getElementById('loader-overlay').style.display = 'none';
+                        }
+                    }
+                };
+
+                // Send AJAX request
+                xhr.send(new URLSearchParams(formData));
+
+                // Show loader overlay
+                document.getElementById('loader-overlay').style.display = 'block';
+
+
+            }
+
+        </script>
+
+
+        <script>
+
+            function TopBrands() {
+
+                //("Loading more products...");
+                $('#loader-overlay').fadeIn();
+
+                // AJAX request
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', `/top-brands`);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        // Request completed
+                        if (xhr.status === 200) {
+                            // Success
+                            const responses = JSON.parse(xhr.responseText); // Update responses variable
+                            //(responses);
+                            $('#loader-overlay').fadeOut();
+                            const productList = $('#TopBrands-list');
+                            responses.TOP_BRAND_PRODUCT.forEach(data => {
+                                const productBoxHTML = generateTopBrands(data);
+                                productList.append(productBoxHTML);
+                            });
+
+
+
+
+
+
+                        } else {
+                            // Error loading more products
+                            console.error("Error loading more products:", textStatus, errorThrown);
+                            // Handle errors appropriately (e.g., display an error message to the user)
+                        }
+                    }
+                };
+
+                // Send AJAX request
+                xhr.send("postData");
+            }
+            TopBrands();
+
+
+            function generateTopBrands(data) {
+
+                return `
+            
+            
+            
+            <div>
+<div class="product-box product-box-bg wow fadeInUp" data-wow-delay="0.1s">
+<form class="schemeForm"  method="post">
+${data.scheme_id !== null ? `
+<input type="hidden" name="scheme_id" value="${data.scheme_id}">
+<input type="hidden" name="product_id" value="${data.product_id}">
+<input type="hidden" name="customer_product_master_id" value="${data.customer_product_master_id}">
+<button type="submit" class="scheme_id">
+    <img src="./assets/img/discount.png" style="height: 30px;" alt="" class="src">
+</button>` :
+                        `<button type="submit" class="scheme_id"></button>`
+                    }
+</form>
+<div class="product-image">
+${data ? `
+<a href="/TopBrands/${data.product_id}" class="href">
+    <div class="slider-image">
+        <img src="${data.image}" class="img-fluid blur-up lazyload" alt="" onerror="handleImageError(this)">
+    </div>
+</a>` :
+                        `<div class="slider-image">
+    <img src="https://shopmefast.com/images/product-no-image.jpg" class="img-fluid blur-up lazyload" alt="" onerror="handleImageError(this)">
+</div>`
+                    }
+</div>
+<div class="product-detail">
+<a href="/TopBrands/${data.product_id}">
+<h6 class="name">${data.name}</h6>
+</a>
+${data.uom_details.length > 0 ? `
+<h5 class="sold text-content"> AED:
+    <span class="theme-color price">${data.uom_details[0].conv_rate}</span>
+</h5>` :
+                        `<h5 class="sold text-content"></h5>`
+                    }
+<form  method="post" class="BestSellers" data-product-id="${data.product_id}">
+<input type="hidden" name="product_id" value="${data.product_id}">
+<select class="form-select select-form-size mt-2" name="primary_uom_code">
+    ${data.uom_details.map((uom, index) => `
+        <option value="${uom.id}" ${index === 0 ? 'selected' : ''}>${uom.uom_code}</option>
+    `).join('')}
+</select>
+<div class="add-to-cart-box bg-white">
+    <button type="button" class="btn btn-add-cart addcart-button addcart-BestSellers theme-bg-color text-white">
+        Add <span class="add-icon bg-light-gray"><i class="fa-solid fa-plus"></i></span>
+    </button>
+    <div class="cart_qty qty-box">
+        <div class="input-group bg-white">
+            <button type="button" class="qty-left-minus BestSellers_qty_minus bg-gray" data-type="minus" data-field="">
+                <i class="fa fa-minus"></i>
+            </button>
+            <input class="form-control input-number qty-input" type="text" name="quantity" value="0">
+            <button type="button" class="qty-right-plus BestSellers_qty_plus bg-gray" data-type="plus" data-field="">
+                <i class="fa fa-plus"></i>
+            </button>
+        </div>
+    </div>
+</div>
+</form>
+</div>
+</div>
+
+</div>
+`;
+            }
+
+
+
+        </script>

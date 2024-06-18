@@ -1,0 +1,365 @@
+<%- include('../include/header') %>
+
+    <!-- mobile fix menu end -->
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadcrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-contain">
+                        <h2>Order Tracking</h2>
+                        <!-- <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="/">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active">Order Tracking</li>
+                            </ol>
+                        </nav> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Order Detail Section Start -->
+    <section class="order-detail">
+        <div class="container-fluid-lg">
+            <div class="row g-sm-4 g-3">
+                <!-- <div class="col-xxl-3 col-xl-4 col-lg-6">
+                    <div class="order-image">
+                        <img src="<%= baseUrl %>/assets/images/vegetable/product/6.png"
+                            class="img-fluid blur-up lazyload" alt="">
+                    </div>
+                </div> -->
+
+
+
+                <div class="col-xxl-12 col-xl-12 col-lg-12">
+                    <div class="row g-sm-4 g-3">
+                        <div class="col-xl-4 col-sm-6">
+                            <div class="order-details-contain">
+
+
+                                <div class="order-details-name">
+                                    <h5 class="text-content">Name</h5>
+                                    <h5 class="theme-color">
+                                        <%= OrdersDetails.customer_detail.customer_name %>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-sm-6">
+                            <div class="order-details-contain">
+                                <div class="order-tracking-icon">
+                                    <i data-feather="package" class="text-content"></i>
+                                </div>
+
+                                <div class="order-details-name">
+                                    <h5 class="text-content">order no</h5>
+                                    <h2 class="theme-color">
+                                        <%= OrdersDetails.order_no %>
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="col-xl-4 col-sm-6">
+                            <div class="order-details-contain">
+                                <div class="order-tracking-icon">
+                                    <i class="text-content" data-feather="crosshair"></i>
+                                </div>
+
+                                <div class="order-details-name">
+                                    <h5 class="text-content">From</h5>
+                                    <h4>STR. Smardan 9, Bucuresti, romania.</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-sm-6">
+                            <div class="order-details-contain">
+                                <div class="order-tracking-icon">
+                                    <i class="text-content" data-feather="map-pin"></i>
+                                </div>
+
+                                <div class="order-details-name">
+                                    <h5 class="text-content">Destination</h5>
+                                    <h4>Flokagata 24, 105 Reykjavik, Iceland</h4>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-12 overflow-hidden">
+                            <ol class="progtrckr">
+
+                                <% if (OrdersDetails.order_status==="ENTERED" ) { %>
+
+                                    <li class="progtrckr-done">
+                                        <h5>In Processing</h5>
+                                    </li>
+                                    <li class="progtrckr-todo">
+                                        <h5>Confirmed</h5>
+                                    </li>
+                                    <li class="progtrckr-todo">
+                                        <h5>Delivered</h5>
+                                    </li>
+
+                                    <% } else if (OrdersDetails.order_status==="BOOKED" ) { %>
+
+                                        <li class="progtrckr-done">
+                                            <h5>In Processing</h5>
+                                        </li>
+                                        <li class="progtrckr-done">
+                                            <h5>Confirmed</h5>
+                                        </li>
+                                        <li class="progtrckr-todo">
+                                            <h5>Delivered</h5>
+                                        </li>
+                                        <!-- Update progress tracker accordingly -->
+                                        <% } else if (OrdersDetails.order_status==="CLOSED" ) { %>
+
+                                            <li class="progtrckr-done">
+                                                <h5>In Processing</h5>
+                                            </li>
+                                            <li class="progtrckr-done">
+                                                <h5>Confirmed</h5>
+                                            </li>
+                                            <li class="progtrckr-done">
+                                                <h5>Delivered</h5>
+                                            </li>
+                                            <!-- Update progress tracker accordingly -->
+                                            <% } else if (OrdersDetails.order_status==="CANCELLED" ) { %>
+
+
+                                                <li class="progtrckr-done">
+                                                    <h5>In Processing</h5>
+                                                </li>
+
+                                                <li class="progtrckr-done">
+                                                    <h5 style="color: red;">Cancelled</h5>
+                                                </li>
+
+
+                                                <% } %>
+
+
+
+
+
+
+
+
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Order Detail Section End -->
+
+
+
+    <section class="cart-section section-b-space">
+        <div class="container-fluid-lg">
+            <div class="row g-sm-4 g-3">
+                <div class="col-xxl-9 col-lg-8">
+
+
+                    <div class="cart-table order-table order-table-2">
+
+
+
+                        <div class="table-responsive">
+                            <table class="table mb-0">
+                                <tbody>
+
+                                    <% OrdersDetails.product_details.forEach(data=>{ %>
+
+                                        <tr>
+                                            <td class="product-detail">
+                                                <div class="product border-0">
+                                                    <a href="#" class="product-image">
+                                                        <img src="<%= data.image %>" class="img-fluid blur-up lazyload"
+                                                            alt="">
+                                                    </a>
+                                                    <div class="product-detail" style="text-align: start;">
+                                                        <ul>
+                                                            <li class="name">
+                                                                <%= data.product_name %>
+                                                            </li>
+
+                                                            <li class="text-content">Total: <%= data.total_amount %>
+                                                            </li>
+
+                                                            <li class="text-content">Quantity - <%= data.qty %>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </td>
+
+
+
+                                        </tr>
+
+
+
+                                        <% }) %>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xxl-3 col-lg-4">
+                    <div class="row g-4">
+                        <div class="col-lg-12 col-sm-6">
+                            <div class="summery-box">
+                                <div class="summery-header">
+                                    <h3>Payment Details</h3>
+                                </div>
+
+                                <ul class="summery-contain">
+                                    <li>
+                                        <h4>Order Amount</h4>
+                                        <h4 class="price">
+                                            <%= OrdersDetails.total %>
+                                        </h4>
+                                    </li>
+
+                                    <li>
+                                        <h4>Discount Amount</h4>
+                                        <h4 class="price theme-color">
+                                            <%= OrdersDetails.total_discount_amount %>
+                                        </h4>
+                                    </li>
+
+                                    <li>
+                                        <h4>Net Amount</h4>
+                                        <h4 class="price text-danger">
+                                            AED <%= OrdersDetails.total %>
+                                        </h4>
+                                    </li>
+                                    <li>
+                                        <h4>Tax Amount</h4>
+                                        <h4 class="price text-danger">
+                                            <%= OrdersDetails.total_tax_value %>
+                                        </h4>
+                                    </li>
+
+                                    <li>
+                                        <h4>Total Order Value Amount <br><span class="text-danger"
+                                                style="color: red !important; font-size: 10px;">(5% Vat
+                                                inclusive)*</span></h4>
+                                        <h4 class="price text-danger">
+                                            <%= OrdersDetails.grand_total %>
+                                        </h4>
+                                    </li>
+
+                                    <li>
+                                        <h4>Loyalty pts Amount</h4>
+                                        <h4 class="price text-danger">AED <%= OrdersDetails.redeem_loyalty_point %>
+                                        </h4>
+                                    </li>
+
+                                    <li>
+                                        <h4>Payable Amount</h4>
+                                        <h4 class="price text-danger">
+                                            <%= OrdersDetails.grand_total %>
+                                        </h4>
+                                    </li>
+
+                                    <li>
+                                        <h4>Payment Mode</h4>
+                                        <h4 class="price text-danger">
+                                            <%= OrdersDetails.payment_mode %>
+                                        </h4>
+                                    </li>
+
+                                </ul>
+
+                                <!-- <ul class="summery-total">
+                                    <li class="list-total">
+                                        <h4>Total (USD)</h4>
+                                        <h4 class="price">$19.28</h4>
+                                    </li>
+                                </ul> -->
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-sm-6">
+                            <div class="summery-box">
+                                <div class="summery-header d-block">
+                                    <h3>Invoice Details</h3>
+                                </div>
+
+                                <ul class="summery-contain pb-0 border-bottom-0">
+                                    <li class="pb-0">
+                                        <h4>Invoice Number:</h4>
+
+                                        <h4 class="price theme-color">
+                                            <% if (OrdersDetails.invoice_no) { %>
+                                                <%= OrdersDetails.invoice_no %>
+                                                    <% } else { %>
+                                                        <small>No invoice number </small>
+                                                        <% } %>
+
+                                        </h4>
+
+                                    </li>
+
+                                    <li class="pb-0">
+                                        <h4>Invoice Date:</h4>
+                                        <h4 class="price theme-color">
+
+                                            <% if (OrdersDetails.invoice_date) { %>
+                                                <%= OrdersDetails.invoice_date %>
+                                                    <% } else {%>
+
+                                                        <small>No invoice Date </small>
+
+
+                                                        <% } %>
+
+                                        </h4>
+                                    </li>
+                                </ul>
+
+
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="summery-box">
+
+
+                                <ul class="summery-contain pb-0 border-bottom-0">
+                                    <a href="" class="href">Return</a>
+                                    <a href="" class="href">Invoice Download
+                                        Return</a>
+                                    <a href="" class="href">Reorder</a>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <%- include('../include/footer.ejs') %>

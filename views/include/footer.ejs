@@ -1,0 +1,300 @@
+<section class="user-dashboard-section section-b-space">
+    <div class="container-fluid-lg">
+        <div class="row">
+
+            <% if (userData) { %>
+                <%- include('../User/UserDashboardSidebar'); %>
+                    <% } %>
+
+
+
+
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Footer Section Start -->
+<footer class="section-t-space">
+    <div class="container-fluid-lg">
+
+
+        <div class="main-footer section-b-space section-t-space">
+            <div class="row g-md-4 g-3">
+                <div class="col-xl-4 col-lg-4 col-sm-6">
+                    <div class="footer-logo">
+                        <div class="theme-logo">
+                            <a href="/">
+                                <img src="<%= baseUrl %>/assets/images/logo/akilogo.png" class="blur-up lazyload"
+                                    alt="">
+                            </a>
+                        </div>
+
+                        <div class="footer-logo-contain">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia, quasi.</p>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="col-xl-4 col-sm-3">
+                    <div class="footer-title">
+                        <h4>Help Center</h4>
+                    </div>
+
+                    <div class="footer-contain">
+                        <ul>
+
+                            <li>
+                                <a href="" class="text-content">Your Account</a>
+                            </li>
+                            <li>
+                                <a href="" class="text-content">Track Order</a>
+                            </li>
+
+
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-lg-4 col-sm-6">
+                    <div class="footer-title">
+                        <h4>Contact Us</h4>
+                    </div>
+
+                    <div class="footer-contact">
+                        <ul>
+                            <li>
+                                <div class="footer-number">
+                                    <i data-feather="phone"></i>
+                                    <div class="contact-number">
+                                        <h6 class="text-content">Hotline 24/7 :</h6>
+                                        <h5>+91 888 104 2340</h5>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="footer-number">
+                                    <i data-feather="mail"></i>
+                                    <div class="contact-number">
+                                        <h6 class="text-content">Email Address :</h6>
+                                        <h5>aki@hotmail.com</h5>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="social-app mb-0">
+                                <h5 class="mb-2 text-content">Download App :</h5>
+                                <ul>
+                                    <li class="mb-0">
+                                        <a href="" target="_blank">
+                                            <img src="https://themes.pixelstrap.com/fastkart/assets/images/playstore.svg"
+                                                class="blur-up lazyload" alt="">
+                                        </a>
+                                    </li>
+                                    <li class="mb-0">
+                                        <a href="" target="_blank">
+                                            <img src="https://themes.pixelstrap.com/fastkart/assets/images/appstore.svg"
+                                                class="blur-up lazyload" alt="">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sub-footer section-small-space">
+            <div class="reserve">
+                <h6 class="text-content">©2024 All rights reserved</h6>
+            </div>
+
+            <!-- <div class="payment">
+                <img src="<%= baseUrl %>/assets/images/payment/1.png" class="blur-up lazyload" alt="">
+            </div> -->
+
+            <!-- <div class="social-link">
+                <h6 class="text-content">Stay connected :</h6>
+                <ul>
+                    <li>
+                        <a href="https://www.facebook.com/" target="_blank">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/" target="_blank">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/" target="_blank">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://in.pinterest.com/" target="_blank">
+                            <i class="fa-brands fa-pinterest-p"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div> -->
+        </div>
+    </div>
+</footer>
+<!-- Footer Section End -->
+
+
+
+
+
+<!-- latest jquery-->
+<script src="<%= baseUrl %>/assets/js/jquery-3.6.0.min.js"></script>
+
+<!-- jquery ui-->
+<script src="<%= baseUrl %>/assets/js/jquery-ui.min.js"></script>
+
+<!-- Bootstrap js-->
+<script src="<%= baseUrl %>/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="<%= baseUrl %>/assets/js/bootstrap/bootstrap-notify.min.js"></script>
+<script src="<%= baseUrl %>/assets/js/bootstrap/popper.min.js"></script>
+
+<!-- feather icon js-->
+<script src="<%= baseUrl %>/assets/js/feather/feather.min.js"></script>
+<script src="<%= baseUrl %>/assets/js/feather/feather-icon.js"></script>
+
+<!-- Lazyload Js -->
+<script src="<%= baseUrl %>/assets/js/lazysizes.min.js"></script>
+
+<!-- Slick js-->
+<script src="<%= baseUrl %>/assets/js/slick/slick.js"></script>
+<script src="<%= baseUrl %>/assets/js/slick/slick-animation.min.js"></script>
+<script src="<%= baseUrl %>/assets/js/slick/custom_slick.js"></script>
+
+<!-- Price Range Js -->
+<script src="<%= baseUrl %>/assets/js/ion.rangeSlider.min.js"></script>
+
+<!-- Quantity js -->
+<script src="<%= baseUrl %>/assets/js/quantity-2.js"></script>
+
+<!-- sidebar open js -->
+<script src="<%= baseUrl %>/assets/js/filter-sidebar.js"></script>
+
+<!-- WOW js -->
+<script src="<%= baseUrl %>/assets/js/wow.min.js"></script>
+<script src="<%= baseUrl %>/assets/js/custom-wow.js"></script>
+
+<!-- Fly Cart Js -->
+<script src="<%= baseUrl %>/assets/js/fly-cart.js"></script>
+
+<!-- script js -->
+<script src="<%= baseUrl %>/assets/js/script.js"></script>
+
+<!-- theme setting js -->
+<script src="<%= baseUrl %>/assets/js/theme-setting.js"></script>
+<script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
+
+
+
+
+<script>
+    function handleImageError(img) {
+        img.src = 'https://shopmefast.com/images/product-no-image.jpg'; // Replace with your placeholder image URL
+        img.alt = 'Image not found';
+    }
+</script>
+<script>
+    // Get the current URL
+    let currentUrl = window.location.pathname;
+
+    // Get all navigation links
+    const navLinks = document.querySelectorAll('.nav-link');
+
+
+    // Loop through each navigation link
+    navLinks.forEach(link => {
+        // Check if the link's href matches the current URL
+        if (link.getAttribute('href') === currentUrl) {
+            // Add the 'active' class to the matching link
+            link.classList.add('active');
+        }
+    });
+
+    const Links = document.querySelectorAll('.mobile-menu li a');
+
+
+    // Loop through each navigation link
+    Links.forEach(link => {
+        // Check if the link's href matches the current URL
+        if (link.getAttribute('href') === currentUrl) {
+            // Add the 'active' class to the matching link
+            link.classList.add('active');
+        }
+    });
+</script>
+
+
+
+
+<script>
+    (function () {
+        'use strict'
+        const forms = document.querySelectorAll('.requires-validation')
+        Array.from(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
+
+<script>
+    $(document).ready(function () {
+        var table = $('#example').DataTable({
+            scrollX: true,
+            paging: false, // Disable pagination
+            searching: false, // Disable search
+        });
+
+        // Check the number of rows in the DataTable
+        var rowCount = table.rows().count();
+
+        // Modify the DataTable's options based on the number of rows
+        var options = {
+            scrollX: true,
+            paging: false,
+            searching: false,
+        };
+
+        if (rowCount > 10) {
+            options.scrollY = 400; // Set fixed height
+        } else {
+            options.scrollY = 'auto'; // Set auto height
+        }
+
+        // Reinitialize the DataTable with the modified options
+        table.destroy(); // Destroy the existing DataTable
+        table = $('#example').DataTable(options); // Reinitialize DataTable
+    });
+</script>
+
+
+
+</body>
+
+
+</html>

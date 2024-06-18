@@ -1,0 +1,83 @@
+<%- include('../include/header') %>
+
+    <!-- mobile fix menu end -->
+
+    <!-- Breadcrumb Section Start -->
+    <section class="faq-breadcrumb pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-contain">
+                        <h2>Help Center</h2>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+
+    <!-- Faq Question section End -->
+
+    <!-- Faq Section Start -->
+    <section class="faq-box-contain section-b-space">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-5">
+                    <div class="faq-contain">
+                        <h2>Frequently Asked Questions</h2>
+
+                    </div>
+                </div>
+
+                <div class="col-xl-7">
+                    <div class="faq-accordion">
+                        <div class="accordion" id="accordionExample">
+
+
+
+                            <% if (faqs && faqs.length> 0) { %>
+                                <% faqs.forEach(faq=> { %>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="heading<%= faq.id %>">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapse<%= faq.id %>">
+                                                <%= faq.question %> <i class="fa-solid fa-angle-down"></i>
+                                            </button>
+                                        </h2>
+                                        <div id="collapse<%= faq.id %>" class="accordion-collapse collapse"
+                                            data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                <p>
+                                                    <%= faq.answer %>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% }); %>
+                                        <% } else { %>
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header">
+                                                    <button class="accordion-button" type="button" disabled>
+                                                        No FAQs available
+                                                    </button>
+                                                </h2>
+                                            </div>
+                                            <% } %>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Faq Section End -->
+
+
+
+    <%- include('../include/footer.ejs') %>

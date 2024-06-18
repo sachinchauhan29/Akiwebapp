@@ -1,0 +1,333 @@
+<%- include('../include/header') %>
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadcrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-contain">
+                        <h2>User Dashboard</h2>
+                        <!-- <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="/">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active">User Dashboard</li>
+                            </ol>
+                        </nav> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+
+    <section class="user-dashboard-section section-b-space">
+        <div class="container-fluid-lg">
+            <div class="row">
+
+
+
+
+                <div class="col-xxl-12 col-lg-12">
+
+                    <div class="dashboard-right-sidebar">
+                        <div class="dashboard-order">
+                            <div class="title">
+                                <h2>Outstanding Invoices</h2>
+                                <span class="title-leaf title-leaf-gray">
+
+                                </span>
+                            </div>
+
+
+
+                            <div class="col-12">
+                                <div class="product-section-box">
+
+
+                                    <div class="tab-content custom-tab" id="myTabContent">
+                                        <div class="tab-pane fade show active" id="description" role="tabpanel">
+                                            <div class="product-description">
+
+
+                                                <div class="table-responsive">
+
+
+                                                    <table class="table">
+                                                        <thead></thead>
+                                                        <tr>
+                                                            <th>S.No</th>
+                                                            <th>
+                                                                <input id="masterCheck" type="checkbox" />
+                                                            </th>
+                                                            <th>Order ID</th>
+                                                            <th>Date </th>
+                                                            <th>AED </th>
+                                                            <th>Payment</th>
+                                                            <th>Invoice</th>
+                                                        </tr>
+                                                        <tbody id="products">
+                                                            <% let serialNumber=1; %>
+
+
+                                                                <% PENDING_PAYMENT_ORDER_data.forEach(data=>{ %>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <%= serialNumber++ %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <input type="checkbox"
+                                                                                value="<%= data.amount_due_original %>" />
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= data.order_no %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= formatDate(data.created_date) %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= data.amount_due_original %>
+                                                                        </td>
+                                                                        <td> <a href="#">
+                                                                                <button
+                                                                                    class="btn text-white bg-success btn-sm fw-bold mend-auto"
+                                                                                    data-bs-toggle="modal"
+                                                                                    data-bs-target="#deal-box<%= data.id %>">Pay
+                                                                                    Now <i
+                                                                                        class="fa-solid fa-arrow-right icon"></i></button>
+
+
+
+                                                                            </a></td>
+
+                                                                        <td> <a target="_blank" download="download"
+                                                                                href="<%= data.invoice_url %>">
+                                                                                <button
+                                                                                    class="btn btn-animation btn-sm fw-bold mend-auto">
+                                                                                    View </button>
+                                                                            </a></td>
+                                                                    </tr>
+
+
+
+                                                                    <!-- Deal Box Modal Start -->
+                                                                    <div class="modal fade theme-modal deal-modal"
+                                                                        id="deal-box<%= data.id %>" tabindex="-1">
+                                                                        <div
+                                                                            class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <div>
+                                                                                        <h5 class="modal-title w-100"
+                                                                                            id="deal_today">Outstanding
+                                                                                            Invoices
+
+                                                                                        </h5>
+                                                                                        <p class="mt-1 text-content">
+                                                                                            Payment for Invoice No.
+                                                                                            <%= data.customer_trx_id %>
+                                                                                        </p>
+                                                                                    </div>
+                                                                                    <button type="button"
+                                                                                        class="btn-close"
+                                                                                        data-bs-dismiss="modal">
+                                                                                        <i
+                                                                                            class="fa-solid fa-xmark"></i>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <div class="deal-offer-box">
+                                                                                        <ul class="deal-offer-list">
+
+
+
+
+
+
+
+                                                                                            <li class="list-1">
+                                                                                                <input type="text"
+                                                                                                    readonly
+                                                                                                    class="form-control"
+                                                                                                    value="<%= data.amount_due_original %>">
+                                                                                                <div
+                                                                                                    class="deal-offer-contain">
+                                                                                                    <a href="#"
+                                                                                                        class="deal-image">
+                                                                                                        <img src="../assets/img/debit-card.png"
+                                                                                                            class="blur-up lazyload"
+                                                                                                            alt="#">
+                                                                                                    </a>
+                                                                                                    <div
+                                                                                                        class="form-check custom-form-check hide-check-box">
+                                                                                                        <input
+                                                                                                            class="form-check-input"
+                                                                                                            type="radio"
+                                                                                                            name="payment_mode<%= data.id %>"
+                                                                                                            id="Credit<%= data.id %>"
+                                                                                                            value="Credit">
+                                                                                                        <label
+                                                                                                            class="form-check-label"
+                                                                                                            for="Credit<%= data.id %>">Credit
+                                                                                                            Card</label>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </li>
+                                                                                            <li class="list-2">
+                                                                                                <div
+                                                                                                    class="deal-offer-contain">
+                                                                                                    <a href="#"
+                                                                                                        class="deal-image">
+                                                                                                        <img src="../assets/img/debit-card.png"
+                                                                                                            class="blur-up lazyload"
+                                                                                                            alt="#">
+                                                                                                    </a>
+                                                                                                    <div
+                                                                                                        class="form-check custom-form-check hide-check-box">
+                                                                                                        <input
+                                                                                                            class="form-check-input"
+                                                                                                            type="radio"
+                                                                                                            name="payment_mode<%= data.id %>"
+                                                                                                            id="Net_Banking<%= data.id %>"
+                                                                                                            value="Net_Banking">
+                                                                                                        <label
+                                                                                                            class="form-check-label"
+                                                                                                            for="Net_Banking<%= data.id %>">Net
+                                                                                                            Banking</label>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </li>
+
+                                                                                            <button
+                                                                                                class="btn btn-animation btn-sm fw-bold mend-auto">Pay
+                                                                                                Now
+                                                                                                <i
+                                                                                                    class="fa-solid fa-arrow-right icon"></i></button>
+
+
+
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <% }) %>
+
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <td colspan="2">Total:</td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td id="total">0
+
+
+                                                                </td>
+                                                                <td>
+                                                                    <button
+                                                                        class="btn btn-animation btn-sm fw-bold mend-auto">Pay
+                                                                        OutStanding
+                                                                        <i
+                                                                            class="fa-solid fa-arrow-right icon"></i></button>
+                                                                </td>
+
+                                                            </tr>
+
+                                                        </tfoot>
+
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+    <%- include('../include/footer') %>
+
+
+        <script>
+            var masterCheck = document.querySelector('#masterCheck');
+            var products = document.querySelector('#products');
+            var total = document.querySelector('#total');
+            var checkboxes = products.querySelectorAll('input[type=checkbox]');
+            var sum = 0;
+
+            checkboxes.forEach(function (checkbox) {
+                checkbox.addEventListener('change', function () {
+                    updateTotal();
+                });
+            });
+
+            masterCheck.addEventListener('change', function () {
+                checkboxes.forEach(function (checkbox) {
+                    checkbox.checked = masterCheck.checked;
+                });
+                updateTotal();
+            });
+
+            function updateTotal() {
+                sum = 0;
+                checkboxes.forEach(function (checkbox) {
+                    if (checkbox.checked) {
+                        var value = parseFloat(checkbox.getAttribute('value'));
+                        //('Checkbox value:', value); // Log checkbox value
+                        if (!isNaN(value)) {
+                            sum += value;
+                        }
+                    }
+                });
+                total.textContent = sum.toFixed(2);
+                //('Total value:', sum); // Log total value
+            }
+        </script>
+
+        <script>
+    <%
+                // Define the formatDate function
+                function formatDate(dateString) {
+                    const date = new Date(dateString); // Parse the date string
+                    const year = date.getFullYear(); // Get the year
+                    const month = String(date.getMonth() + 1).padStart(2, '0'); // Get the month (zero-based) and pad with zero if needed
+                    const day = String(date.getDate()).padStart(2, '0'); // Get the day of the month and pad with zero if needed
+                    return `${year}-${month}-${day}`; // Return the formatted date
+                }
+                %>
+
+        </script>
+
+        <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    // Add click event listeners to all images to select corresponding radio button
+                    document.querySelectorAll('.deal-image').forEach(function (image) {
+                        image.addEventListener('click', function (event) {
+                            event.preventDefault();
+                            const parent = image.closest('.deal-offer-contain');
+                            const radioInput = parent.querySelector('.form-check-input');
+                            if (radioInput) {
+                                radioInput.checked = true;
+                            }
+                        });
+                    });
+                });
+        </script>

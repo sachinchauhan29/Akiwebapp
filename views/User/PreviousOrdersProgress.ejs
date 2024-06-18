@@ -1,0 +1,438 @@
+<%- include('../include/header') %>
+
+
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css'>
+
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadcrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-contain">
+                        <h2>User Dashboard</h2>
+                        <!-- <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="/">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active">User Dashboard</li>
+                            </ol>
+                        </nav> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+
+    <section class="user-dashboard-section section-b-space">
+        <div class="container-fluid-lg">
+            <div class="row">
+
+
+
+
+                <div class="col-xxl-12 col-lg-12">
+
+                    <div class="dashboard-right-sidebar">
+                        <div class="dashboard-order">
+                            <div class="title">
+                                <h2>Previous Orders</h2>
+                                <span class="title-leaf title-leaf-gray">
+
+                                </span>
+                            </div>
+                            <div class="mb-3 col-md-6" style="float: inline-end;">
+                                <label for="Validity" class="form-label">Select Date Range:</label>
+                                <input type="text" id="Validity" class="form-control" required name="dates" />
+                                <div class="invalid-feedback">
+                                    this field is required
+                                </div>
+
+                            </div>
+
+                            <div class="product-section-box">
+                                <ul class="nav nav-tabs custom-nav" id="myTab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <a href="#" class="href">
+                                            <button class="nav-link active" type="button">
+                                                Order-Tracking</button>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item" role="presentation">
+                                        <a href="/Invoice" class="href">
+                                            <button class="nav-link" type="button">Invoice</button>
+                                        </a>
+                                    </li>
+
+
+
+
+                                </ul>
+                            </div>
+
+
+
+
+                            <div class="product-section-box">
+                                <ul class="nav nav-tabs custom-nav" id="myTab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <a href="./PreviousOrdersProgress" class="href">
+                                            <button class="nav-link active" type="button">
+                                                In Progress</button>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item" role="presentation">
+                                        <a href="./PreviousOrdersDelivered" class="href">
+                                            <button class="nav-link" type="button">Delivered</button>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item" role="presentation">
+                                        <a href="./PreviousOrderscancel" class="href">
+                                            <button class="nav-link" type="button">
+                                                Cancelled</button>
+                                        </a>
+                                    </li>
+
+
+                                </ul>
+                            </div>
+
+
+
+
+
+
+                            <div class="order-contains" id="category-list">
+
+
+
+
+
+
+
+
+                            </div>
+
+
+
+
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+    <%- include('../include/footer.ejs') %>
+
+
+        <script src='https://cdn.jsdelivr.net/momentjs/latest/moment.min.js'></script>
+        <script src='https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js'></script>
+
+
+        <script>
+            $(document).ready(function () {
+                // Initialize the date range picker
+                $('input[name="dates"]').daterangepicker();
+
+                // Variables to keep track of pagination and loading state
+                let nextPageNumber = 1;
+                let loading = false;
+                let currentStartDate = "";
+                let currentEndDate = "";
+
+                // Function to load data
+                function loadMore(startDate = "", endDate = "", page = 1, reset = false) {
+                    if (loading) return; // Prevent multiple simultaneous requests
+                    loading = true; // Set loading indicator to true
+                    $('#loader-overlay').fadeIn();
+
+                    // AJAX request
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', `/PreviousOrdersAjex`);
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === XMLHttpRequest.DONE) {
+                            // Request completed
+                            if (xhr.status === 200) {
+                                // Success
+                                const responses = JSON.parse(xhr.responseText); // Update responses variable
+                                $('#loader-overlay').fadeOut();
+
+                                // Get the container element
+                                const CategoryList = document.getElementById('category-list');
+
+                                // Clear the category list if reset is true
+                                if (reset) {
+                                    CategoryList.innerHTML = '';
+                                }
+
+                                // Check if the table already exists
+                                let tableBody = CategoryList.querySelector('tbody');
+                                if (!tableBody) {
+                                    // Create the table and append it to the category list
+                                    const tableHTML = `
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped table-hover">
+                                                <thead class="table-dark">
+                                                    <tr>
+                                                        <th>order no</th>
+                                            <th>
+                                                Total Order Amount</th>
+                                            <th>
+                                                Total Discount Amount</th>
+                                            <th>
+
+                                                Total Invoiced Value</th>
+                                            <th>invoice no</th>
+                                            <th>invoice date</th>
+                                            <th>Order Date</th>
+                                            <th>Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                        </div>
+                                    `;
+                                    CategoryList.insertAdjacentHTML('beforeend', tableHTML);
+                                    tableBody = CategoryList.querySelector('tbody');
+                                }
+
+                                if (responses.data && responses.data.length > 0) {
+                                    responses.data.forEach(data => {
+                                        // Format date function
+                                        const formatDate = (dateString) => {
+                                            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                                            return new Date(dateString).toLocaleDateString(undefined, options);
+                                        };
+
+                                        // Create a row element
+                                        const rowHTML = `
+                                        <tr>
+                                    <td>${data.order_no}</td>
+                                    <td>null</td>
+                                    <td>null</td>
+                                    <td>null</td>
+                                    <td>${data.customer_trx_id || 'null'}</td>
+                                    <td>${formatDate(data.invoice_date)}</td>
+                                    <td>${formatDate(data.created_date)}</td>
+                                    <td>
+                                        <a href="/OrdersDetails/${data.id}" class="href">
+                                            <h6>
+                                                ${data.order_status === "ENTERED" ?
+                                                `<button class="btn bg-success text-white btn-sm fw-bold mt-lg-0 mt-3">In-Progress</button>` :
+                                                `<span>Unknown Status</span>`}
+                                            </h6>
+                                        </a>
+                                    </td>
+                                </tr>
+                                        `;
+                                        // Append the row HTML to the table body
+                                        tableBody.insertAdjacentHTML('beforeend', rowHTML);
+                                    });
+                                } else {
+                                    if (page === 1) { // Show "No data found" only if it's the first page
+                                        const noDataHTML = `
+                                            <tr>
+                                                <td colspan="4">No data found</td>
+                                            </tr>
+                                        `;
+                                        tableBody.insertAdjacentHTML('beforeend', noDataHTML);
+                                    }
+                                }
+
+                                loading = false; // Reset loading indicator
+                                nextPageNumber = page + 1; // Increment page number for next load
+                            } else {
+                                // Error loading more products
+                                console.error("Error loading more products:", xhr.statusText);
+                                // Handle errors appropriately (e.g., display an error message to the user)
+                                $('#loader-overlay').fadeOut(); // Hide loading indicator on error
+                                loading = false; // Reset loading indicator
+                            }
+                        }
+                    };
+
+                    // Send AJAX request
+                    xhr.send(`startDate=${startDate}&endDate=${endDate}&nextPageNumber=${page}&APPROVED=ENTERED`);
+                }
+
+                // Initial call to load data on page load
+                loadMore();
+
+                // Event listener for the apply button
+                $('input[name="dates"]').on('apply.daterangepicker', function (ev, picker) {
+                    //("Apply button clicked");
+                    //("Start date: " + picker.startDate.format('YYYY-MM-DD'));
+                    //("End date: " + picker.endDate.format('YYYY-MM-DD'));
+
+                    nextPageNumber = 1; // Reset page number on new date range selection
+                    currentStartDate = picker.startDate.format('YYYY-MM-DD');
+                    currentEndDate = picker.endDate.format('YYYY-MM-DD');
+                    loadMore(currentStartDate, currentEndDate, nextPageNumber, true);
+                });
+
+                // Event listener for the cancel button
+                $('input[name="dates"]').on('cancel.daterangepicker', function (ev, picker) {
+                    //("Cancel button clicked");
+                });
+
+                window.addEventListener('scroll', function () {
+                    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+                        // Load more products when user scrolls to bottom of page
+                        loadMore(currentStartDate, currentEndDate, nextPageNumber);
+                    }
+                });
+            });
+        </script>
+
+
+
+
+        <script>
+        <%
+                // Define the formatDate function
+                function formatDate(dateString) {
+                    const date = new Date(dateString); // Parse the date string
+                    const year = date.getFullYear(); // Get the year
+                    const month = String(date.getMonth() + 1).padStart(2, '0'); // Get the month (zero-based) and pad with zero if needed
+                    const day = String(date.getDate()).padStart(2, '0'); // Get the day of the month and pad with zero if needed
+                    return `${year}-${month}-${day}`; // Return the formatted date
+                }
+                %>
+
+        </script>
+
+
+        <script>
+                $(document).ready(function () {
+
+
+                    // inspired by http://jsfiddle.net/arunpjohny/564Lxosz/1/
+                    $('.table-responsive-stack').each(function (i) {
+                        var id = $(this).attr('id');
+                        //alert(id);
+                        $(this).find("th").each(function (i) {
+                            $('#' + id + ' td:nth-child(' + (i + 1) + ')').prepend('<span class="table-responsive-stack-thead">' + $(this).text() + ':</span> ');
+                            $(this).find('.table-responsive-stack-thead').hide();
+
+                        });
+
+                    });
+
+
+
+
+                    $('.table-responsive-stack').each(function () {
+                        var thCount = $(this).find("th").length;
+                        var rowGrow = 100 / thCount + '%';
+                        //console.log(rowGrow);
+                        $(this).find("th, td").css('flex-basis', rowGrow);
+                    });
+
+
+
+
+                    function flexTable() {
+                        if ($(window).width() < 768) {
+
+                            $(".table-responsive-stack").each(function (i) {
+                                $(this).find(".table-responsive-stack-thead").show();
+                                $(this).find('thead').hide();
+                            });
+
+
+                            // window is less than 768px   
+                        } else {
+
+
+                            $(".table-responsive-stack").each(function (i) {
+                                $(this).find(".table-responsive-stack-thead").hide();
+                                $(this).find('thead').show();
+                            });
+
+
+
+                        }
+                        // flextable   
+                    }
+
+                    flexTable();
+
+                    window.onresize = function (event) {
+                        flexTable();
+                    };
+
+
+
+
+
+
+                    // document ready  
+                });
+
+
+
+
+        </script>
+
+        <style>
+            .table-responsive-stack tr {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-orient: horizontal;
+                -webkit-box-direction: normal;
+                -ms-flex-direction: row;
+                flex-direction: row;
+            }
+
+
+            .table-responsive-stack td,
+            .table-responsive-stack th {
+                display: block;
+                /*      
+   flex-grow | flex-shrink | flex-basis   */
+                -ms-flex: 1 1 auto;
+                flex: 1 1 auto;
+            }
+
+            .table-responsive-stack .table-responsive-stack-thead {
+                font-weight: bold;
+            }
+
+            @media screen and (max-width: 768px) {
+                .table-responsive-stack tr {
+                    -webkit-box-orient: vertical;
+                    -webkit-box-direction: normal;
+                    -ms-flex-direction: column;
+                    flex-direction: column;
+                    border-bottom: 3px solid #ccc;
+                    display: block;
+
+                }
+
+                /*  IE9 FIX   */
+                .table-responsive-stack td {
+                    float: left\9;
+                    width: 100%;
+                }
+            }
+        </style>

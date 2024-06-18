@@ -1,0 +1,275 @@
+<%- include('../include/header') %>
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadcrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-contain">
+                        <h2>Order Summary</h2>
+                        <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="#">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active">Order Summary</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Checkout section Start -->
+    <section class="cart-section section-b-space">
+        <div class="container-fluid-lg">
+            <div class="row g-sm-5 g-3">
+                <div class="col-xxl-8">
+                    <div class="cart-table">
+
+                        <ul class="pb-5">
+                            <li>
+                                <div class="checkout-icon">
+                                    <lord-icon target=".nav-item" src="https://cdn.lordicon.com/ggihhudh.json"
+                                        trigger="loop-on-hover"
+                                        colors="primary:#121331,secondary:#646e78,tertiary:#0baf9a" class="lord-icon">
+                                    </lord-icon>
+                                </div>
+                                <div class="checkout-box">
+                                    <div class="checkout-title">
+                                        <h4>Delivery Address</h4>
+                                    </div>
+
+                                    <div class="checkout-detail">
+                                        <div class="row g-4">
+                                            <div class="col-xxl-12 col-lg-12 col-md-12">
+                                                <div class="delivery-address-box">
+                                                    <div>
+
+
+                                                        <!-- <div class="label">
+                                                            <label>Home</label>
+                                                        </div> -->
+
+                                                        <ul class="delivery-address-detail active">
+
+
+                                                            <li>
+                                                                <p class="text-content">
+                                                                    <span class="text-title">Address: </span>
+                                                                    <%= address.address %>
+                                                                </p>
+                                                            </li>
+                                                            <li>
+                                                                <p class="text-content">
+                                                                    <span class="text-title">Pincode: </span>
+                                                                    <%= address.pincode %>
+                                                                </p>
+                                                            </li>
+
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="table-responsive-xl">
+                            <table class="table">
+
+
+
+                                <% if (!carts_Amount) { %>
+                                    <p>Your carts_Amount is empty.</p>
+                                    <% } else { %>
+                                        <% carts_Amount.product_details.forEach(product=> { %>
+
+
+                                            <tr class="product-box-contain">
+                                                <td class="product-detail">
+                                                    <div class="product border-0">
+                                                        <% if (product.image && product.image.length> 0) { %>
+                                                            <a href="#" class="product-image">
+                                                                <img src="<%= product.image %>"
+                                                                    class="img-fluid blur-up lazyload" alt=""
+                                                                    onerror="handleImageError(this)">
+                                                            </a>
+                                                            <% } else { %>
+                                                                <!-- If data.image is not available or has length 0, render placeholder image -->
+                                                                <a href="#" class="product-image">
+                                                                    <!-- Check if the image URL exists -->
+                                                                    <% if (product.image) { %>
+                                                                        <!-- If the image URL exists but the image couldn't be found (404 Not Found), render a placeholder image -->
+                                                                        <img src="https://shopmefast.com/images/product-no-image.jpg"
+                                                                            class="img-fluid blur-up lazyload" alt="">
+                                                                        <% } else { %>
+                                                                            <!-- If the image URL doesn't exist, render an alternative content or handle the absence of image as per your requirement -->
+                                                                            <span>No image available</span>
+                                                                            <% } %>
+                                                                </a>
+                                                                <% } %>
+                                                                    <div class="product-detail">
+                                                                        <ul>
+                                                                            <li class="text-content">
+                                                                                <a href="#">
+                                                                                    <%= product.product_name %>
+
+
+                                                                                </a>
+                                                                            </li>
+
+                                                                            <li class="text-content">
+                                                                                <span class="text-title">Unit Price :
+                                                                                </span>
+                                                                                AED <%= product.conv_rate %>
+                                                                            </li>
+
+                                                                            <li class="text-content">
+                                                                                <span class="text-title">QTY : </span>
+                                                                                <strong>
+                                                                                    <%= product.qty %> EA
+                                                                                </strong>
+                                                                            </li>
+
+                                                                            <li>
+                                                                                <h5 class="text-content ">Unit Price:
+                                                                                </h5>
+                                                                                <span class="text-title"> AED
+                                                                                    <%= product.total_amount %>
+                                                                                </span>
+                                                                            </li>
+
+
+
+
+
+                                                                        </ul>
+                                                                    </div>
+                                                    </div>
+                                                </td>
+
+                                                <td class="subtotal">
+                                                    <h4 class="table-title text-content">
+                                                        <%= product.conv_rate * product.qty %>
+                                                    </h4>
+
+                                                </td>
+
+                                                <td class="price">
+                                                    <h6 class="table-title text-content">Payment Method</h6>
+                                                    <p class="theme-color">
+                                                        <%= payment_mode %>
+                                                    </p>
+                                                </td>
+
+
+
+
+                                            </tr>
+                                            <!-- Your existing code for displaying product details goes here -->
+                                            <!-- For example: -->
+
+                                            <% }); %>
+                                                <% } %>
+
+
+                            </table>
+                        </div>
+
+
+
+
+                    </div>
+
+
+
+
+
+                </div>
+
+
+
+                <div class="col-xxl-4">
+                    <div class="summery-box p-sticky">
+                        <div class="summery-header">
+                            <h3></h3>
+                        </div>
+
+                        <div class="summery-contain">
+
+                            <ul class="summery-total">
+                                <li>
+                                    <h5>Order Amount: </h5>
+                                    <h4 class="price">AED <%= carts_Amount.total %>
+                                    </h4>
+                                </li>
+
+
+                                <li>
+                                    <h5>Discount Amount: </h5>
+                                    <h4 class="price">AED <%= carts_Amount.total_discount_amount %>
+                                    </h4>
+                                </li>
+
+                                <li>
+                                    <h5>Tax Amount: </h5>
+                                    <h4 class="price">AED <%= carts_Amount.total_tax_value %>
+                                    </h4>
+                                </li>
+
+                                <li>
+                                    <h5>Net Order Amount: </h5>
+                                    <h4 class="price">AED<%= carts_Amount.grand_total %>
+                                    </h4>
+                                </li>
+
+                                <li>
+                                    <h5>Net Payable Amount: </h5>
+                                    <h4 class="price">AED<%= carts_Amount.grand_total %>
+                                    </h4>
+                                </li>
+                            </ul>
+                        </div>
+
+
+
+                        <div class="button-group cart-button">
+                            <ul>
+
+
+
+                                <form action="./add-order" method="post">
+                                    <input type="hidden" name="payment_mode" value="<%= payment_mode %>" id="">
+                                    <input type="hidden" name="address_id" value="<%= address.id %>" id="">
+                                    <li>
+
+                                        <button type="submit" class="btn btn-animation proceed-btn fw-bold">Process Now
+                                        </button>
+
+                                    </li>
+
+                                </form>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Checkout section End -->
+
+
+
+
+    <%- include('../include/footer.ejs') %>

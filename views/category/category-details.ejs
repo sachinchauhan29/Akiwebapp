@@ -1,0 +1,1292 @@
+<%- include('../include/header') %>
+
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadcrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-contain">
+                        <h2>Categories</h2>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 5px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        th,
+        td {
+            padding: 5px;
+            text-align: left;
+        }
+    </style>
+
+
+    <section>
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="slider-1 slider-animate product-wrapper no-arrow">
+
+                        <% if (bannerUrl.length> 0) { %>
+                            <% bannerUrl.forEach(banner=> { %>
+                                <div>
+                                    <div class="banner-contain-2 hover-effect">
+                                        <img src="<%- banner.banner_url %>" class=" rounded-3 blur-up lazyload" alt=""
+                                            style="width: 100%; border: 1px solid;">
+
+                                    </div>
+                                </div>
+                                <% }); %>
+                                    <% } %>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <section class="section-b-space shop-section">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="show-button">
+                        <div class="top-filter-menu-2">
+                            <div class="sidebar-filter-menu" data-bs-toggle="collapse"
+                                data-bs-target="#collapseExample">
+                                <a href="javascript:void(0)"><i class="fa-solid fa-filter"></i> Filter Menu</a>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <form action="/category-details/<%= url %>" method="get">
+
+                        <div class="top-filter-category" id="collapseExample">
+                            <div class="row g-sm-4 g-3">
+                                <div class="col-md-2 mt-2 pb-2 col-12">
+                                    <select class="form-select" name="Categories_one" id="Categories_one">
+                                        <option selected value="" disabled>Categories 1</option>
+                                        <% CATEGORY_PARENT.forEach(data=> { %>
+                                            <option value="<%= data.id %>" data-id="<%= data.id %>">
+                                                <%= data.name %>
+                                            </option>
+                                            <% }) %>
+                                    </select>
+                                </div>
+
+
+                                <div class="col-md-2 mt-2 pb-2 col-12">
+                                    <select class="form-select" id="Categories_Two" name="Categories_Two">
+                                    </select>
+                                </div>
+
+
+                                <div class="col-md-2 mt-2 pb-2 col-12">
+                                    <select class="form-select" id="brand_id" name="brand_id">
+
+                                    </select>
+                                </div>
+
+                                <div class="col-md-2 mt-2 pb-2 col-12">
+                                    <select class="form-select" id="sub_brand_id" name="sub_brand_id">
+
+                                    </select>
+                                </div>
+
+
+                                <div class="col-md-2 mt-2 pb-2 col-12">
+                                    <select class="form-select" name="ALL" id="allDropdown">
+                                        <option value="ALL">All</option>
+                                        <option value="NEW_LAUNCH">NEW LAUNCH</option>
+                                        <option value="SCHEME_PRODUCT">SCHEME PRODUCT</option>
+
+
+                                    </select>
+                                </div>
+                                <!-- <div class="col-md-2 mt-2 pb-2 col-12">
+                                    <button type="submit"
+                                        class="btn btn-md bg-dark cart-button text-white w-100">Search</button>
+                                </div> -->
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <div class="row g-sm-4 g-3 row-cols-xxl-5 row-cols-xl-3 row-cols-lg-2 row-cols-md-3 row-cols-2 product-list-section"
+                        id="products-list">
+
+                    </div>
+
+                    <!-- <div class="loading" id="loadingIndicator">
+                        Loading...
+                    </div> -->
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Quick View Modal Box Start -->
+    <div class="modal fade theme-modal view-modal" id="view" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-xl modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-header p-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-sm-4 g-2">
+                        <!-- <div class="col-lg-6">
+                            <div class="slider-image">
+
+                     
+
+                                <img id="modalImage" src="../assets/images/product/category/1.jpg"
+                                    class="img-fluid blur-up lazyload" alt="">
+
+                            </div>
+                        </div> -->
+
+                        <div class="col-lg-12">
+                            <div class="right-sidebar-modal">
+                                <h5 class="title-name" id="applicableProducts"></h5>
+
+                                <div id="scheme-container"></div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Quick View Modal Box End -->
+
+
+    <%- include('../include/footer.ejs') %>
+
+
+        <script>
+
+
+            $(document).on("click", ".qty-right-plus", function () {
+                var $quantityInput = $(this).siblings('.qty-input');
+                var currentVal = parseInt($quantityInput.val());
+
+                if (currentVal < 9) {
+                    $quantityInput.val(currentVal + 1);
+                    var quantity = $quantityInput.val();
+                    //("Updated quantity:", quantity);
+                    addToCart.call(this); // Pass `this` as an argument
+                } else if (currentVal === 9) {
+                    alert("Maximum quantity reached!"); // Display alert message
+                }
+            });
+            // Event listener for clicking on the minus button
+            $(document).on("click", ".qty-left-minus", function () {
+                var $quantityInput = $(this).siblings('.qty-input');
+                var currentVal = parseInt($quantityInput.val());
+
+                if (currentVal > 0) {
+                    $quantityInput.val(currentVal - 1);
+                    var quantity = $quantityInput.val();
+                    addToCart.call(this); // Pass `this` as an argument
+                }
+            });
+
+            // Event listener for clicking on the add-to-cart button
+            $(document).on("click", ".addcart-button", function () {
+                // Add the "open" class to the next element
+                $(this).next().addClass("open");
+                // Set the value of the quantity input box to 1
+                $(this).closest('.add-to-cart-box').find('.qty-input').val('1');
+                addToCart.call(this); // Pass `this` as an argument
+            });
+
+            function addToCart() {
+                var form = $(this).closest('.cartForm')[0]; // Get the native DOM element
+                // Now you can use formData and productId as needed
+                var formData = new FormData(form);
+                var productId = form.getAttribute('data-product-id');
+                var xhr = new XMLHttpRequest();
+                // Setup AJAX request
+                xhr.open('POST', '/add-to-cart/' + productId);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        // Request completed
+                        if (xhr.status === 200) {
+                            // Success
+                            //(xhr.responseText);
+
+                            // Optionally, you can perform additional actions after successfully adding the item to cart
+                            $.notify({
+                                icon: "fa fa-check",
+                                title: "Success!",
+                                message: "Item added to cart successfully",
+                            }, {
+                                element: "body",
+                                position: null,
+                                type: "info",
+                                allow_dismiss: true,
+                                newest_on_top: false,
+                                showProgressbar: true,
+                                placement: {
+                                    from: "top",
+                                    align: "right",
+                                },
+                                offset: 20,
+                                spacing: 10,
+                                z_index: 1031,
+                                delay: 1000,
+                                animate: {
+                                    enter: "animated fadeInDown",
+                                    exit: "animated fadeOutUp",
+                                },
+                                icon_type: "class",
+                                template: '<div data-notify="container" class="col-xxl-3 col-lg-5 col-md-6 col-sm-7 col-12 alert alert-{0}" role="alert">' +
+                                    '<button type="button" aria-hidden="true" class="btn-close" data-notify="dismiss"></button>' +
+                                    '<span data-notify="icon"></span> ' +
+                                    '<span data-notify="title">{1}</span> ' +
+                                    '<span data-notify="message">{2}</span>' +
+                                    '<div class="progress" data-notify="progressbar">' +
+                                    '<div class="progress-bar progress-bar-info progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+                                    "</div>" +
+                                    '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                                    "</div>",
+                            });
+
+                            // Hide loader overlay
+                            document.getElementById('loader-overlay').style.display = 'none';
+                        } else {
+                            // Error
+                            console.error('Failed to add item to cart:', xhr.statusText);
+                            alert('Failed to add item to cart');
+
+                            // Optionally, you can perform additional actions after unsuccessfully adding the item to cart
+                            $.notify({
+                                icon: "fa fa-times-circle",
+                                // title: "Success!",
+                                message: "Failed to add item to cart",
+                            }, {
+                                element: "body",
+                                position: null,
+                                type: "danger",
+                                allow_dismiss: true,
+                                newest_on_top: false,
+                                showProgressbar: true,
+                                placement: {
+                                    from: "top",
+                                    align: "right",
+                                },
+                                offset: 20,
+                                spacing: 10,
+                                z_index: 1031,
+                                delay: 1000,
+                                animate: {
+                                    enter: "animated fadeInDown",
+                                    exit: "animated fadeOutUp",
+                                },
+                                icon_type: "class",
+                                template: '<div data-notify="container" class="col-xxl-3 col-lg-5 col-md-6 col-sm-7 col-12 alert alert-{0}" role="alert">' +
+                                    '<button type="button" aria-hidden="true" class="btn-close" data-notify="dismiss"></button>' +
+                                    '<span data-notify="icon"></span> ' +
+                                    '<span data-notify="title">{1}</span> ' +
+                                    '<span data-notify="message">{2}</span>' +
+                                    '<div class="progress" data-notify="progressbar">' +
+                                    '<div class="progress-bar progress-bar-info progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+                                    "</div>" +
+                                    '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                                    "</div>",
+                            });
+
+                            // Hide loader overlay
+                            document.getElementById('loader-overlay').style.display = 'none';
+                        }
+                    }
+                };
+
+                // Send AJAX request
+                xhr.send(new URLSearchParams(formData));
+
+                // Show loader overlay
+                document.getElementById('loader-overlay').style.display = 'block';
+
+
+            }
+
+
+
+
+            let nextPageNumber = 20;
+            let loading = false; // Initialize loading indicator
+            // Event delegation for button clicks inside the productList container
+            const productList = document.getElementById('products-list');
+
+            // Declare variables to store selected values globally
+            let selectedValue = "";
+            let selectedId = "";
+            let selectedBrandId = "";
+            let selectedSubBrandValue = ""; //
+            let selectedAllValue = "";
+
+            function loadMore() {
+                if (loading) return; // Prevent multiple simultaneous requests
+                loading = true; // Set loading indicator to true
+                //("Loading more products...");
+                // Now you can use these selected values as needed
+                //('Selected Categories One value:', selectedValue);
+                //('Selected Categories Two value:', selectedId);
+                //('Selected Brand value:', selectedBrandId);
+                //('Selected Sub-brand value:', selectedSubBrandValue);
+                //('Selected ALL value:', selectedAllValue);
+
+                //(`<%= url %>`);
+                var postData = `nextPageNumber=${nextPageNumber}&url=<%= url %>&selectedValue=${selectedValue}&selectedId=${selectedId}&selectedBrandId=${selectedBrandId}&selectedSubBrandValue=${selectedSubBrandValue}&selectedAllValue=${selectedAllValue}`;
+                // 2. Update UI with a loading indicator (optional)
+                $('#loader-overlay').fadeIn();
+
+                // AJAX request
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', `/loadmore`);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        // Request completed
+                        if (xhr.status === 200) {
+                            // Success
+                            responses = JSON.parse(xhr.responseText); // Update responses variable
+                            $('#loader-overlay').fadeOut();
+                            nextPageNumber += 20;
+                            // Get the container element
+                            const productList = document.getElementById('products-list');
+                            responses.data.forEach(product => {
+                                const productBoxHTML = generateProductBoxHTML(product);
+                                productList.insertAdjacentHTML('beforeend', productBoxHTML);
+                            });
+
+                            loading = false; // Reset loading indicator
+
+
+                            // Handle the redirection after receiving the response
+                        } else {
+                            // Error loading more products
+                            console.error("Error loading more products:", textStatus, errorThrown);
+                            // Handle errors appropriately (e.g., display an error message to the user)
+                        }
+                    }
+                };
+
+                // Send AJAX request
+                xhr.send(postData);
+            }
+            // Initial call to loadMore (optional, depending on your setup)
+            loadMore();
+
+
+            window.addEventListener('scroll', function () {
+                if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+
+                    loadMore();
+                }
+            });
+
+
+
+
+        </script>
+
+
+
+        <script>
+            // Select the collapse element by its ID
+            var collapseElement = document.getElementById('collapseExample');
+            let parentCategoryId; // Declare a global variable
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const categoriesSelectElement = document.getElementById('Categories_one');
+                const allDropdown = document.getElementById('allDropdown'); // Initialize allDropdown here
+                // Add default option
+
+
+
+                if (categoriesSelectElement) {
+                    categoriesSelectElement.addEventListener('change', function () {
+                        selectedValue = categoriesSelectElement.value;
+
+                        // Remove redeclaration of allDropdown here
+                        // const allDropdown = allDropdown.value; // Remove this line
+
+                        const selectedOption = categoriesSelectElement.options[categoriesSelectElement.selectedIndex];
+                        const selectedId = selectedOption ? selectedOption.getAttribute('data-id') : null;
+
+                        productList.innerHTML = ''; // This will empty the product list container
+
+                        // Reset the collapse state
+                        var bsCollapse = new bootstrap.Collapse(collapseElement, {
+                            toggle: false // This prevents the collapse state from toggling
+                        });
+
+                        // Hide the collapse
+                        // bsCollapse.hide();
+                        $('#loader-overlay').fadeIn();
+                        // Fetch data for the second category based on the selected category
+                        fetch('/category-Two', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                selectedValue,
+                                selectedId,
+                                allDropdown: allDropdown.value, // Use the existing variable here
+                                url: '<%= url %>'
+                            })
+                        })
+                            .then(response => {
+                                if (response.ok) {
+                                    return response.json();
+                                } else {
+                                    $('#loader-overlay').fadeOut();
+
+
+                                    throw new Error('Failed to fetch category two data');
+                                }
+                            })
+                            .then(responseData => {
+                                $('#loader-overlay').fadeOut();
+                                const productList = document.getElementById('products-list');
+                                //(responseData.productList);
+                                responseData.productList.forEach(product => {
+                                    const productBoxHTML = generateProductBoxHTML(product);
+                                    productList.insertAdjacentHTML('beforeend', productBoxHTML);
+                                });
+
+                                const categoriesTwo = responseData.data;
+                                //("***", categoriesTwo[0].parent_id);
+                                const selectedId = categoriesTwo[0].parent_id
+
+                                // In your function where you have access to categoriesTwo array, assign the value to the global variable
+                                parentCategoryId = categoriesTwo[0].parent_id;
+
+                                const selectElementCategoriesTwo = document.querySelector('[name="Categories_Two"]');
+                                const selectElementBrand = document.getElementById('brand_id');
+                                const selectElementSubBrand = document.getElementById('sub_brand_id');
+
+                                // Clear existing options for Categories Two
+                                selectElementCategoriesTwo.innerHTML = '';
+                                const defaultOptionCategoriesTwo = document.createElement('option');
+                                defaultOptionCategoriesTwo.value = '';
+                                defaultOptionCategoriesTwo.textContent = 'Select a category';
+                                selectElementCategoriesTwo.appendChild(defaultOptionCategoriesTwo);
+
+                                // Clear existing options for Brand
+                                selectElementBrand.innerHTML = '';
+                                const defaultOptionBrand = document.createElement('option');
+                                defaultOptionBrand.value = '';
+                                defaultOptionBrand.textContent = 'Select a brand';
+                                selectElementBrand.appendChild(defaultOptionBrand);
+
+                                // Clear existing options for Sub-brand
+                                selectElementSubBrand.innerHTML = '';
+                                const defaultOptionSubBrand = document.createElement('option');
+                                defaultOptionSubBrand.value = '';
+                                defaultOptionSubBrand.textContent = 'Select a sub-brand';
+                                selectElementSubBrand.appendChild(defaultOptionSubBrand);
+
+                                if (Array.isArray(categoriesTwo)) {
+                                    categoriesTwo.forEach(category => {
+                                        const option = document.createElement('option');
+                                        option.value = category.id;
+                                        option.textContent = category.name;
+                                        option.setAttribute('data-id', category.id);
+                                        selectElementCategoriesTwo.appendChild(option);
+                                    });
+                                } else {
+                                    console.error('Categories is not an array:', categoriesTwo);
+                                }
+                            })
+                            .catch(error => {
+                                $('#loader-overlay').fadeOut();
+
+                                console.error('Error:', error);
+                            });
+                    });
+                } else {
+                    $('#loader-overlay').fadeOut();
+
+                    console.error("Select element with ID 'Categories_one' not found.");
+                }
+            });
+        </script>
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const selectElement = document.getElementById('brand_id');
+
+                const allDropdown = document.getElementById('allDropdown');
+
+
+                // Add default option
+                const defaultOption = document.createElement('option');
+                defaultOption.value = ''; // Set the value of the default option
+                defaultOption.textContent = 'Select a brand'; // Set the text content of the default option
+                selectElement.appendChild(defaultOption); // Append the default option to the select element
+
+                const categoriesSelectElement = document.getElementById('Categories_Two');
+                categoriesSelectElement.addEventListener('change', function () {
+
+                    selectedId = this.value;
+                    $('#loader-overlay').fadeIn();
+
+                    productList.innerHTML = ''; // This will empty the product list container
+
+                    // Reset the collapse state
+                    var bsCollapse = new bootstrap.Collapse(collapseElement, {
+                        toggle: false // This prevents the collapse state from toggling
+                    });
+
+                    // Hide the collapse
+                    // bsCollapse.hide();
+
+
+                    fetch('/brand-id', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            selectedId,
+                            parentCategoryId,
+                            allDropdown: allDropdown.value, // Use the existing variable here
+                            url: '<%= url %>' // Include parentCategoryId in the request body
+                        })
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                return response.json(); // Parse response body as JSON
+                            } else {
+                                $('#loader-overlay').fadeOut();
+
+                                throw new Error('Failed to fetch brand data');
+                            }
+                        })
+                        .then(responseData => {
+                            $('#loader-overlay').fadeOut();
+                            const productList = document.getElementById('products-list');
+
+
+                            //(responseData);
+                            responseData.productListData.forEach(product => {
+                                const productBoxHTML = generateProductBoxHTML(product);
+                                productList.insertAdjacentHTML('beforeend', productBoxHTML);
+                            });
+
+                            const categories = responseData.data;
+                            selectElement.innerHTML = ''; // Clear existing options
+
+                            // Add default option
+                            selectElement.appendChild(defaultOption.cloneNode(true));
+
+                            // Check if categories is an array
+                            if (Array.isArray(categories)) {
+                                // Iterate over the array and append options
+                                categories.forEach(category => {
+                                    const option = document.createElement('option');
+                                    option.value = category.id; // Set the value of the option
+                                    option.textContent = category.name; // Set the text content of the option
+                                    selectElement.appendChild(option); // Append the option to the select element
+                                });
+                            } else {
+                                $('#loader-overlay').fadeOut();
+
+                                console.error('Categories is not an array:', categories);
+                            }
+                        })
+                        .catch(error => {
+                            $('#loader-overlay').fadeOut();
+
+                            console.error('Error:', error);
+                        });
+                });
+            });
+
+        </script>
+
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const allDropdown = document.getElementById('allDropdown');
+
+
+                // Add default option
+                const selectElement = document.getElementById('sub_brand_id');
+                const defaultOption = document.createElement('option');
+                defaultOption.value = ''; // Set the value of the default option
+                defaultOption.textContent = 'Select a sub-brand'; // Set the text content of the default option
+                selectElement.appendChild(defaultOption); // Append the default option to the select element
+
+                const categoriesSelectElement = document.getElementById('Categories_Two');
+                const brandSelectElement = document.getElementById('brand_id');
+                const selectedCategoryId = categoriesSelectElement.value;
+
+                brandSelectElement.addEventListener('change', function () {
+                    const selectedCategoryId = categoriesSelectElement.value;
+                    selectedBrandId = brandSelectElement.value;
+
+                    $('#loader-overlay').fadeIn();
+
+                    productList.innerHTML = ''; // This will empty the product list container
+
+                    // Reset the collapse state
+                    var bsCollapse = new bootstrap.Collapse(collapseElement, {
+                        toggle: false // This prevents the collapse state from toggling
+                    });
+
+                    // Hide the collapse
+                    // bsCollapse.hide();
+
+                    fetch('/sub_brand_id', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+
+                        body: JSON.stringify({
+                            selectedCategoryId,
+                            selectedBrandId,
+                            parentCategoryId,
+                            allDropdown: allDropdown.value, // Use the existing variable here
+                            url: '<%= url %>' // Include parentCategoryId in the request body
+                        })
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                return response.json(); // Parse response body as JSON
+                            } else {
+                                $('#loader-overlay').fadeOut();
+
+                                throw new Error('Failed to fetch sub-brands');
+                            }
+                        })
+                        .then(responseData => {
+                            $('#loader-overlay').fadeOut();
+
+                            //(responseData);
+
+                            const productList = document.getElementById('products-list');
+
+
+                            //(responseData);
+                            responseData.productListData.forEach(product => {
+                                const productBoxHTML = generateProductBoxHTML(product);
+                                productList.insertAdjacentHTML('beforeend', productBoxHTML);
+                            });
+
+                            const subBrands = responseData.data;
+                            selectElement.innerHTML = ''; // Clear existing options
+
+                            // Add default option
+                            selectElement.appendChild(defaultOption.cloneNode(true));
+
+                            // Check if subBrands is an array
+                            if (Array.isArray(subBrands)) {
+                                // Iterate over the array and append options
+                                subBrands.forEach(subBrand => {
+                                    const option = document.createElement('option');
+                                    option.value = subBrand.id; // Set the value of the option
+                                    option.textContent = subBrand.name; // Set the text content of the option
+                                    selectElement.appendChild(option); // Append the option to the select element
+                                });
+                            } else {
+                                $('#loader-overlay').fadeOut();
+
+                                console.error('Sub-brands is not an array:', subBrands);
+                            }
+                        })
+                        .catch(error => {
+                            $('#loader-overlay').fadeOut();
+
+                            console.error('Error:', error);
+                        });
+                });
+            });
+        </script>
+
+
+
+
+
+
+        <script>
+
+
+
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const allDropdown = document.getElementById('allDropdown');
+                const categoriesOneDropdown = document.getElementById('Categories_one');
+                const categoriesTwoDropdown = document.getElementById('Categories_Two');
+                const brandDropdown = document.getElementById('brand_id');
+                const subBrandDropdown = document.getElementById('sub_brand_id');
+
+                allDropdown.addEventListener('change', function () {
+                    $('#loader-overlay').fadeIn();
+
+                    selectedAllValue = allDropdown.value;
+                    const selectedCategoriesOneValue = categoriesOneDropdown.value;
+                    const selectedCategoriesTwoValue = categoriesTwoDropdown.value;
+                    const selectedBrandValue = brandDropdown.value;
+                    const selectedSubBrandValue = subBrandDropdown.value;
+                    productList.innerHTML = ''; // This will empty the product list container
+
+                    // Reset the collapse state
+                    var bsCollapse = new bootstrap.Collapse(collapseElement, {
+                        toggle: false // This prevents the collapse state from toggling
+                    });
+
+                    fetch('/selectedAll', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+
+                        body: JSON.stringify({
+                            selectedCategoriesOneValue,
+                            selectedCategoriesTwoValue,
+                            selectedBrandValue,
+                            selectedSubBrandValue,
+                            selectedAllValue,
+
+                            url: '<%= url %>' // Include parentCategoryId in the request body
+                        })
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                return response.json(); // Parse response body as JSON
+                            } else {
+                                $('#loader-overlay').fadeOut();
+
+                                throw new Error('Failed to fetch sub-brands');
+                            }
+                        })
+                        .then(responseData => {
+                            $('#loader-overlay').fadeOut();
+
+                            const productList = document.getElementById('products-list');
+                            responseData.productListData.forEach(product => {
+                                const productBoxHTML = generateProductBoxHTML(product);
+                                productList.insertAdjacentHTML('beforeend', productBoxHTML);
+                            });
+
+
+
+                        })
+                        .catch(error => {
+                            $('#loader-overlay').fadeOut();
+
+                            console.error('Error:', error);
+                        });
+
+
+
+
+
+
+                });
+            });
+        </script>
+
+
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const categoriesTwoDropdown = document.getElementById('Categories_Two');
+                const categoriesOneDropdown = document.getElementById('Categories_one');
+                const brandDropdown = document.getElementById('brand_id');
+                const brandSelectElement = document.getElementById('sub_brand_id');
+                const allDropdown = document.getElementById('allDropdown');
+
+
+                brandSelectElement.addEventListener('change', function () {
+                    const selectedCategoryId = categoriesTwoDropdown.value;
+                    const selectedCategoriesOneValue = categoriesOneDropdown.value;
+                    const selectedBrandValue = brandDropdown.value;
+                    const selectedBrandId = brandSelectElement.value;
+                    selectedSubBrandValue = brandSelectElement.value;
+
+
+                    $('#loader-overlay').fadeIn();
+                    productList.innerHTML = ''; // This will empty the product list container
+
+                    // Reset the collapse state
+                    var bsCollapse = new bootstrap.Collapse(collapseElement, {
+                        toggle: false // This prevents the collapse state from toggling
+                    });
+
+                    // Hide the collapse
+                    // bsCollapse.hide();
+
+                    fetch('/sub_brand_Two', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            selectedCategoryId,
+                            selectedCategoriesOneValue,
+                            selectedBrandValue,
+                            selectedBrandId,
+                            allDropdown: allDropdown.value, // Use the existing variable here
+                            url: '<%= url %>' // Include parentCategoryId in the request body
+                        })
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                return response.json(); // Parse response body as JSON
+                            } else {
+                                $('#loader-overlay').fadeOut();
+
+                                throw new Error('Failed to fetch sub-brands');
+                            }
+                        })
+                        .then(responseData => {
+                            $('#loader-overlay').fadeOut();
+
+                            //(responseData);
+
+                            const productList = document.getElementById('products-list');
+
+                            //(responseData);
+                            responseData.productListData.forEach(product => {
+                                const productBoxHTML = generateProductBoxHTML(product);
+                                productList.insertAdjacentHTML('beforeend', productBoxHTML);
+                            });
+                        })
+                        .catch(error => {
+                            $('#loader-overlay').fadeOut();
+
+                            console.error('Error:', error);
+                        });
+                });
+            });
+        </script>
+
+
+
+
+
+
+
+        <script>
+
+
+
+
+
+            function generateProductBoxHTML(product) {
+                return `
+        <div>
+            <div class="product-box-3 h-100 wow fadeInUp">
+                <form class="schemeForm" action="#" method="post">
+                    ${product.scheme_id !== null ?
+                        `<input type="hidden" name="scheme_id" value="${product.scheme_id}">
+                        <input type="hidden" name="product_id" value="${product.product_id}">
+                        <input type="hidden" name="customer_product_master_id" value="${product.customer_product_master_id}">
+                        
+                        <button type="submit" class="scheme_id">
+                            <img src="<%= baseUrl %>/assets/img/discount.png" style="height: 30px;" alt="" class="src">
+                        </button>` :
+
+                        `<button type="submit" class="scheme_id"></button>`
+                    }
+                </form>
+                <div class="product-header">
+                    <div class="product-image">
+                        <a href="/singleProduct/${product.customer_product_master_id}/${product.product_id}">
+                            <img src="${product.image || 'https://shopmefast.com/images/product-no-image.jpg'}" class="img-fluid blur-up lazyload" alt="" onerror="handleImageError(this)">
+                        </a>
+                    </div>
+                </div>
+                <div class="product-footer">
+                    <div class="product-detail">
+                        <a href="/singleProduct/${product.customer_product_master_id}/${product.product_id}">
+                            <h6 class="name">${product.name}</h6>
+                        </a>
+                        <p class="text-content mt-1 mb-2 product-content">${product.description}</p>
+                        <h6 class="unit">${product.item_code}</h6>
+                        <h5 class="price"><span class="theme-color">AED: <span id="conversionRateDisplay-${product.product_id}">${product.gross_price} </span></span></h5>
+                        <form method="post" class="cartForm TopBrands" data-product-id="${product.product_id}">
+                            <input type="hidden" name="customer_product_master_id" value="${product.customer_product_master_id}">
+                            <input type="hidden" name="product_id" value="${product.product_id}">
+                            <select class="form-select select-form-size mt-2 uomSelected" name="primary_uom_code"  id="uomSelected" data-product-id="${product.product_id}">
+                                ${product.uom_details.map((uom, index) => `
+                                    <option data-conv_rate="${uom.conv_rate}" value="${uom.id}" ${index === 1 ? 'selected' : ''}>${uom.uom_code}</option>
+                                `).join('')}
+                            </select>
+                            <div class="add-to-cart-box bg-white">
+                                <button type="button" class="btn btn-add-cart theme-bg-color text-white addcart-button">Add<span class="add-icon bg-light-gray"><i class="fa-solid fa-plus"></i></span></button>
+                                <div class="cart_qty qty-box">
+                                    <div class="input-group bg-white">
+                                        <button type="button" class="qty-left-minus bg-gray" data-type="minus" data-field=""><i class="fa fa-minus"></i></button>
+                                        <input class="form-control input-number qty-input" type="text" name="quantity" readonly value="1">
+                                        <button type="button" class="qty-right-plus bg-gray" data-type="plus" data-field=""><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+            }
+
+        </script>
+
+
+        <script>
+            $(document).on("click", ".schemeForm", function () {
+                // Prevent the default form submission
+                event.preventDefault();
+
+                // Serialize the form data including hidden input fields
+                var formData = $(this).serialize();
+
+                //(formData);
+
+                // Disable the button to prevent multiple submissions
+                $(this).find('button[type="submit"]').prop('disabled', true);
+                const schemeContainer = document.getElementById('scheme-container');
+                schemeContainer.innerHTML = ''; // Properly clear the container
+
+
+
+                // Send AJAX request
+                $.ajax({
+                    url: '/get_scheme_detail_by_product', // Replace 'your-endpoint-url' with your actual endpoint
+                    type: 'POST',
+                    data: formData, // Include serialized form data
+                    success: function (response) {
+                        console.table("Access schemeDetail from the response data", response.data);
+                        const schemeContainer = document.getElementById('scheme-container');
+
+                        response.data.forEach(schemeDetail => {
+                            const productNamesHeader = document.createElement('h3');
+                            const productNames = [];
+                            // Check if applicable_products exist and are not empty
+                            if (schemeDetail.applicable_products && schemeDetail.applicable_products.length > 0) {
+                                schemeDetail.applicable_products.forEach(product => {
+                                    const productNameHeader = document.createElement('h3');
+                                    productNameHeader.textContent = product.name;
+                                    schemeContainer.appendChild(productNameHeader);
+                                    schemeContainer.appendChild(document.createElement('br'));
+                                });
+                            } else {
+                                // If no applicable products are found, set a default text
+                                const noProductsHeader = document.createElement('h3');
+                                noProductsHeader.textContent = 'No applicable products found';
+                                schemeContainer.appendChild(noProductsHeader);
+                            }
+                            schemeContainer.appendChild(productNamesHeader);
+                            // Create main scheme detail table
+                            const schemeTable = document.createElement('table');
+                            const schemeTableHeader = document.createElement('thead');
+                            const schemeTableBody = document.createElement('tbody');
+
+                            const headers = ["Property", "Value"];
+                            const headerRow = document.createElement('tr');
+                            headers.forEach(headerText => {
+                                const header = document.createElement('th');
+                                header.textContent = headerText;
+                                headerRow.appendChild(header);
+                            });
+                            schemeTableHeader.appendChild(headerRow);
+
+                            const schemeProperties = [
+                                { key: "Scheme Name", value: schemeDetail.scheme_name + ' (' + schemeDetail.slab_scheme_type + ' )' },
+                                { key: "Validity From", value: new Date(schemeDetail.validity_from).toLocaleDateString() },
+                                { key: "Validity To", value: new Date(schemeDetail.validity_to).toLocaleDateString() }
+                            ];
+
+                            schemeProperties.forEach(prop => {
+                                const row = document.createElement('tr');
+                                const cellKey = document.createElement('td');
+                                cellKey.textContent = prop.key;
+                                const cellValue = document.createElement('td');
+                                cellValue.textContent = prop.value;
+                                row.appendChild(cellKey);
+                                row.appendChild(cellValue);
+                                schemeTableBody.appendChild(row);
+                            });
+
+                            schemeTable.appendChild(schemeTableHeader);
+                            schemeTable.appendChild(schemeTableBody);
+                            schemeContainer.appendChild(schemeTable);
+
+                            if (schemeDetail.slab_calculation_type === "RUNNING") {
+                                // Handle RUNNING slab calculation type
+                                const runningTable = document.createElement('table');
+                                const runningTableHeader = document.createElement('thead');
+                                const runningTableBody = document.createElement('tbody');
+
+                                const runningHeaders = ["On Purchase of QTY", "FOC (INCLUSIVE)"];
+                                const runningHeaderRow = document.createElement('tr');
+                                runningHeaders.forEach(headerText => {
+                                    const header = document.createElement('th');
+                                    header.textContent = headerText;
+                                    runningHeaderRow.appendChild(header);
+                                });
+                                runningTableHeader.appendChild(runningHeaderRow);
+
+                                schemeDetail.scheme_slabes.forEach(slab => {
+                                    const row = document.createElement('tr');
+                                    const cells = [
+                                        slab.on_purchase_of_qty + ' ' + schemeDetail.slab_uom,
+                                        slab.foc_qty + slab.foc_sku
+                                    ];
+                                    cells.forEach(cellText => {
+                                        const cell = document.createElement('td');
+                                        cell.textContent = cellText;
+                                        row.appendChild(cell);
+                                    });
+                                    runningTableBody.appendChild(row);
+                                });
+
+                                runningTable.appendChild(runningTableHeader);
+                                runningTable.appendChild(runningTableBody);
+                                schemeContainer.appendChild(runningTable);
+
+
+
+
+
+
+
+
+
+                            } else if (schemeDetail.slab_calculation_type === "SLAB_BASED") {
+                                // Handle SLAB_BASED slab calculation type
+                                const slabBasedTable = document.createElement('table');
+                                const slabBasedTableHeader = document.createElement('thead');
+                                const slabBasedTableBody = document.createElement('tbody');
+
+                                const slabBasedHeaders = ["Slab QTY", "FOC (INCLUSIVE)"];
+                                const slabBasedHeaderRow = document.createElement('tr');
+                                slabBasedHeaders.forEach(headerText => {
+                                    const header = document.createElement('th');
+                                    header.textContent = headerText;
+                                    slabBasedHeaderRow.appendChild(header);
+                                });
+                                slabBasedTableHeader.appendChild(slabBasedHeaderRow);
+
+                                schemeDetail.scheme_slabes.forEach(slab => {
+                                    const row = document.createElement('tr');
+                                    const cells = [
+                                        // slab.id,
+                                        // slab.scheme_master_id,
+                                        // slab.slab_id,
+                                        slab.from_qty + '-' + slab.to_qty + '-' + schemeDetail.slab_uom,
+                                        slab.foc_qty + ' ' + slab.foc_sku
+                                    ];
+                                    cells.forEach(cellText => {
+                                        const cell = document.createElement('td');
+                                        cell.textContent = cellText;
+                                        row.appendChild(cell);
+                                    });
+                                    slabBasedTableBody.appendChild(row);
+                                });
+
+                                slabBasedTable.appendChild(slabBasedTableHeader);
+                                slabBasedTable.appendChild(slabBasedTableBody);
+                                schemeContainer.appendChild(slabBasedTable);
+
+
+
+
+                                // Clear the existing content of the scheme container
+
+
+                                // Create a table to hold the applicable products
+                                const productsTable = document.createElement('table');
+
+                                // Create table headers
+                                const tableHeaderRow = document.createElement('tr');
+                                const nameHeader = document.createElement('th');
+                                nameHeader.textContent = 'Applicable For';
+                                tableHeaderRow.appendChild(nameHeader);
+                                productsTable.appendChild(tableHeaderRow);
+
+                                // Check if applicable_products exist and are not empty
+                                if (schemeDetail.applicable_products && schemeDetail.applicable_products.length > 0) {
+                                    // Loop through each product
+                                    schemeDetail.applicable_products.forEach(product => {
+                                        // Create a table row for each product
+                                        const tableRow = document.createElement('tr');
+                                        const productNameCell = document.createElement('td');
+                                        productNameCell.textContent = product.name;
+                                        tableRow.appendChild(productNameCell);
+                                        productsTable.appendChild(tableRow);
+                                    });
+                                } else {
+                                    // If no applicable products are found, set a default row
+                                    const noProductsRow = document.createElement('tr');
+                                    const noProductsCell = document.createElement('td');
+                                    noProductsCell.textContent = 'No applicable products found';
+                                    noProductsRow.appendChild(noProductsCell);
+                                    productsTable.appendChild(noProductsRow);
+                                }
+
+                                // Append the products table to the scheme container
+                                schemeContainer.appendChild(productsTable);
+                                // Create a table to hold the free products
+                                // Create an h3 element for "Free Products" heading
+
+
+
+
+                                // Clear the existing content of the scheme container
+
+                                // Create an h3 element for "Free Products" heading
+
+
+                                // Create a table element to hold the product names
+                                const customTable = document.createElement('table');
+
+                                // Create a table header row for the table headers
+                                const headerRow = document.createElement('tr');
+                                const customHeader = document.createElement('th');
+                                customHeader.textContent = 'Free Products'; // Change the text content as needed
+                                headerRow.appendChild(customHeader);
+                                customTable.appendChild(headerRow);
+
+                                // Create a table row to hold the product names
+                                const tableRow = document.createElement('tr');
+
+                                // Check if schemeDetail.scheme_slabes exists and is not empty
+                                if (schemeDetail.scheme_slabes && schemeDetail.scheme_slabes.length > 0) {
+                                    // Concatenate the text for each product
+                                    let productText = '';
+                                    schemeDetail.scheme_slabes.forEach((product, index) => {
+                                        // Add the product text
+                                        productText += product.foc_sku;
+                                        // Add comma if it's not the last product
+                                        if (index < schemeDetail.scheme_slabes.length - 1) {
+                                            productText += ', ';
+                                        }
+                                    });
+                                    // Create a single cell in the table row and set its text content to the concatenated product text
+                                    const tableCell = document.createElement('td');
+                                    tableCell.textContent = productText;
+                                    tableRow.appendChild(tableCell);
+                                } else {
+                                    // If no free products are found, create a single cell with a default message
+                                    const tableCell = document.createElement('td');
+                                    tableCell.textContent = 'No free products available';
+                                    tableRow.appendChild(tableCell);
+                                }
+
+                                // Append the table row to the table
+                                customTable.appendChild(tableRow);
+
+                                // Append the table to the scheme container
+                                schemeContainer.appendChild(customTable);
+
+
+
+
+
+
+
+
+
+                            }
+
+
+
+                        });
+
+
+                        // Show the modal
+                        $('#view').modal('show');
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error response
+                        console.error('Error:', error);
+                    },
+                    complete: function () {
+                        // Enable the button after the AJAX request completes, whether successful or not
+                        $('.schemeForm button[type="submit"]').prop('disabled', false);
+                    }
+                });
+            });
+        </script>
+
+        <script>
+            $(document).ready(function () {
+
+
+
+                // Handle the change event for all dynamically added .uomSelected elements
+                $(document).on("change", ".uomSelected", function () {
+                    const uomSelect = this; // The changed select element
+                    const productId = $(uomSelect).data('product-id');
+
+                    //(productId);
+                    const conversionRateDisplay = document.getElementById(`conversionRateDisplay-${productId}`);
+
+                    //(conversionRateDisplay);
+
+                    // Get the selected option
+                    const selectedOption = uomSelect.options[uomSelect.selectedIndex];
+                    // Get the conversion rate from the selected option's data attribute
+                    const conversionRate = selectedOption.dataset.conv_rate;
+
+                    //(conversionRate);
+                    // Update the display with the selected conversion rate
+                    conversionRateDisplay.textContent = ` ${conversionRate}`;
+                });
+
+                // Trigger the change event to display the initial conversion rate for each product
+                $('.uomSelected').each(function () {
+                    $(this).trigger('change');
+                });
+            });
+
+
+        </script>

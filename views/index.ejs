@@ -1,0 +1,1336 @@
+<%- include('include/header') %>
+
+    <style>
+        .shop-category-box {
+
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        }
+    </style>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 5px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        th,
+        td {
+            padding: 5px;
+            text-align: left;
+        }
+    </style>
+
+    <!-- Home Section Start -->
+    <section>
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="slider-1 slider-animate product-wrapper no-arrow">
+                        <% if (banner.length> 0) { %>
+                            <% banner.forEach(banner=> { %>
+                                <div>
+                                    <div class="banner-contain-2 hover-effect">
+                                        <img src="<%- banner.banner_url %>" class="rounded-3 blur-up lazyload" alt=""
+                                            style="width: 100%;">
+                                        <div
+                                            class="banner-detail p-center-right position-relative shop-banner ms-auto banner-small">
+                                            <!-- Additional banner details or content can be placed here -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <% }); %>
+                                    <% } %>
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Home Section End -->
+
+
+    <section class="wow ">
+        <div class="container-fluid-lg">
+            <div class=" space shop-box no-arrow">
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="shop-category-box">
+                            <a href="./PreviousOrdersDelivered">
+                                <div class="shop-category-image">
+                                    <img src="<%= baseUrl %>/assets/Icons/BannerIcons/RecentOrders.png"
+                                        class="blur-up lazyload" alt="">
+                                </div>
+                                <div class="category-box-name">
+                                    <h6>Recent Orders</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="shop-category-box">
+                            <a href="./frequently">
+                                <div class="shop-category-image">
+                                    <img src="<%= baseUrl %>/assets/Icons/BannerIcons/FrequentlyPurchasedItems.png"
+                                        class="blur-up lazyload" alt="">
+                                </div>
+                                <div class="category-box-name">
+                                    <h6>Frequently Purchased Items</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="shop-category-box">
+                            <a href="./catalogue">
+                                <div class="shop-category-image">
+                                    <img src="<%= baseUrl %>/assets/Icons/BannerIcons/ProductCatalogue.png"
+                                        class="blur-up lazyload" alt="">
+                                </div>
+                                <div class="category-box-name">
+                                    <h6> Product Catalog</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <section class="section-b-space shop-section">
+        <div class="container-fluid-lg">
+
+            <div class="title">
+                <h2>Categories</h2>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="row g-sm-4 g-3 row-cols-xxl-4 row-cols-xl-3 row-cols-lg-2 row-cols-md-3 row-cols-2 product-list-section text"
+                        id="category-list">
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+    <!-- Product Section Start -->
+
+    <!-- Product Section End -->
+
+
+    <!-- Product Section Start -->
+
+
+
+
+
+    <!-- Product Section Start -->
+    <section>
+        <div class="container-fluid-lg">
+            <div class="row g-3">
+                <div class="col-xxl-12 col-xl-12">
+                    <div class="title title-flex">
+                        <div>
+                            <h2>Top Brands <small><a class="text-dark" href="top-brands">View All</a></small>
+
+                            </h2>
+
+                        </div>
+                        <!-- <div class="timing-box">
+                            <div class="timing theme-bg-color">
+
+                            </div>
+                        </div> -->
+                    </div>
+
+                    <div class="slider-7_1 arrow-slider img-slider " id="TopBrands-list">
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <div class="title title-flex mt-5">
+                        <div>
+                            <h2>Best Sellers <small> <a class="text-dark" href="top-selling">View All</a>
+                                </small>
+                            </h2>
+
+
+                        </div>
+                        <!-- <div class="timing-box">
+                            <div class="timing theme-bg-color">
+
+                            </div>
+                        </div> -->
+                    </div>
+
+
+                    <div class="slider-7_1 arrow-slider img-slider" id="top-selling-list">
+
+
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+    <!-- Product Section End -->
+
+
+
+
+
+
+
+    <!-- Quick View Modal Box Start -->
+    <!-- Quick View Modal Box Start -->
+    <div class="modal fade theme-modal view-modal" id="view" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-xl modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-header p-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-sm-4 g-2">
+                        <!-- <div class="col-lg-6">
+                            <div class="slider-image">
+
+                     
+
+                                <img id="modalImage" src="../assets/images/product/category/1.jpg"
+                                    class="img-fluid blur-up lazyload" alt="">
+
+                            </div>
+                        </div> -->
+
+                        <div class="col-lg-12">
+                            <div class="right-sidebar-modal">
+                                <h5 class="title-name" id="applicableProducts"></h5>
+
+                                <div id="scheme-container"></div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Quick View Modal Box End -->
+    <!-- Quick View Modal Box End -->
+
+    <div id="overlay"></div>
+
+
+    <%- include('include/footer') %>
+
+
+
+        <script>
+            $(document).on("click", ".addcart-button_TopBrands", function () {
+                // Add the "open" class to the next element
+                $(this).next().addClass("open");
+                // Set the value of the quantity input box to 1
+                $(this).closest('.add-to-cart-box').find('.qty-input').val('1');
+                addToCart.call(this); // Pass `this` as an argument
+
+            });
+
+            function addToCart() {
+                var form = $(this).closest('.TopBrands')[0]; // Get the native DOM element
+                // Now you can use formData and productId as needed
+                var formData = new FormData(form);
+                var productId = form.getAttribute('data-product-id');
+                var xhr = new XMLHttpRequest();
+                // Setup AJAX request
+                xhr.open('POST', '/addToCartTopBrands/' + productId);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        // Request completed
+                        if (xhr.status === 200) {
+                            // Success
+                            //(xhr.responseText);
+
+                            // Optionally, you can perform additional actions after successfully adding the item to cart
+                            $.notify({
+                                icon: "fa fa-check",
+                                title: "Success!",
+                                message: "Item added to cart successfully",
+                            }, {
+                                element: "body",
+                                position: null,
+                                type: "info",
+                                allow_dismiss: true,
+                                newest_on_top: false,
+                                showProgressbar: true,
+                                placement: {
+                                    from: "top",
+                                    align: "right",
+                                },
+                                offset: 20,
+                                spacing: 10,
+                                z_index: 1031,
+                                delay: 1000,
+                                animate: {
+                                    enter: "animated fadeInDown",
+                                    exit: "animated fadeOutUp",
+                                },
+                                icon_type: "class",
+                                template: '<div data-notify="container" class="col-xxl-3 col-lg-5 col-md-6 col-sm-7 col-12 alert alert-{0}" role="alert">' +
+                                    '<button type="button" aria-hidden="true" class="btn-close" data-notify="dismiss"></button>' +
+                                    '<span data-notify="icon"></span> ' +
+                                    '<span data-notify="title">{1}</span> ' +
+                                    '<span data-notify="message">{2}</span>' +
+                                    '<div class="progress" data-notify="progressbar">' +
+                                    '<div class="progress-bar progress-bar-info progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+                                    "</div>" +
+                                    '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                                    "</div>",
+                            });
+
+                            // Hide loader overlay
+                            document.getElementById('loader-overlay').style.display = 'none';
+                        } else {
+                            // Error
+                            console.error('Failed to add item to cart:', xhr.statusText);
+                            alert('Failed to add item to cart');
+
+                            // Optionally, you can perform additional actions after unsuccessfully adding the item to cart
+                            $.notify({
+                                icon: "fa fa-times-circle",
+                                // title: "Success!",
+                                message: "Failed to add item to cart",
+                            }, {
+                                element: "body",
+                                position: null,
+                                type: "danger",
+                                allow_dismiss: true,
+                                newest_on_top: false,
+                                showProgressbar: true,
+                                placement: {
+                                    from: "top",
+                                    align: "right",
+                                },
+                                offset: 20,
+                                spacing: 10,
+                                z_index: 1031,
+                                delay: 1000,
+                                animate: {
+                                    enter: "animated fadeInDown",
+                                    exit: "animated fadeOutUp",
+                                },
+                                icon_type: "class",
+                                template: '<div data-notify="container" class="col-xxl-3 col-lg-5 col-md-6 col-sm-7 col-12 alert alert-{0}" role="alert">' +
+                                    '<button type="button" aria-hidden="true" class="btn-close" data-notify="dismiss"></button>' +
+                                    '<span data-notify="icon"></span> ' +
+                                    '<span data-notify="title">{1}</span> ' +
+                                    '<span data-notify="message">{2}</span>' +
+                                    '<div class="progress" data-notify="progressbar">' +
+                                    '<div class="progress-bar progress-bar-info progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+                                    "</div>" +
+                                    '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                                    "</div>",
+                            });
+
+                            // Hide loader overlay
+                            document.getElementById('loader-overlay').style.display = 'none';
+                        }
+                    }
+                };
+
+                // Send AJAX request
+                xhr.send(new URLSearchParams(formData));
+
+                // Show loader overlay
+                document.getElementById('loader-overlay').style.display = 'block';
+
+
+            }
+
+
+
+        </script>
+
+
+
+
+
+
+
+
+        <script>
+
+            $(document).on("click", ".qty-right-plus_TopBrands", function () {
+                var $quantityInput = $(this).siblings('.qty-input');
+                var currentVal = parseInt($quantityInput.val());
+
+                if (currentVal < 9) {
+                    $quantityInput.val(currentVal + 1);
+                    var quantity = $quantityInput.val();
+                    //("Updated quantity:", quantity);
+                    addToCart.call(this); // Pass `this` as an argument
+
+                } else if (currentVal === 9) {
+                    alert("Maximum quantity reached!"); // Display alert message
+                }
+            });
+            // Event listener for clicking on the minus button
+            $(document).on("click", ".qty-left-minus_TopBrands", function () {
+                var $quantityInput = $(this).siblings('.qty-input');
+                var currentVal = parseInt($quantityInput.val());
+
+                if (currentVal > 0) {
+                    $quantityInput.val(currentVal - 1);
+                    var quantity = $quantityInput.val();
+                    addToCart.call(this); // Pass `this` as an argument
+                }
+            });
+
+            // // Event listener for clicking on the plus button
+            // $('.qty-right-plus').click(function () {
+            //     var $quantityInput = $(this).siblings('.qty-input');
+            //     var currentVal = parseInt($quantityInput.val());
+
+            //     if (currentVal < 9) {
+            //         $quantityInput.val(currentVal + 1);
+            //         // Retrieve the updated quantity value
+            //         var quantity = $quantityInput.val();
+            //        //("Updated quantity:", quantity);
+            //     }
+            // });
+
+            // // Event listener for clicking on the minus button
+            // $('.qty-left-minus').click(function () {
+            //     var $quantityInput = $(this).siblings('.qty-input');
+            //     var currentVal = parseInt($quantityInput.val());
+
+            //     if (currentVal > 0) {
+            //         $quantityInput.val(currentVal - 1);
+            //         // Retrieve the updated quantity value
+            //         var quantity = $quantityInput.val();
+            //        //("Updated quantity:", quantity);
+            //     }
+            // });
+
+
+
+        </script>
+
+
+        <script>
+            $(document).on("click", ".schemeForm", function () {
+                // Prevent the default form submission
+                event.preventDefault();
+
+                // Serialize the form data including hidden input fields
+                var formData = $(this).serialize();
+
+                //(formData);
+
+                // Disable the button to prevent multiple submissions
+                $(this).find('button[type="submit"]').prop('disabled', true);
+                const schemeContainer = document.getElementById('scheme-container');
+                schemeContainer.innerHTML = ''; // Properly clear the container
+
+
+
+                // Send AJAX request
+                $.ajax({
+                    url: '/get_scheme_detail_by_product', // Replace 'your-endpoint-url' with your actual endpoint
+                    type: 'POST',
+                    data: formData, // Include serialized form data
+                    success: function (response) {
+                        console.table("Access schemeDetail from the response data", response.data);
+                        const schemeContainer = document.getElementById('scheme-container');
+
+                        response.data.forEach(schemeDetail => {
+                            const productNamesHeader = document.createElement('h3');
+                            const productNames = [];
+                            // Check if applicable_products exist and are not empty
+                            if (schemeDetail.applicable_products && schemeDetail.applicable_products.length > 0) {
+                                schemeDetail.applicable_products.forEach(product => {
+                                    const productNameHeader = document.createElement('h3');
+                                    productNameHeader.textContent = product.name;
+                                    schemeContainer.appendChild(productNameHeader);
+                                    schemeContainer.appendChild(document.createElement('br'));
+                                });
+                            } else {
+                                // If no applicable products are found, set a default text
+                                const noProductsHeader = document.createElement('h3');
+                                noProductsHeader.textContent = 'No applicable products found';
+                                schemeContainer.appendChild(noProductsHeader);
+                            }
+                            schemeContainer.appendChild(productNamesHeader);
+                            // Create main scheme detail table
+                            const schemeTable = document.createElement('table');
+                            const schemeTableHeader = document.createElement('thead');
+                            const schemeTableBody = document.createElement('tbody');
+
+                            const headers = ["Property", "Value"];
+                            const headerRow = document.createElement('tr');
+                            headers.forEach(headerText => {
+                                const header = document.createElement('th');
+                                header.textContent = headerText;
+                                headerRow.appendChild(header);
+                            });
+                            schemeTableHeader.appendChild(headerRow);
+
+                            const schemeProperties = [
+                                { key: "Scheme Name", value: schemeDetail.scheme_name + ' (' + schemeDetail.slab_scheme_type + ' )' },
+                                { key: "Validity From", value: new Date(schemeDetail.validity_from).toLocaleDateString() },
+                                { key: "Validity To", value: new Date(schemeDetail.validity_to).toLocaleDateString() }
+                            ];
+
+                            schemeProperties.forEach(prop => {
+                                const row = document.createElement('tr');
+                                const cellKey = document.createElement('td');
+                                cellKey.textContent = prop.key;
+                                const cellValue = document.createElement('td');
+                                cellValue.textContent = prop.value;
+                                row.appendChild(cellKey);
+                                row.appendChild(cellValue);
+                                schemeTableBody.appendChild(row);
+                            });
+
+                            schemeTable.appendChild(schemeTableHeader);
+                            schemeTable.appendChild(schemeTableBody);
+                            schemeContainer.appendChild(schemeTable);
+
+                            if (schemeDetail.slab_calculation_type === "RUNNING") {
+                                // Handle RUNNING slab calculation type
+                                const runningTable = document.createElement('table');
+                                const runningTableHeader = document.createElement('thead');
+                                const runningTableBody = document.createElement('tbody');
+
+                                const runningHeaders = ["On Purchase of QTY", "FOC (INCLUSIVE)"];
+                                const runningHeaderRow = document.createElement('tr');
+                                runningHeaders.forEach(headerText => {
+                                    const header = document.createElement('th');
+                                    header.textContent = headerText;
+                                    runningHeaderRow.appendChild(header);
+                                });
+                                runningTableHeader.appendChild(runningHeaderRow);
+
+                                schemeDetail.scheme_slabes.forEach(slab => {
+                                    const row = document.createElement('tr');
+                                    const cells = [
+                                        slab.on_purchase_of_qty + ' ' + schemeDetail.slab_uom,
+                                        slab.foc_qty + slab.foc_sku
+                                    ];
+                                    cells.forEach(cellText => {
+                                        const cell = document.createElement('td');
+                                        cell.textContent = cellText;
+                                        row.appendChild(cell);
+                                    });
+                                    runningTableBody.appendChild(row);
+                                });
+
+                                runningTable.appendChild(runningTableHeader);
+                                runningTable.appendChild(runningTableBody);
+                                schemeContainer.appendChild(runningTable);
+
+
+
+
+
+
+
+
+
+                            } else if (schemeDetail.slab_calculation_type === "SLAB_BASED") {
+                                // Handle SLAB_BASED slab calculation type
+                                const slabBasedTable = document.createElement('table');
+                                const slabBasedTableHeader = document.createElement('thead');
+                                const slabBasedTableBody = document.createElement('tbody');
+
+                                const slabBasedHeaders = ["Slab QTY", "FOC (INCLUSIVE)"];
+                                const slabBasedHeaderRow = document.createElement('tr');
+                                slabBasedHeaders.forEach(headerText => {
+                                    const header = document.createElement('th');
+                                    header.textContent = headerText;
+                                    slabBasedHeaderRow.appendChild(header);
+                                });
+                                slabBasedTableHeader.appendChild(slabBasedHeaderRow);
+
+                                schemeDetail.scheme_slabes.forEach(slab => {
+                                    const row = document.createElement('tr');
+                                    const cells = [
+                                        // slab.id,
+                                        // slab.scheme_master_id,
+                                        // slab.slab_id,
+                                        slab.from_qty + '-' + slab.to_qty + '-' + schemeDetail.slab_uom,
+                                        slab.foc_qty + ' ' + slab.foc_sku
+                                    ];
+                                    cells.forEach(cellText => {
+                                        const cell = document.createElement('td');
+                                        cell.textContent = cellText;
+                                        row.appendChild(cell);
+                                    });
+                                    slabBasedTableBody.appendChild(row);
+                                });
+
+                                slabBasedTable.appendChild(slabBasedTableHeader);
+                                slabBasedTable.appendChild(slabBasedTableBody);
+                                schemeContainer.appendChild(slabBasedTable);
+
+
+
+
+                                // Clear the existing content of the scheme container
+
+
+                                // Create a table to hold the applicable products
+                                const productsTable = document.createElement('table');
+
+                                // Create table headers
+                                const tableHeaderRow = document.createElement('tr');
+                                const nameHeader = document.createElement('th');
+                                nameHeader.textContent = 'Applicable For';
+                                tableHeaderRow.appendChild(nameHeader);
+                                productsTable.appendChild(tableHeaderRow);
+
+                                // Check if applicable_products exist and are not empty
+                                if (schemeDetail.applicable_products && schemeDetail.applicable_products.length > 0) {
+                                    // Loop through each product
+                                    schemeDetail.applicable_products.forEach(product => {
+                                        // Create a table row for each product
+                                        const tableRow = document.createElement('tr');
+                                        const productNameCell = document.createElement('td');
+                                        productNameCell.textContent = product.name;
+                                        tableRow.appendChild(productNameCell);
+                                        productsTable.appendChild(tableRow);
+                                    });
+                                } else {
+                                    // If no applicable products are found, set a default row
+                                    const noProductsRow = document.createElement('tr');
+                                    const noProductsCell = document.createElement('td');
+                                    noProductsCell.textContent = 'No applicable products found';
+                                    noProductsRow.appendChild(noProductsCell);
+                                    productsTable.appendChild(noProductsRow);
+                                }
+
+                                // Append the products table to the scheme container
+                                schemeContainer.appendChild(productsTable);
+                                // Create a table to hold the free products
+                                // Create an h3 element for "Free Products" heading
+
+
+
+
+                                // Clear the existing content of the scheme container
+
+                                // Create an h3 element for "Free Products" heading
+
+
+                                // Create a table element to hold the product names
+                                const customTable = document.createElement('table');
+
+                                // Create a table header row for the table headers
+                                const headerRow = document.createElement('tr');
+                                const customHeader = document.createElement('th');
+                                customHeader.textContent = 'Free Products'; // Change the text content as needed
+                                headerRow.appendChild(customHeader);
+                                customTable.appendChild(headerRow);
+
+                                // Create a table row to hold the product names
+                                const tableRow = document.createElement('tr');
+
+                                // Check if schemeDetail.scheme_slabes exists and is not empty
+                                if (schemeDetail.scheme_slabes && schemeDetail.scheme_slabes.length > 0) {
+                                    // Concatenate the text for each product
+                                    let productText = '';
+                                    schemeDetail.scheme_slabes.forEach((product, index) => {
+                                        // Add the product text
+                                        productText += product.foc_sku;
+                                        // Add comma if it's not the last product
+                                        if (index < schemeDetail.scheme_slabes.length - 1) {
+                                            productText += ', ';
+                                        }
+                                    });
+                                    // Create a single cell in the table row and set its text content to the concatenated product text
+                                    const tableCell = document.createElement('td');
+                                    tableCell.textContent = productText;
+                                    tableRow.appendChild(tableCell);
+                                } else {
+                                    // If no free products are found, create a single cell with a default message
+                                    const tableCell = document.createElement('td');
+                                    tableCell.textContent = 'No free products available';
+                                    tableRow.appendChild(tableCell);
+                                }
+
+                                // Append the table row to the table
+                                customTable.appendChild(tableRow);
+
+                                // Append the table to the scheme container
+                                schemeContainer.appendChild(customTable);
+
+
+
+
+
+
+
+
+
+                            }
+
+
+
+                        });
+
+
+                        // Show the modal
+                        $('#view').modal('show');
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error response
+                        console.error('Error:', error);
+                    },
+                    complete: function () {
+                        // Enable the button after the AJAX request completes, whether successful or not
+                        $('.schemeForm button[type="submit"]').prop('disabled', false);
+                    }
+                });
+            });
+        </script>
+
+
+
+
+        <script>
+
+            $(document).on("click", ".addcart-BestSellers", function () {
+                // Add the "open" class to the next element
+                $(this).next().addClass("open");
+                // Set the value of the quantity input box to 1
+                $(this).closest('.add-to-cart-box').find('.qty-input').val('1');
+                BestSellers.call(this); // Pass `this` as an argument
+
+            });
+
+
+            $(document).on("click", ".BestSellers_qty_plus", function () {
+                var $quantityInput = $(this).siblings('.qty-input');
+                var currentVal = parseInt($quantityInput.val());
+
+                if (currentVal < 9) {
+                    $quantityInput.val(currentVal + 1);
+                    var quantity = $quantityInput.val();
+                    //("Updated quantity:", quantity);
+                    BestSellers.call(this); // Pass `this` as an argument
+
+                } else if (currentVal === 9) {
+                    alert("Maximum quantity reached!"); // Display alert message
+                }
+            });
+            // Event listener for clicking on the minus button
+            $(document).on("click", ".BestSellers_qty_minus", function () {
+                var $quantityInput = $(this).siblings('.qty-input');
+                var currentVal = parseInt($quantityInput.val());
+
+                if (currentVal > 0) {
+                    $quantityInput.val(currentVal - 1);
+                    var quantity = $quantityInput.val();
+                    BestSellers.call(this); // Pass `this` as an argument
+                }
+            });
+
+
+
+            function BestSellers() {
+                var form = $(this).closest('.BestSellers')[0]; // Get the native DOM element
+                // Now you can use formData and productId as needed
+                var formData = new FormData(form);
+                var productId = form.getAttribute('data-product-id');
+                var xhr = new XMLHttpRequest();
+                // Setup AJAX request
+                xhr.open('POST', '/addToCartBestSellers/' + productId);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        // Request completed
+                        if (xhr.status === 200) {
+                            // Success
+                            //(xhr.responseText);
+
+                            // Optionally, you can perform additional actions after successfully adding the item to cart
+                            $.notify({
+                                icon: "fa fa-check",
+                                title: "Success!",
+                                message: "Item added to cart successfully",
+                            }, {
+                                element: "body",
+                                position: null,
+                                type: "info",
+                                allow_dismiss: true,
+                                newest_on_top: false,
+                                showProgressbar: true,
+                                placement: {
+                                    from: "top",
+                                    align: "right",
+                                },
+                                offset: 20,
+                                spacing: 10,
+                                z_index: 1031,
+                                delay: 1000,
+                                animate: {
+                                    enter: "animated fadeInDown",
+                                    exit: "animated fadeOutUp",
+                                },
+                                icon_type: "class",
+                                template: '<div data-notify="container" class="col-xxl-3 col-lg-5 col-md-6 col-sm-7 col-12 alert alert-{0}" role="alert">' +
+                                    '<button type="button" aria-hidden="true" class="btn-close" data-notify="dismiss"></button>' +
+                                    '<span data-notify="icon"></span> ' +
+                                    '<span data-notify="title">{1}</span> ' +
+                                    '<span data-notify="message">{2}</span>' +
+                                    '<div class="progress" data-notify="progressbar">' +
+                                    '<div class="progress-bar progress-bar-info progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+                                    "</div>" +
+                                    '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                                    "</div>",
+                            });
+
+                            // Hide loader overlay
+                            document.getElementById('loader-overlay').style.display = 'none';
+                        } else {
+                            // Error
+                            console.error('Failed to add item to cart:', xhr.statusText);
+                            alert('Failed to add item to cart');
+
+                            // Optionally, you can perform additional actions after unsuccessfully adding the item to cart
+                            $.notify({
+                                icon: "fa fa-times-circle",
+                                // title: "Success!",
+                                message: "Failed to add item to cart",
+                            }, {
+                                element: "body",
+                                position: null,
+                                type: "danger",
+                                allow_dismiss: true,
+                                newest_on_top: false,
+                                showProgressbar: true,
+                                placement: {
+                                    from: "top",
+                                    align: "right",
+                                },
+                                offset: 20,
+                                spacing: 10,
+                                z_index: 1031,
+                                delay: 1000,
+                                animate: {
+                                    enter: "animated fadeInDown",
+                                    exit: "animated fadeOutUp",
+                                },
+                                icon_type: "class",
+                                template: '<div data-notify="container" class="col-xxl-3 col-lg-5 col-md-6 col-sm-7 col-12 alert alert-{0}" role="alert">' +
+                                    '<button type="button" aria-hidden="true" class="btn-close" data-notify="dismiss"></button>' +
+                                    '<span data-notify="icon"></span> ' +
+                                    '<span data-notify="title">{1}</span> ' +
+                                    '<span data-notify="message">{2}</span>' +
+                                    '<div class="progress" data-notify="progressbar">' +
+                                    '<div class="progress-bar progress-bar-info progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+                                    "</div>" +
+                                    '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                                    "</div>",
+                            });
+
+                            // Hide loader overlay
+                            document.getElementById('loader-overlay').style.display = 'none';
+                        }
+                    }
+                };
+
+                // Send AJAX request
+                xhr.send(new URLSearchParams(formData));
+
+                // Show loader overlay
+                document.getElementById('loader-overlay').style.display = 'block';
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+        </script>
+
+
+        <script>
+            let nextPageNumber = 1; // Initialize nextPageNumber outside the loadMore function
+            let loading = false; // Initialize loading indicator
+            function loadMore() {
+                if (loading) return; // Prevent multiple simultaneous requests
+                loading = true; // Set loading indicator to true
+                $('#loader-overlay').fadeIn();
+                // AJAX request
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', `/category`);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        // Request completed
+                        if (xhr.status === 200) {
+                            // Success
+                            const responses = JSON.parse(xhr.responseText); // Update responses variable
+
+                            console.log(responses);
+                            console.log("category", typeof responses); // Log the type of response data
+
+                            $('#loader-overlay').fadeOut();
+                            nextPageNumber += 1;
+                            // Get the container element
+                            const CategoryList = document.getElementById('category-list');
+                            responses.data.forEach(category => {
+                                // Create a product box element
+                                const productBoxHTML = `
+
+                                
+                 
+                        <div>
+                            <div class="product-box-3 h-100 wow fadeInUp">
+                                <div class="product-header">
+                                    <div class="product-image">
+                    
+
+                                        <!-- Link to category details page -->
+                        <a href="category-details/${category.id}">
+                            <!-- Use category image -->
+                            ${category ? `
+  
+        <img src="${category.image}" class="img-fluid blur-up lazyload" alt="Product Image" onerror="handleImageError(this)">
+` :
+                                        `
+        <img src="https://shopmefast.com/images/product-no-image.jpg" class="img-fluid blur-up lazyload" alt="Default Image" onerror="handleImageError(this)">
+    `
+                                    }
+
+                   
+                                </a>
+
+
+                                    </div>
+                                </div>
+                                <div class="product-footer">
+                                    <div class="product-detail">
+                                        <!-- <span class="span-name">Vegetable</span> -->
+
+
+                                        <a href="category-details/${category.id}">
+                                        <!-- Category description or additional information -->
+                                        <div class="blog-list">
+                                            <button
+                                                class="btn theme-bg-color mt-sm-4 btn-md mx-auto text-white fw-bold">
+                                                ${category.name}
+                                            </button>
+                                        </div>
+                                    </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+               
+        
+
+
+         
+
+
+
+
+
+           `;
+                                // Append the product box HTML to the product list container
+                                CategoryList.insertAdjacentHTML('beforeend', productBoxHTML);
+                            });
+
+                            loading = false; // Reset loading indicator
+                        } else {
+                            // Error loading more products
+                            console.error("Error loading more products:", xhr.statusText);
+                            // Handle errors appropriately (e.g., display an error message to the user)
+                            $('#loader-overlay').fadeOut(); // Hide loading indicator on error
+                        }
+                    }
+                };
+
+                // Send AJAX request
+                xhr.send(`nextPageNumber=${nextPageNumber}`);
+            }
+
+            // Initial call to loadMore (optional, depending on your setup)
+            loadMore();
+
+            window.addEventListener('scroll', function () {
+                if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+                    // Load more products when user scrolls to bottom of page
+                    loadMore();
+                }
+            });
+
+        </script>
+
+
+
+
+
+
+
+
+
+        <script>
+
+            function TopBrands() {
+                $('#loader-overlay').fadeIn();
+                // AJAX request
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', `/top-brands`);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        // Request completed
+                        if (xhr.status === 200) {
+                            try {
+                                // Success: Parse JSON response
+                                const responses = JSON.parse(xhr.responseText);
+
+                                console.log(responses);
+                                console.log("top-selling", typeof responses); // Log the type of response data
+
+                                $('#loader-overlay').fadeOut();
+                                const productList = $('#TopBrands-list');
+
+                                // Ensure TOP_BRAND_PRODUCT is parsed as an array of objects
+                                let TOP_BRAND_PRODUCT = responses.TOP_BRAND_PRODUCT;
+                                if (typeof TOP_BRAND_PRODUCT === 'string') {
+                                    TOP_BRAND_PRODUCT = JSON.parse(TOP_BRAND_PRODUCT);
+                                }
+
+                                // Verify TOP_BRAND_PRODUCT is an array before iterating
+                                if (Array.isArray(TOP_BRAND_PRODUCT)) {
+                                    TOP_BRAND_PRODUCT.forEach(data => {
+                                        const productBoxHTML = generateTopBrands(data);
+                                        productList.append(productBoxHTML);
+                                    });
+                                } else {
+                                    console.error('TOP_BRAND_PRODUCT is not an array:', TOP_BRAND_PRODUCT);
+                                    // Handle the case where TOP_BRAND_PRODUCT is not an array
+                                }
+                            } catch (error) {
+                                console.error('Error parsing JSON:', error);
+                                // Handle parsing error appropriately
+                            }
+                        } else {
+                            // Error loading more products
+                            console.error("Error loading more products:", xhr.statusText);
+                            // Handle errors appropriately (e.g., display an error message to the user)
+                        }
+                    }
+                };
+
+                // Send AJAX request
+                xhr.send("postData");
+            }
+
+            TopBrands();
+
+
+
+            function generateTopBrands(data) {
+
+                return `
+
+                
+                
+                
+                
+                <div>
+<div class="product-box product-box-bg wow fadeInUp" data-wow-delay="0.1s">
+    
+<form class="schemeForm" action="#" method="post">
+${data.scheme_id !== null ? `
+    <input type="hidden" name="scheme_id" value="${data.scheme_id}">
+    <input type="hidden" name="product_id" value="${data.product_id}">
+    <input type="hidden" name="customer_product_master_id" value="${data.customer_product_master_id}">
+    <button type="button" class="scheme_id">
+        <img src="./assets/img/discount.png" style="height: 30px;" alt="" class="src">
+    </button>` :
+                        `<button type="button" class="scheme_id"></button>`
+                    }
+</form>
+<div class="product-image">
+${data ? `
+    <a href="/TopBrands/${data.product_id}" class="href">
+        <div class="slider-image">
+            <img src="${data.image}" class="img-fluid blur-up lazyload" alt="" onerror="handleImageError(this)">
+        </div>
+    </a>` :
+                        `<div class="slider-image">
+        <img src="https://shopmefast.com/images/product-no-image.jpg" class="img-fluid blur-up lazyload" alt="" onerror="handleImageError(this)">
+    </div>`
+                    }
+</div>
+<div class="product-detail">
+<a href="/TopBrands/${data.product_id}">
+    <h6 class="name">${data.name}</h6>
+</a>
+${data.uom_details.length > 0 ? `
+    <h5 class="sold text-content"> AED:
+        <span class="theme-color price">${data.uom_details[0].conv_rate}</span>
+    </h5>` :
+                        `<h5 class="sold text-content"></h5>`
+                    }
+<form  method="post" class="TopBrands" data-product-id="${data.product_id}">
+    <input type="hidden" name="product_id" value="${data.product_id}">
+    <select class="form-select select-form-size mt-2" name="primary_uom_code">
+        ${data.uom_details.map((uom, index) => `
+            <option value="${uom.id}" ${index === 0 ? 'selected' : ''}>${uom.uom_code}</option>
+        `).join('')}
+    </select>
+    <div class="add-to-cart-box bg-white">
+        <button type="button" class="btn btn-add-cart addcart-button addcart-button_TopBrands  theme-bg-color text-white">
+            Add <span class="add-icon bg-light-gray"><i class="fa-solid fa-plus"></i></span>
+        </button>
+        <div class="cart_qty qty-box">
+            <div class="input-group bg-white">
+                <button type="button" class="qty-left-minus qty-right-minus_TopBrands  bg-gray" data-type="minus" data-field="">
+                    <i class="fa fa-minus"></i>
+                </button>
+                <input class="form-control input-number qty-input" type="text" name="quantity" readonly value="0">
+                <button type="button" class="qty-right-plus qty-right-plus_TopBrands bg-gray" data-type="plus" data-field="">
+                    <i class="fa fa-plus"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+</div>
+
+</div>
+`;
+            }
+
+
+
+        </script>
+
+
+
+
+
+        <script>
+
+            $(document).ready(function () {
+                fetchTopSellingProducts();
+
+                function fetchTopSellingProducts() {
+                    $.ajax({
+                        url: '/top-selling', // Replace with the actual endpoint URL
+                        type: 'POST', // Corrected to POST request
+                        success: function (response) {
+                            console.log(response);
+                            console.log("top-selling", typeof response); // Log the type of response data
+
+                            const productList = $('#top-selling-list'); // Use jQuery to select the product list container
+
+                            let TOP_SELLING_PRODUCT_PRODUCT = response.TOP_SELLING_PRODUCT_PRODUCT; // Access directly from response
+
+                            // Check if TOP_SELLING_PRODUCT_PRODUCT is a string and parse it if necessary
+                            if (typeof TOP_SELLING_PRODUCT_PRODUCT === 'string') {
+                                try {
+                                    TOP_SELLING_PRODUCT_PRODUCT = JSON.parse(TOP_SELLING_PRODUCT_PRODUCT);
+                                } catch (error) {
+                                    console.error('Error parsing JSON:', error);
+                                    // Handle JSON parse errors if needed
+                                    return;
+                                }
+                            }
+
+                            // Verify TOP_SELLING_PRODUCT_PRODUCT is an array before iterating
+                            if (Array.isArray(TOP_SELLING_PRODUCT_PRODUCT)) {
+                                TOP_SELLING_PRODUCT_PRODUCT.forEach(data => {
+                                    const productBoxHTML = generatetop_selling(data);
+                                    productList.append(productBoxHTML);
+                                });
+
+                                // Initialize Slick carousel after appending elements
+                                $('.slider-7_1').slick({
+                                    arrows: true,
+                                    infinite: true,
+                                    slidesToShow: 7,
+                                    slidesToScroll: 1,
+                                    responsive: [{
+                                        breakpoint: 1660,
+                                        settings: {
+                                            slidesToShow: 6,
+                                        }
+                                    },
+                                    {
+                                        breakpoint: 1501,
+                                        settings: {
+                                            slidesToShow: 5,
+                                        }
+                                    },
+                                    {
+                                        breakpoint: 1251,
+                                        settings: {
+                                            slidesToShow: 4,
+                                        }
+                                    },
+                                    {
+                                        breakpoint: 992,
+                                        settings: {
+                                            slidesToShow: 3,
+                                        }
+                                    },
+                                    {
+                                        breakpoint: 684,
+                                        settings: {
+                                            slidesToShow: 2,
+                                            autoplay: true,
+                                            autoplaySpeed: 2000,
+                                        }
+                                    },
+                                    ]
+                                });
+                            } else {
+                                console.error('TOP_SELLING_PRODUCT_PRODUCT is not an array:', TOP_SELLING_PRODUCT_PRODUCT);
+                                // Handle the case where TOP_SELLING_PRODUCT_PRODUCT is not an array
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Error fetching top-selling products:', error);
+                            // Handle errors appropriately (e.g., display an error message to the user)
+                        }
+                    });
+                }
+
+                // Function to generate HTML for each data item
+
+            });
+
+
+            function generatetop_selling(data) {
+                return ` 
+                
+                
+                <div>
+        <div class="product-box product-box-bg wow fadeIn">
+            <form class="schemeForm" action="#" method="post">
+                ${data.scheme_id !== null ? `
+                    <input type="hidden" name="scheme_id" value="${data.scheme_id}">
+                    <input type="hidden" name="product_id" value="${data.product_id}">
+                    <input type="hidden" name="customer_product_master_id" value="${data.customer_product_master_id}">
+                    <button type="button" class="scheme_id">
+                        <img src="./assets/img/discount.png" style="height: 30px;" alt="" class="src">
+                    </button>` :
+                        `<button type="button" class="scheme_id"></button>`
+                    }
+            </form>
+            <div class="product-image">
+                ${data.image ? `
+                    <a href="/BestSellers/${data.product_id}">
+                        <img src="${data.image}" class="img-fluid blur-up lazyload" alt="" onerror="handleImageError(this)">
+                    </a>` :
+                        `<a href="/BestSellers/${data.product_id}">
+                        <img src="https://shopmefast.com/images/product-no-image.jpg" class="img-fluid blur-up lazyload" alt="" onerror="handleImageError(this)">
+                    </a>`
+                    }
+            </div>
+            <div class="product-detail">
+                <a href="/BestSellers/${data.product_id}">
+                    <h6 class="name">${data.name}</h6>
+                </a>
+                ${data.uom_details.length > 0 ? `
+                    <h5 class="sold text-content"> AED:
+                        <span class="theme-color price">${data.uom_details[0].conv_rate}</span>
+                    </h5>` :
+                        `<h5 class="sold text-content">Handle case when uom_details is empty</h5>`
+                    }
+                <form  method="post" class="BestSellers" data-product-id="${data.product_id}">
+                    <input type="hidden" name="customer_product_master_id" value="${data.customer_product_master_id}">
+                    <input type="hidden" name="product_id" value="${data.product_id}">
+                    <select class="form-select select-form-size mt-2" name="primary_uom_code">
+                        ${data.uom_details.map((uom, index) => `
+                            <option value="${uom.id}" ${index === 0 ? 'selected' : ''}>${uom.uom_code}</option>
+                        `).join('')}
+                    </select>
+                    <div class="add-to-cart-box bg-white">
+                        <button type="button" class="btn btn-add-cart addcart-button addcart-BestSellers theme-bg-color text-white">
+                            Add <span class="add-icon bg-light-gray"><i class="fa-solid fa-plus"></i></span>
+                        </button>
+                        <div class="cart_qty qty-box">
+                            <div class="input-group bg-white">
+                                <button type="button" class="qty-left-minus BestSellers_qty_minus bg-gray" data-type="minus" data-field="">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <input class="form-control input-number qty-input" type="text" readonly name="quantity" value="0">
+                                <button type="button" class="qty-right-plus BestSellers_qty_plus bg-gray" data-type="plus" data-field="">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    `;
+            }
+
+        </script>

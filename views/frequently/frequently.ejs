@@ -1,0 +1,496 @@
+<%- include('../include/header') %>
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadcrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-contain">
+                        <h2>frequently</h2>
+                        <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="/">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active">frequently</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Home Section Start -->
+    <section>
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="slider-1 slider-animate product-wrapper no-arrow">
+                        <div>
+                            <div class="banner-contain-2 hover-effect">
+                                <img src="<%- bannerUrl %>" class=" rounded-3 blur-up lazyload" alt=""
+                                    style="width: 100%;">
+                                <div
+                                    class="banner-detail p-center-right position-relative shop-banner ms-auto banner-small">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="banner-contain-2 hover-effect">
+                                <img src="<%- bannerUrl %>" class=" rounded-3 blur-up lazyload" alt=""
+                                    style="width: 100%;">
+                                <div
+                                    class="banner-detail p-center-right position-relative shop-banner ms-auto banner-small">
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Home Section End -->
+
+
+
+
+
+
+
+    <section class="section-b-space shop-section">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+
+
+
+
+
+
+
+                    <div
+                        class="row g-sm-4 g-3 row-cols-xxl-5 row-cols-xl-3 row-cols-lg-2 row-cols-md-3 row-cols-2 product-list-section">
+
+
+
+
+
+                        <% if (frequently_result.result.length> 0) { %>
+                            <% frequently_result.result.forEach(data=> { %>
+                                <div>
+                                    <div class="product-box-3 h-100 wow fadeInUp">
+
+
+                                        <form class="schemeForm" action="#" method="post">
+                                            <% if (data.scheme_id !==null) { %>
+                                                <input type="hidden" name="scheme_id" value="<%= data.scheme_id %>">
+                                                <input type="hidden" name="product_id" value="<%= data.product_id %>">
+                                                <input type="hidden" name="customer_product_master_id"
+                                                    value="<%= data.customer_product_master_id %>">
+
+
+                                                <button type="submit" class="scheme_id">
+
+                                                    <img src="<%= baseUrl %>/assets/img/discount.png"
+                                                        style="height: 30px;" alt="" class="src">
+
+                                                </button>
+                                                <% } else { %>
+                                                    <button type="submit" class="scheme_id">
+
+
+
+                                                    </button>
+                                                    <!-- If scheme_id is null, don't render the button -->
+                                                    <% } %>
+                                        </form>
+                                        <div class="product-header">
+                                            <div class="product-image">
+                                                <% if (data.image && data.image.length> 0) { %>
+                                                    <a href="/frequently-Details/<%= data.product_id %>">
+                                                        <img src="<%= data.image %>" class="img-fluid blur-up lazyload"
+                                                            alt="" onerror="handleImageError(this)">
+                                                    </a>
+                                                    <% } else { %>
+                                                        <a href="/frequently-Details">
+                                                            <img src="https://shopmefast.com/images/product-no-image.jpg"
+                                                                class="img-fluid blur-up lazyload" alt=""
+                                                                onerror="handleImageError(this)">
+                                                        </a>
+                                                        <% } %>
+
+
+
+
+
+
+
+
+                                            </div>
+                                        </div>
+                                        <div class="product-footer">
+                                            <div class="product-detail">
+                                                <a href="/frequently-Details/<%= data.product_id %>">
+                                                    <h5 class="name">
+                                                        <%= data.name %>
+                                                    </h5>
+                                                </a>
+                                                <p class="text-content mt-1 mb-2 product-content">
+                                                    <%= data.description %>
+                                                </p>
+                                                <h6 class="unit">
+                                                    <%= data.item_code %>
+                                                </h6>
+                                                <h5 class="price"><span class="theme-color">AED : <%=
+                                                            data.uom_details[0].conv_rate %></span></h5>
+
+
+
+
+                                                <form action="#" method="post" class="frequently"
+                                                    data-product-id="<%= data.product_id %>">
+
+
+                                                    <input type="hidden" name="product_id"
+                                                        value="<%= data.product_id %>">
+
+                                                    <select class="form-select select-form-size mt-2"
+                                                        name="primary_uom_code">
+                                                        <% data.uom_details.forEach((uom, index)=> { %>
+                                                            <option value="<%= uom.id %>" <% if (index===0) { %>
+                                                                selected<% } %>>
+                                                                    <%= uom.uom_code %>
+                                                            </option>
+                                                            <% }) %>
+
+
+
+                                                    </select>
+
+
+                                                    <div class="add-to-cart-box bg-white">
+                                                        <button type="submit"
+                                                            class="btn btn-add-cart theme-bg-color text-white addcart-button">Add
+                                                            <span class="add-icon bg-light-gray">
+                                                                <i class="fa-solid fa-plus"></i>
+                                                            </span>
+                                                        </button>
+                                                        <div class="cart_qty qty-box">
+
+
+                                                            <div class="input-group bg-white">
+                                                                <button type="submit" class="qty-left-minus bg-gray"
+                                                                    data-type="minus" data-field="">
+                                                                    <i class="fa fa-minus"></i>
+                                                                </button>
+                                                                <input class="form-control input-number qty-input"
+                                                                    type="text" name="quantity" value="0">
+
+
+                                                                <button type="submit" class="qty-right-plus bg-gray"
+                                                                    data-type="plus" data-field="">
+                                                                    <i class="fa fa-plus"></i>
+                                                                </button>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <% }) %>
+                                    <% } else { %>
+                                        <p>No products found.</p>
+                                        <% } %>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick View Modal Box Start -->
+    <div class="modal fade theme-modal view-modal" id="view" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-xl modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-header p-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-sm-4 g-2">
+                        <div class="col-lg-6">
+                            <div class="slider-image">
+
+                                <!-- <img id="modalImage" src="" class="img-fluid blur-up lazyload" alt="Modal Image"
+                                    style="height: 250px;"> -->
+
+                                <img id="modalImage" src="../assets/images/product/category/1.jpg"
+                                    class="img-fluid blur-up lazyload" alt="">
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="right-sidebar-modal">
+                                <h5 class="title-name" id="applicableProducts"></h5>
+                                <p id="description"></p>
+
+
+                                <div class="product-detail">
+                                    <h4>Scheme Name</h4>
+                                    <p>Discount Amount Running
+                                        Quantity
+                                    </p>
+                                </div>
+
+                                <div class="product-detail">
+                                    <h5>Validity: <span id="validity"></span></h5>
+
+                                </div>
+
+                                <div class="product-detail">
+                                    <h4>Applicable For</h4>
+                                    <p id="applicableProducts">
+                                    </p>
+                                </div>
+
+                                <div class="product-detail">
+                                    <h5>On Purchase of QTY: <span id="on_purchase_of_qty"></span></h5>
+
+                                </div>
+
+
+                                <div class="product-detail">
+                                    <h5>Discount : <span id="Discount"></span></h5>
+
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Quick View Modal Box End -->
+
+
+
+
+
+
+    <%- include('../include/footer.ejs') %>
+
+
+
+
+
+
+        <script>
+            // Event listener for form submission
+            $('.frequently').submit(function (event) {
+                event.preventDefault(); // Prevent default form submission
+
+                // Retrieve form data
+                var formData = $(this).serialize();
+                var productId = $(this).data('product-id');
+                $('#loader-overlay').fadeIn();
+
+
+                // Send AJAX request to add item to cart
+                $.ajax({
+                    url: '/add-to-cart-frequently/' + productId,
+                    type: 'POST',
+                    data: formData,
+                    success: function (response) {
+                        //(response);
+                        $('#loader-overlay').fadeOut();
+
+
+
+                        // Optionally, you can perform additional actions after successfully adding the item to cart
+                        $.notify({
+                            icon: "fa fa-check",
+                            title: "Success!",
+                            message: "Item added to cart successfully",
+                        }, {
+                            element: "body",
+                            position: null,
+                            type: "info",
+                            allow_dismiss: true,
+                            newest_on_top: false,
+                            showProgressbar: true,
+                            placement: {
+                                from: "top",
+                                align: "right",
+                            },
+                            offset: 20,
+                            spacing: 10,
+                            z_index: 1031,
+                            delay: 1000,
+                            animate: {
+                                enter: "animated fadeInDown",
+                                exit: "animated fadeOutUp",
+                            },
+                            icon_type: "class",
+                            template: '<div data-notify="container" class="col-xxl-3 col-lg-5 col-md-6 col-sm-7 col-12 alert alert-{0}" role="alert">' +
+                                '<button type="button" aria-hidden="true" class="btn-close" data-notify="dismiss"></button>' +
+                                '<span data-notify="icon"></span> ' +
+                                '<span data-notify="title">{1}</span> ' +
+                                '<span data-notify="message">{2}</span>' +
+                                '<div class="progress" data-notify="progressbar">' +
+                                '<div class="progress-bar progress-bar-info progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+                                "</div>" +
+                                '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                                "</div>",
+                        });
+
+
+
+                    },
+                    error: function (xhr, status, error) {
+                        $('#loader-overlay').fadeOut();
+
+                        console.error('Failed to add item to cart:', error);
+                        alert('Failed to add item to cart');
+                        // Optionally, you can handle the error and perform additional actions
+                    }
+                });
+            });
+
+        </script>
+
+
+        <script>
+
+            // Event listener for clicking on the plus button
+            $('.qty-right-plus').click(function () {
+                var $quantityInput = $(this).siblings('.qty-input');
+                var currentVal = parseInt($quantityInput.val());
+
+                if (currentVal < 9) {
+                    $quantityInput.val(currentVal + 1);
+                    // Retrieve the updated quantity value
+                    var quantity = $quantityInput.val();
+                    //("Updated quantity:", quantity);
+                }
+            });
+
+            // Event listener for clicking on the minus button
+            $('.qty-left-minus').click(function () {
+                var $quantityInput = $(this).siblings('.qty-input');
+                var currentVal = parseInt($quantityInput.val());
+
+                if (currentVal > 0) {
+                    $quantityInput.val(currentVal - 1);
+                    // Retrieve the updated quantity value
+                    var quantity = $quantityInput.val();
+                    //("Updated quantity:", quantity);
+                }
+            });
+
+
+        </script>
+
+
+
+
+
+        <script>
+            // Event listener for form submission
+            // Event listener for form submission
+            $('.schemeForm').submit(function (event) {
+                event.preventDefault(); // Prevent default form submission
+
+                // Serialize the form data including hidden input fields
+                var formData = $(this).serialize();
+
+                // Send AJAX request
+                $.ajax({
+                    url: '/get_scheme_detail_by_product', // Replace 'your-endpoint-url' with your actual endpoint
+                    type: 'POST',
+                    data: formData, // Include serialized form data
+                    success: function (response) {
+
+                        //(response);
+                        // Access schemeDetail from the response data
+                        var schemeDetail = response.data[0];
+
+                        const schemeDetails = response.data;
+                        const imageUrl = response.singleProduct_result_img;
+
+                        // Handle success response
+                        const schemeName = schemeDetail.scheme_name;
+                        const schemeOwner = schemeDetail.scheme_owner;
+                        const validityDate = schemeDetail.validity_date;
+                        const applicableProducts = schemeDetail.applicable_products.map(product => product.name).join(', ');
+                        const description = schemeDetail.applicable_products.map(product => product.description).join(', ');
+
+                        const on_purchase_of_qty = schemeDetail.scheme_slabes.map(slab => slab.on_purchase_of_qty).join(', ');
+                        const Discount = schemeDetail.scheme_slabes.map(slab => slab.discount_amount).join(', ');
+
+
+                        $('#modalImage').attr('src', imageUrl);
+
+
+                        // Populate modal with scheme details
+                        $('#schemeName').text(schemeName);
+                        $('#schemeOwner').text(schemeOwner);
+                        $('#validity').text(validityDate);
+                        $('#applicableProducts').text(applicableProducts);
+                        $('#description').text(description);
+                        $('#on_purchase_of_qty').text(on_purchase_of_qty);
+                        $('#Discount').text(Discount);
+
+
+                        // Show the modal
+                        $('#view').modal('show');
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error response
+                        console.error('Error:', error);
+                    }
+                });
+            });
+
+
+        </script>
+
+
+        <script>
+            // Get references to the select element and the container for displaying conversion rate
+            const uomSelect = document.getElementById('uomSelect');
+            const conversionRateDisplay = document.getElementById('conversionRateDisplay');
+
+            // Add event listener for change event on the select element
+            uomSelect.addEventListener('change', function () {
+                // Get the selected option
+                const selectedOption = uomSelect.options[uomSelect.selectedIndex];
+                // Get the conversion rate from the selected option's value
+                const conversionRate = selectedOption.value;
+                // Update the display with the selected conversion rate
+                conversionRateDisplay.textContent = `AED : ${conversionRate}`;
+            });
+
+            // Trigger the change event to display the initial conversion rate
+            uomSelect.dispatchEvent(new Event('change'));
+        </script>

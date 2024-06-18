@@ -1,0 +1,215 @@
+<%- include('../include/header.ejs') %>
+    <!-- Breadcrumb Section Start -->
+    <section class="breadcrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-contain">
+                        <h2>Contact Us</h2>
+                        <!-- <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="#">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active">Contact Us</li>
+                            </ol>
+                        </nav> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Contact Box Section Start -->
+    <section class="contact-box-section">
+        <div class="container-fluid-lg">
+            <div class="row g-lg-5 g-3">
+                <div class="col-lg-12 pb-2">
+                    <div class="left-sidebar-box">
+                        <div class="row">
+
+                            <div class="col-xl-12">
+                                <div class="contact-title">
+                                    <h3>Get In Touch</h3>
+                                </div>
+
+                                <div class="contact-detail">
+                                    <div class="row g-4">
+                                        <div class="col-xxl-6 col-lg-6 col-sm-6">
+                                            <div class="contact-detail-box">
+                                                <div class="contact-icon">
+                                                    <i class="fa-solid fa-phone"></i>
+                                                </div>
+                                                <div class="contact-detail-title">
+                                                    <h4>Customer Service Number</h4>
+                                                </div>
+
+                                                <div class="contact-detail-contain">
+                                                    <p>8510971702</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xxl-6 col-lg-6 col-sm-6">
+                                            <div class="contact-detail-box">
+                                                <div class="contact-icon">
+                                                    <i class="fa-solid fa-phone"></i>
+                                                </div>
+                                                <div class="contact-detail-title">
+                                                    <h4>Call Center Number</h4>
+                                                </div>
+
+                                                <div class="contact-detail-contain">
+                                                    <p>8510971703</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xxl-6 col-lg-6 col-sm-6">
+                                            <div class="contact-detail-box">
+                                                <div class="contact-icon">
+                                                    <i class="fa-solid fa-phone"></i>
+                                                </div>
+                                                <div class="contact-detail-title">
+                                                    <h4>Whatsapp Number</h4>
+                                                </div>
+
+                                                <div class="contact-detail-contain">
+                                                    <p>+91 9625251508</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xxl-6 col-lg-6 col-sm-6">
+                                            <div class="contact-detail-box">
+                                                <div class="contact-icon">
+                                                    <i class="fa-solid fa-phone"></i>
+                                                </div>
+                                                <div class="contact-detail-title">
+                                                    <h4>Area-Wise Salesman Number</h4>
+                                                </div>
+
+                                                <div class="contact-detail-contain">
+                                                    <button class="btn deal-button" data-bs-toggle="modal"
+                                                        data-bs-target="#deal-box">
+                                                        <i data-feather="zap"></i>
+                                                        <span>Contact Salesman</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Deal Box Modal Start -->
+    <div class="modal fade theme-modal deal-modal" id="deal-box" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <h5 class="modal-title w-100" id="deal_today">Contact Salesman</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+
+                    <section class="faq-box-contain section-b-space">
+                        <div class="container">
+                            <div class="row">
+
+
+                                <div class="col-xl-12">
+                                    <div class="faq-accordion">
+                                        <div class="accordion" id="accordionExample">
+
+
+                                            <% if (sales_man_Data && sales_man_Data.length> 0) { %>
+                                                <% sales_man_Data.forEach(sales_man=> { %>
+                                                    <div class="accordion-item">
+                                                        <h2 class="accordion-header" id="heading<%= sales_man.id %>">
+                                                            <button class="accordion-button collapsed" type="button"
+                                                                data-bs-toggle="collapse"
+                                                                data-bs-target="#collapse<%= sales_man.id %>">
+                                                                <%= sales_man.name %> <br>
+                                                                    <%= sales_man.mobile_no %> <i
+                                                                            class="fa-solid fa-angle-down"></i>
+                                                            </button>
+                                                        </h2>
+                                                        <div id="collapse<%= sales_man.id %>"
+                                                            class="accordion-collapse collapse"
+                                                            data-bs-parent="#accordionExample">
+                                                            <div class="accordion-body">
+                                                                <table class="table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th scope="col">Sr No.</th>
+                                                                            <th scope="col">brands Name</th>
+
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <% sales_man.brands.forEach(function(category,index)
+                                                                            { %>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <%= index + 1 %>
+                                                                                </td>
+
+                                                                                <td>
+                                                                                    <%= category.name %>
+                                                                                </td>
+
+                                                                            </tr>
+                                                                            <% }); %>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <% }); %>
+                                                        <% } else { %>
+                                                            <div class="accordion-item">
+                                                                <h2 class="accordion-header">
+                                                                    <button class="accordion-button" type="button"
+                                                                        disabled>
+                                                                        No sales data available
+                                                                    </button>
+                                                                </h2>
+                                                            </div>
+                                                            <% } %>
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Deal Box Modal End -->
+    <!-- Contact Box Section End -->
+    <%- include('../include/footer.ejs') %>

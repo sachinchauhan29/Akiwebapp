@@ -1,0 +1,213 @@
+<%- include('../include/header') %>
+
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadcrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-contain">
+                        <h2>User Dashboard</h2>
+                        <!-- <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="/">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active">User Dashboard</li>
+                            </ol>
+                        </nav> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+
+    <section class="user-dashboard-section section-b-space">
+        <div class="container-fluid-lg">
+            <div class="row">
+
+                <div class="col-xxl-12 col-lg-12">
+
+                    <div class="dashboard-right-sidebar">
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade tab-pane fade show active" id="pills-order" role="tabpanel">
+                                <div class="dashboard-order">
+                                    <div class="title">
+                                        <h2>Payment Summary</h2>
+                                        <span class="title-leaf title-leaf-gray">
+
+                                        </span>
+                                    </div>
+
+                                    <div class="order-contains" id="category-list">
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+    <script>
+<%
+            // Define the formatDate function
+            function formatDate(dateString) {
+                const date = new Date(dateString); // Parse the date string
+                const year = date.getFullYear(); // Get the year
+                const month = String(date.getMonth() + 1).padStart(2, '0'); // Get the month (zero-based) and pad with zero if needed
+                const day = String(date.getDate()).padStart(2, '0'); // Get the day of the month and pad with zero if needed
+                return `${year}-${month}-${day}`; // Return the formatted date
+            }
+            %>
+
+    </script>
+
+
+
+
+    <%- include('../include/footer.ejs') %>
+
+
+        <script>
+                $(document).ready(function () {
+                    // Variables to keep track of pagination and loading state
+                    let nextPageNumber = 1;
+                    let loading = false;
+
+                    // Function to load data
+                    function loadMore(page = 1, reset = false) {
+                        if (loading) return; // Prevent multiple simultaneous requests
+                        loading = true; // Set loading indicator to true
+                        $('#loader-overlay').fadeIn();
+
+                        // AJAX request
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('POST', `/PaymentSummaryAjex`);
+                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState === XMLHttpRequest.DONE) {
+                                // Request completed
+                                if (xhr.status === 200) {
+                                    // Success
+                                    try {
+                                        const responses = JSON.parse(xhr.responseText); // Update responses variable
+                                        //('Received data:', responses); // Log received data for debugging
+
+                                        $('#loader-overlay').fadeOut();
+
+                                        // Get the container element
+                                        const CategoryList = document.getElementById('category-list');
+
+                                        // Clear the category list if reset is true
+                                        if (reset) {
+                                            CategoryList.innerHTML = '';
+                                        }
+
+                                        // Check if the table already exists
+                                        let tableBody = CategoryList.querySelector('tbody');
+                                        if (!tableBody) {
+                                            // Create the table and append it to the category list
+                                            const tableHTML = `
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped table-hover ">
+                                                <thead class="table-dark">
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Invoice No</th>
+                                                        <th>Amount</th>
+                                                        <th>Status</th>
+                                                        <th>Payment Mode</th>
+                                                        <th>Created Date</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                        </div>
+                                    `;
+                                            CategoryList.insertAdjacentHTML('beforeend', tableHTML);
+                                            tableBody = CategoryList.querySelector('tbody');
+                                        }
+
+                                        if (responses.data && responses.data.length > 0) {
+                                            responses.data.forEach(data => {
+                                                // Format date function
+                                                const formatDate = (dateString) => {
+                                                    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                                                    return new Date(dateString).toLocaleDateString(undefined, options);
+                                                };
+
+                                                // Create a row element
+                                                const rowHTML = `
+                                            <tr>
+                                                <td>${data.id}</td>
+                                                <td>${data.customer_trx_ids}</td>
+                                                <td>AED ${data.amount}</td>
+                                                <td>${data.status}</td>
+                                                <td>${data.payment_mode}</td>
+                                                <td>${formatDate(data.created_date)}</td> <!-- Call formatDate function -->
+                                            </tr>
+                                        `;
+                                                // Append the row HTML to the table body
+                                                tableBody.insertAdjacentHTML('beforeend', rowHTML);
+                                            });
+                                        } else {
+                                            if (page === 1) { // Show "No data found" only if it's the first page
+                                                const noDataHTML = `
+                                            <tr>
+                                                <td colspan="6">No data found</td>
+                                            </tr>
+                                        `;
+                                                tableBody.insertAdjacentHTML('beforeend', noDataHTML);
+                                            }
+                                        }
+
+                                        loading = false; // Reset loading indicator
+                                        nextPageNumber = page + 1; // Increment page number for next load
+                                    } catch (error) {
+                                        console.error("Error parsing server response:", error);
+                                        // Handle errors appropriately (e.g., display an error message to the user)
+                                        $('#loader-overlay').fadeOut(); // Hide loading indicator on error
+                                        loading = false; // Reset loading indicator
+                                    }
+                                } else {
+                                    // Error loading more products
+                                    console.error("Error loading more products:", xhr.statusText);
+                                    // Handle errors appropriately (e.g., display an error message to the user)
+                                    $('#loader-overlay').fadeOut(); // Hide loading indicator on error
+                                    loading = false; // Reset loading indicator
+                                }
+                            }
+                        };
+
+                        // Send AJAX request
+                        xhr.send(`nextPageNumber=${page}`);
+                    }
+
+                    // Initial call to load data on page load
+                    loadMore();
+
+                    window.addEventListener('scroll', function () {
+                        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+                            // Load more products when user scrolls to bottom of page
+                            loadMore(nextPageNumber);
+                        }
+                    });
+                });
+        </script>

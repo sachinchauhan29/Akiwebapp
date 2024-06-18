@@ -1,0 +1,393 @@
+<%- include('../include/header') %>
+    <!-- mobile fix menu end -->
+    <style>
+        /* Adjust the size of the checkbox */
+        input[type="checkbox"] {
+            width: 20px;
+            /* Set the width */
+            height: 20px;
+            /* Set the height */
+        }
+
+        /* Style the checked checkbox */
+        input[type="checkbox"]:checked {
+            background-color: #000000;
+            /* Change the background color when checked */
+            border-color: #000000;
+            /* Change the border color when checked */
+        }
+    </style>
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadcrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-contain">
+                        <h2>Checkout</h2>
+                        <!-- <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="index.html">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active">Checkout</li>
+                            </ol>
+                        </nav> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Checkout section Start -->
+    <section class="checkout-section-2 section-b-space">
+        <div class="container-fluid-lg">
+
+            <form id="orderForm" action="checkout" method="post">
+
+                <div class="row g-sm-4 g-3">
+                    <div class="col-lg-8">
+                        <div class="left-sidebar-checkout">
+                            <div class="checkout-detail-box">
+                                <ul>
+                                    <li>
+                                        <div class="checkout-icon">
+                                            <lord-icon target=".nav-item" src="https://cdn.lordicon.com/ggihhudh.json"
+                                                trigger="loop-on-hover"
+                                                colors="primary:#121331,secondary:#646e78,tertiary:#0baf9a"
+                                                class="lord-icon">
+                                            </lord-icon>
+                                        </div>
+                                        <div class="checkout-box">
+                                            <div class="checkout-title">
+                                                <h4>Shipping Address</h4>
+                                            </div>
+
+                                            <div class="checkout-detail">
+                                                <div class="row g-4">
+
+
+
+                                                    <% if (shipping_address_data && shipping_address_data.length> 0) {
+                                                        %>
+                                                        <% shipping_address_data.forEach(address=> { %>
+
+
+                                                            <div class="col-xxl-6 col-lg-12 col-md-6">
+                                                                <div class="delivery-address-box">
+                                                                    <div>
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input" type="radio"
+                                                                                name="address_id"
+                                                                                value="<%= address.id %>"
+                                                                                id="flexRadioDefault1" required>
+                                                                        </div>
+
+
+
+                                                                        <ul class="delivery-address-detail">
+                                                                            <!-- <li>
+                                                                                <h4 class="fw-500">Jack Jennas</h4>
+                                                                            </li> -->
+
+                                                                            <li>
+                                                                                <p class="text-content"><span
+                                                                                        class="text-title">Address
+                                                                                        : </span>
+                                                                                    <%= address.address %>,
+                                                                                        <%= address.area %>,
+                                                                                            <%= address.landmark %>,
+                                                                                                <%= address.region %>,
+                                                                                                    <%= address.country
+                                                                                                        %>
+                                                                                </p>
+                                                                            </li>
+
+
+
+
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <% }); %>
+                                                                <% } else { %>
+                                                                    <p>No shipping addresses found.</p>
+                                                                    <% } %>
+
+
+
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="checkout-icon">
+                                            <lord-icon target=".nav-item" src="https://cdn.lordicon.com/qmcsqnle.json"
+                                                trigger="loop-on-hover" colors="primary:#0baf9a" class="lord-icon">
+                                            </lord-icon>
+                                        </div>
+                                        <div class="checkout-box">
+                                            <div class="checkout-title">
+                                                <h4>Net Payment Terms
+                                                </h4>
+                                            </div>
+
+                                            <div class="checkout-detail">
+                                                <div class="row g-4">
+                                                    <div class="col-xxl-6">
+                                                        <div class="delivery-option">
+                                                            <div class="delivery-category">
+                                                                <div class="shipment-detail">
+                                                                    <div
+                                                                        class="form-check custom-form-check hide-check-box">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="payment_mode" value="CREDIT"
+                                                                            id="payment_mode" checked>
+                                                                        <label class="form-check-label"
+                                                                            for="payment_mode">Credit Card</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xxl-6">
+                                                        <div class="delivery-option">
+                                                            <div class="delivery-category">
+                                                                <div class="shipment-detail">
+                                                                    <div
+                                                                        class="form-check custom-form-check hide-check-box">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="payment_mode" id="COD" value="COD">
+                                                                        <label class="form-check-label" for="COD">Cash
+                                                                            On Delivery</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xxl-6">
+                                                        <div class="delivery-option">
+                                                            <div class="delivery-category">
+                                                                <div class="shipment-detail">
+                                                                    <div
+                                                                        class="form-check mb-0 custom-form-check show-box-checked">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="payment_mode" id="Cheque"
+                                                                            value="CHEQUE">
+                                                                        <label class="form-check-label" for="Cheque">On
+                                                                            Credit Card</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="right-side-summery-box">
+                            <div class="summery-box-2">
+                                <div class="summery-header">
+                                    <h3>Order Summery</h3>
+                                </div>
+
+
+
+                                <ul class="summery-total">
+                                    <li>
+                                        <h4>Order Amount: </h4>
+                                        <h4 class="price">AED <%= carts_Amount.total %>
+                                        </h4>
+                                    </li>
+
+
+                                    <li>
+                                        <h4>Discount Amount: </h4>
+                                        <h4 class="price">AED <%= carts_Amount.total_discount_amount %>
+                                        </h4>
+                                    </li>
+
+                                    <li>
+                                        <h4>VAT Amount: </h4>
+                                        <h4 class="price">AED <%= carts_Amount.total_tax_value %>
+                                        </h4>
+                                    </li>
+
+                                    <li>
+                                        <h4>Net Order Amount: </h4>
+                                        <h4 class="price">AED <%= carts_Amount.grand_total %>
+                                        </h4>
+                                    </li>
+
+                                    <li>
+
+                                        <h4 class=" " id="selectedValues">
+                                        </h4>
+                                    </li>
+
+                                    <li class="list-total">
+                                        <h4>Net Payable Amount: </h4>
+                                        <h4 class="price">AED <%= carts_Amount.grand_total %>
+                                        </h4>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="checkout-offer">
+                                <div class="offer-title">
+                                    <div class="offer-icon">
+                                        <img src="https://themes.pixelstrap.com/fastkart/assets/images/inner-page/offer.svg"
+                                            class="img-fluid" alt="">
+                                    </div>
+                                    <div class="offer-name">
+                                        <h6>Redeem Loyalty Points</h6>
+                                    </div>
+                                </div>
+
+
+                                <ul class="offer-detail">
+
+
+                                    <li>
+
+                                        <label for="redeemPointsCheckbox">Available Points: <%=
+                                                loyalty_point.loyalty_point %></label>
+                                    </li>
+                                    <li> <input type="checkbox" class="form-check-input"
+                                            value="<%= loyalty_point.loyalty_point_amount %>" id="redeemPointsCheckbox"
+                                            name="redeemPointsCheckbox">
+                                    </li>
+                                    <li>
+                                        <label for="redeemPointsCheckbox">Available Redeem Loyalty Points : AED <%=
+                                                loyalty_point.loyalty_point_amount %></label>
+                                    </li>
+
+
+                                </ul>
+
+                            </div>
+                            <button type="submit" class="btn theme-bg-color text-white btn-md w-100 mt-4 fw-bold">Place
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </section>
+    <!-- Checkout section End -->
+
+    <script src="../assets/js/jquery-3.6.0.min.js"></script>
+
+
+
+    <%- include('../include/footer') %>
+
+
+        <!-- Lord-icon Js -->
+        <script src="../assets/js/lusqsztk.js"></script>
+        <!-- feather icon js-->
+        <script src="../assets/js/feather/feather.min.js"></script>
+        <script src="../assets/js/feather/feather-icon.js"></script>
+        <!-- Delivery Option js -->
+        <script src="../assets/js/delivery-option.js"></script>
+        <script>
+            // document.addEventListener('DOMContentLoaded', function () {
+            //     const orderForm = document.getElementById('orderForm');
+            //     const submitBtn = document.getElementById('submitBtn');
+
+            //     orderForm.addEventListener('submit', function (event) {
+            //         event.preventDefault(); // Prevent default form submission
+
+            //         // Serialize form data
+            //         // Convert FormData to JSON
+            //         function formDataToJson(formData) {
+            //             const json = {};
+            //             formData.forEach(function (value, key) {
+            //                 json[key] = value;
+            //             });
+            //             return json;
+            //         }
+
+
+
+            //         // Get the FormData object from the form
+            //         const formData = new FormData(orderForm);
+
+            //         // Convert FormData to JSON
+            //         const jsonData = formDataToJson(formData);
+
+            //        //(jsonData);
+
+
+            //         // Send form data via AJAX
+            //         fetch('/OrderSummery', {
+            //             method: 'get',
+            //             body: formData
+            //         })
+            //             .then(response => response.json())
+            //             .then(data => {
+            //                 // Handle the response data
+            //                //(data);
+            //                 // Redirect to order success page or show a success message
+            //             })
+            //             .catch(error => {
+            //                 console.error('Error:', error);
+            //                 // Show error message or handle the error
+            //             });
+            //     });
+            // });
+
+        </script>
+
+        <script>
+            $(".show-box-checked").click(function () {
+                $(".future-box").css("display", "block");
+            });
+            $(".hide-check-box").click(function () {
+                $(".future-box").css("display", "none");
+            });
+        </script>
+
+        <script>
+            // Get the checkbox elements
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+            // Add event listener to each checkbox
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function () {
+                    // Check if the checkbox is checked
+                    if (this.checked) {
+                        // If checked, append its value to the HTML element
+                        document.getElementById('selectedValues').innerHTML += '<p>Loyalty Points Amount Redeemed: AED: ' + this.value + '</p>';
+                    } else {
+                        // If unchecked, remove its value from the HTML element
+                        document.getElementById('selectedValues').innerHTML = document.getElementById('selectedValues').innerHTML.replace('<p>Loyalty Points Amount Redeemed: AED: ' + this.value + '</p>', '');
+                    }
+                });
+            });
+        </script>

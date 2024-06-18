@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Aki">
+    <meta name="keywords" content="Aki">
+    <meta name="author" content="Aki">
+    <link rel="icon" href="<%= baseUrl %>/assets/images/logo/favicon-32x32.png" type="image/x-icon">
+    <title>Home</title>
+
+    <!-- Google font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap">
+
+    <!-- bootstrap css -->
+    <link id="rtl-link" rel="stylesheet" type="text/css" href="<%= baseUrl %>/assets/css/vendors/bootstrap.css">
+    <!-- wow css -->
+    <link rel="stylesheet" href="<%= baseUrl %>/assets/css/animate.min.css">
+    <!-- Iconly css -->
+    <link rel="stylesheet" type="text/css" href="<%= baseUrl %>/assets/css/bulk-style.css">
+    <link rel="stylesheet" type="text/css" href="<%= baseUrl %>/assets/css/vendors/animate.css">
+    <!-- Template css -->
+    <link id="color-link" rel="stylesheet" type="text/css" href="<%= baseUrl %>/assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" class="rel">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css'>
+
+
+    <style>
+        .active {
+            color: #b69c6f !important;
+            border-bottom: 3px solid #b69c6f !important;
+        }
+    </style>
+
+
+</head>
+
+<body class="bg-effect">
+    <div id="loader-overlay">
+        <div id="loader"></div>
+    </div>
+
+
+
+
+    <!-- Header Start -->
+    <header class="pb-md-4 pb-0">
+
+        <div class="header-top">
+            <div class="container-fluid-lg">
+                <div class="row">
+                    <div class="col-xxl-3 d-xxl-block d-none">
+                        <div class="top-left-header">
+                            <i class="iconly-Location icli text-white"></i>
+                            <span class="text-white">1418 Riverwood Drive, CA 96052, US</span>
+                        </div>
+                    </div>
+
+                    <div class="col-xxl-6 col-lg-9 d-lg-block d-none">
+                        <div class="header-offer">
+                            <div class="notification-slider">
+                                <div>
+                                    <div class="timer-notification">
+                                        <h6><strong class="me-1">Welcome to AKI!</strong><strong class="ms-1">New Coupon
+                                                Code:12345
+                                            </strong>
+
+                                        </h6>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="timer-notification">
+                                        <h6>Something you love is now on sale!
+                                            <a href="" class="text-white">Buy Now
+                                                !</a>
+                                        </h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <ul class="about-list right-nav-about">
+                            <li class="right-nav-list">
+                                <div class="dropdown theme-form-select">
+                                    <button class="btn dropdown-toggle" type="button" id="select-language"
+                                        data-bs-toggle="dropdown">
+                                        <!-- <img src="../assets/images/country/united-states.png"
+                                            class="img-fluid blur-up lazyload" alt=""> -->
+                                        <span>English</span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li>
+                                            <a class="dropdown-item" href="javascript:void(0)" id="english">
+                                                <!-- <img src="../assets/images/country/united-kingdom.png"
+                                                    class="img-fluid blur-up lazyload" alt=""> -->
+                                                <span>English</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="javascript:void(0)" id="france">
+                                                <!-- <img src="../assets/images/country/germany.png"
+                                                    class="img-fluid blur-up lazyload" alt=""> -->
+                                                <span>Arabic</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="javascript:void(0)" id="chinese">
+                                                <!-- <img src="../assets/images/country/turkish.png"
+                                                    class="img-fluid blur-up lazyload" alt=""> -->
+                                                <span>Malyalam</span>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a class="dropdown-item" href="javascript:void(0)" id="chinese">
+                                                <!-- <img src="../assets/images/country/turkish.png"
+                                                    class="img-fluid blur-up lazyload" alt=""> -->
+                                                <span>Urdu</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <!-- <li class="right-nav-list">
+                                <div class="dropdown theme-form-select">
+                                    <button class="btn dropdown-toggle" type="button" id="select-dollar"
+                                        data-bs-toggle="dropdown">
+                                        <span>USD</span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end sm-dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" id="aud" href="javascript:void(0)">AUD</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" id="eur" href="javascript:void(0)">EUR</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" id="cny" href="javascript:void(0)">CNY</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="top-nav top-header sticky-header">
+            <div class="container-fluid-lg">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="navbar-top">
+                            <button class="navbar-toggler d-xl-none d-inline navbar-menu-button    left-dashboard-show "
+                                type="button">
+                                <span class="navbar-toggler-icon">
+                                    <i class="fa-solid fa-bars"></i>
+                                </span>
+                            </button>
+                            <a href="/" class="web-logo nav-logo">
+                                <img src="<%= baseUrl %>/assets/images/logo/akilogo.png"
+                                    class="img-fluid blur-up lazyload" alt="">
+                            </a>
+
+                            <div class="middle-box">
+
+
+                                <form action="./search" method="get">
+                                    <div class="search-box">
+                                        <div class="input-group">
+                                            <input type="search" name="search" class="form-control"
+                                                placeholder="I'm searching for...">
+                                            <button class="btn" type="submit" id="button-addon2">
+                                                <i data-feather="search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="rightside-box">
+                                <div class="search-full">
+                                    <div class="input-group">
+                                        <span class="input-group-text">
+                                            <i data-feather="search" class="font-light"></i>
+                                        </span>
+                                        <input type="text" class="form-control search-type" placeholder="Search here..">
+                                        <span class="input-group-text close-search">
+                                            <i data-feather="x" class="font-light"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <ul class="right-side-menu">
+                                    <li class="right-side">
+                                        <div class="delivery-login-box">
+                                            <div class="delivery-icon">
+                                                <div class="search-box">
+                                                    <i data-feather="search"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="right-side contact">
+                                        <a href="contact-us" class="delivery-login-box">
+                                            <div class="delivery-icon">
+                                                <i data-feather="phone-call"></i>
+                                            </div>
+                                            <div class="delivery-detail">
+                                                <h6>24/7 Delivery</h6>
+                                                <h5>+91 888 104 2340</h5>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                    <li class="right-side">
+                                        <div class="onhover-dropdown header-badge">
+
+                                            <a href="/cart" class="href">
+                                                <button type="button" class="btn p-0 position-relative header-wishlist">
+                                                    <i data-feather="shopping-cart"></i>
+                                                    <span
+                                                        class="position-absolute top-0 start-100 translate-middle badge">
+                                                        <% if (!userData) { %>
+                                                            <!-- Render the CartCount value if it exists -->
+                                                            0
+
+                                                            </p>
+                                                            <% } else { %>
+                                                                <!-- Render a default message or handle the case when CartCount does not exist -->
+                                                                <% if (typeof CartCount !=='undefined' ) { %>
+                                                                    <!-- Render CartCount if it's not undefined -->
+                                                                    <%= CartCount %>
+                                                                        <% } else { %>
+                                                                            <!-- Handle the case when CartCount is undefined -->
+                                                                            0
+                                                                            <% } %>
+
+                                                                                <% } %>
+
+
+
+                                                    </span>
+                                                </button>
+
+                                            </a>
+
+
+                                        </div>
+                                    </li>
+                                    <li class="right-side onhover-dropdown">
+                                        <div class="delivery-login-box">
+                                            <div class="delivery-icon">
+                                                <i data-feather="user"></i>
+                                            </div>
+                                            <div class="delivery-detail">
+                                                <h6>Hello,</h6>
+                                                <h5>My Account</h5>
+                                            </div>
+                                        </div>
+
+                                        <% if (!userData) { %>
+                                            <div class="onhover-div onhover-div-login">
+                                                <ul class="user-box-name">
+                                                    <li class="product-box-contain">
+                                                        <i></i>
+                                                        <a href="login">Log In</a>
+                                                    </li>
+                                                    <li class="product-box-contain">
+                                                        <a href="sign-up">Register</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <% } else { %>
+                                                <div class="onhover-div onhover-div-login">
+                                                    <ul class="user-box-name">
+                                                        <li class="product-box-contain">
+                                                            <i></i>
+                                                            <a href="./Profile">Profile</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <% } %>
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="header-nav">
+
+
+
+                        <div class="header-nav-left">
+                            <!-- <button class="dropdown-category dropdown-category-2">
+                                <i data-feather="align-left"></i>
+                                <span>All Categories</span>
+                            </button> -->
+
+                            <% if (userData) { %>
+                                <button
+                                    class="dropdown-category dropdown-category-2 left-dashboard-show btn-animation btn-md fw-bold mb-4  hide-on-mobile">
+                                    <i data-feather="align-left"></i>All</button>
+                                <% } %>
+
+
+
+                        </div>
+
+
+                        <div class="header-nav-middle">
+                            <div class="main-nav navbar navbar-expand-xl navbar-light navbar-sticky">
+                                <div class="offcanvas offcanvas-collapse order-xl-2" id="primaryMenu">
+                                    <div class="offcanvas-header navbar-shadow">
+                                        <h5>Menu</h5>
+                                        <button class="btn-close lead" type="button"
+                                            data-bs-dismiss="offcanvas"></button>
+                                    </div>
+                                    <div class="offcanvas-body">
+
+                                        <ul class="navbar-nav">
+
+
+                                            <ul class="nav">
+                                                <li class="nav-item ">
+                                                    <a class="nav-link  " href="/">Home</a>
+                                                </li>
+                                                <li class="nav-item ">
+                                                    <a class="nav-link " href="/category">Categories</a>
+                                                </li>
+                                                <li class="nav-item ">
+                                                    <a class="nav-link " href="/Deals">Deals</a>
+                                                </li>
+                                                <li class="nav-item ">
+                                                    <a class="nav-link " href="/PreviousOrdersProgress">Order
+                                                        History</a>
+                                                </li>
+                                            </ul>
+
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="header-nav-right">
+                            <button class="btn deal-button" data-bs-toggle="modal" data-bs-target="#deal-box">
+                                <i data-feather="zap"></i>
+                                <span>Deal Today</span>
+                            </button>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+
+
+
+
+
+    <!-- mobile fix menu start -->
+    <div class="mobile-menu d-md-none d-block mobile-cart">
+        <ul>
+            <li>
+                <a href="/">
+                    <img src="<%= baseUrl %>/assets/Icons/FooterIcons/Home.png" class="img-fluid" alt="">
+                    <span>Home</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/Deals" class="search-box">
+                    <img src="<%= baseUrl %>/assets/Icons/FooterIcons/Deals.png" class="img-fluid" alt="">
+                    <span>Deals</span>
+                </a>
+            </li>
+
+            <li class="mobile-category">
+                <a href="/category">
+                    <img src="<%= baseUrl %>/assets/Icons/FooterIcons/Categories.png" class="img-fluid" alt="">
+                    <span>Category</span>
+                </a>
+            </li>
+
+
+
+            <li>
+                <a href="/PreviousOrdersProgress">
+                    <img src="<%= baseUrl %>/assets/Icons/FooterIcons/OrderHistory.png" class="img-fluid" alt="">
+                    <span>Order History</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/contact-us">
+                    <img src="<%= baseUrl %>/assets/Icons/FooterIcons/Support.png" class="img-fluid" alt="">
+                    <span>Support</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- mobile fix menu end -->

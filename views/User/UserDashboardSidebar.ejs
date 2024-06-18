@@ -1,0 +1,153 @@
+<div class="col-xxl-3 col-lg-4">
+    <div class="dashboard-left-sidebar">
+        <div class="close-button d-flex ">
+            <button class="close-sidebar">
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+        </div>
+
+
+        <style>
+            .nav-pills .nav-link img {
+                height: 40px;
+                margin: 0 10px 0 0;
+            }
+        </style>
+
+        <div class="profile-box">
+            <div class="cover-image">
+                <img src="<%= baseUrl %>/assets/images/inner-page/cover-img.jpg" class="img-fluid blur-up lazyload"
+                    alt="">
+            </div>
+
+            <div class="profile-contain">
+                <div class="profile-image">
+                    <div class="position-relative">
+                        <% if (userData && userData.image_url) { %>
+                            <img src="<%- userData.image_url %>" class="blur-up lazyload update_img" alt="">
+                            <% } else { %>
+                                <!-- Placeholder image or alternative content when userData.image_url is not available -->
+                                <img src="https://www.pngitem.com/pimgs/m/22-220721_circled-user-male-type-user-colorful-icon-png.png"
+                                    class="blur-up lazyload update_img" alt="Placeholder Image">
+                                <% } %>
+
+                    </div>
+                </div>
+
+                <div class="profile-name">
+                    <h3><%- userData.name %></h3>
+                    <h6 class="text-content"><%- userData.email %></h6>
+                </div>
+            </div>
+        </div>
+
+        <ul class="nav nav-pills user-nav-pills" id="pills-tab" role="tablist">
+            <!-- <li class="nav-item" role="presentation">
+                <button class="nav-link " id="pills-dashboard-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-dashboard" type="button">
+                    <i data-feather="home"></i>
+
+                    DashBoard</button>
+            </li> -->
+
+            <li class="nav-item " role="presentation">
+                <a href="./Profile" class="href">
+                    <button class="nav-link <%= currentUrl === '/Profile' ? 'active' : '' %>" type="button">
+                        <img src="<%= baseUrl %>/assets/Icons/MenuIcons/Profile.png" class="img-fluid" alt="">
+                        Profile</button>
+                </a>
+            </li>
+
+            <li class="nav-item" role="presentation">
+                <a href="./CreditDetails" class="href">
+                    <button class="nav-link <%= currentUrl === '/CreditDetails' ? 'active' : '' %>" type="button">
+                        <img src="<%= baseUrl %>/assets/Icons/MenuIcons/OutstandingInvoices.png" class="img-fluid"
+                            alt="">
+                        Outstanding Invoices
+                    </button>
+                </a>
+
+            </li>
+
+
+            <li class="nav-item" role="presentation">
+                <a href="./LoyaltyPoints" class="href">
+                    <button class="nav-link <%= currentUrl === '/LoyaltyPoints' ? 'active' : '' %>" type="button">
+                        <img src="<%= baseUrl %>/assets/Icons/MenuIcons/LoyaltyPoints.png" class="img-fluid" alt="">
+                        Loyalty
+                        Points</button>
+                </a>
+            </li>
+
+            <!-- 
+            <li class="nav-item" role="presentation">
+                <a href="./LanguageSettings" class="href">
+                    <button class="nav-link" type="button">
+                         <img src="<%= baseUrl %>/assets/Icons/MenuIcons/Categories.png" class="img-fluid" alt="">
+                        Language
+                        Settings</button>
+                </a>
+            </li> -->
+
+            <li class="nav-item" role="presentation">
+                <a href="./PreviousOrdersProgress" class="href">
+                    <button class="nav-link <%= currentUrl === '/PreviousOrdersProgress' ? 'active' : '' %>"
+                        type="button">
+                        <img src="<%= baseUrl %>/assets/Icons/MenuIcons/PreviousOrders.png" class="img-fluid" alt="">
+                        Previous
+                        Orders</button>
+                </a>
+            </li>
+
+            <li class="nav-item" role="presentation">
+                <a href="./PurchaseReturns" class="href">
+                    <button class="nav-link <%= currentUrl === '/PurchaseReturns' ? 'active' : '' %>" type="button">
+                        <img src="<%= baseUrl %>/assets/Icons/MenuIcons/PurchaseReturns.png" class="img-fluid" alt="">
+                        Purchase
+                        Returns</button>
+                </a>
+            </li>
+
+            <li class="nav-item" role="presentation">
+                <a href="./PaymentSummary" class="href">
+                    <button class="nav-link <%= currentUrl === '/PaymentSummary' ? 'active' : '' %>" type="button">
+                        <img src="<%= baseUrl %>/assets/Icons/MenuIcons/PaymentSummary.png" class="img-fluid" alt="">
+                        Payment
+                        Summary</button>
+                </a>
+            </li>
+
+            <li class="nav-item" role="presentation">
+                <a href="./FrequentlyAskedQuestions" class="href">
+                    <button class="nav-link <%= currentUrl === '/FrequentlyAskedQuestions' ? 'active' : '' %>"
+                        type="button">
+                        <img src="<%= baseUrl %>/assets/Icons/MenuIcons/FrequentlyAskedQuestions.png" class="img-fluid"
+                            alt="">
+                        Frequently Asked
+                        Questions</button>
+
+                </a>
+            </li>
+
+            <li class="nav-item" role="presentation">
+                <a href="./ResetPassword" class="href">
+                    <button class="nav-link <%= currentUrl === '/ResetPassword' ? 'active' : '' %>" type="button">
+                        <img src="<%= baseUrl %>/assets/Icons/MenuIcons/ResetPassword.png" class="img-fluid" alt="">
+
+                        Reset Password</button>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="./logout" class="href">
+                    <button class="nav-link" type="button">
+                        <img src="<%= baseUrl %>/assets/Icons/MenuIcons/Logout.png" class="img-fluid" alt="">
+                        Logout</button>
+
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</div>

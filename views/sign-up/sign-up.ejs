@@ -1,0 +1,975 @@
+<%- include('../include/header.ejs') %>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+    <style>
+        .invalid-feedback {
+            color: #ff606e;
+        }
+
+        .valid-feedback {
+            color: #2acc80;
+        }
+    </style>
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadcrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-contain">
+                        <h2>Sign In</h2>
+
+                        <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="/">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active">Sign In</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- log in section start -->
+    <!-- log in section start -->
+    <section class="log-in-section section-b-space">
+        <div class="container-fluid-lg w-100">
+            <div class="row">
+                <!-- <div class="col-xxl-6 col-xl-5 col-lg-6 d-lg-block d-none ms-auto">
+                <div class="image-contain">
+                    <img src="<%= baseUrl %>/assets/images/inner-page/sign-up.png" class="img-fluid" alt="">
+                </div>
+            </div> -->
+
+
+
+
+
+
+                <div class="col-xxl-12 col-xl-12 col-lg-12 col-sm-12 mx-auto">
+                    <div class="log-in-box">
+                        <div class="log-in-title">
+                            <h3>Welcome To Al Khayyat Investments</h3>
+                            <h4>Create New Account</h4>
+                        </div>
+
+                        <div class="input-box">
+                            <form id="signupForm" method="POST" class="row g-4 requires-validation" novalidate>
+
+
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-floating theme-form-floating">
+
+                                        <input type="text" class="form-control" required id="fullname"
+                                            name="outlet_name" value="testapp Name" placeholder="Outlet Name">
+                                        <label for="fullname">Outlet Name</label>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-floating theme-form-floating">
+                                        <input type="number" class="form-control" required id="trn_number"
+                                            name="trn_number" value="123411156" placeholder="TRN Number" maxlength="30">
+                                        <label for="trn_number">TRN Number</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-floating theme-form-floating">
+                                        <input type="email" value="teggstdapp@gmail.com" class="form-control" required
+                                            id="email" name="email" placeholder="Email Address" maxlength="30">
+                                        <label for="email">Email Address</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-floating theme-form-floating">
+                                        <input type="password" class="form-control" required id="password"
+                                            name="password" value="Password@123A" placeholder="Password">
+                                        <label for="password">Password</label>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-4 col-sm-12">
+                                    <div class="form-floating theme-form-floating">
+                                        <input type="password" class="form-control" required id="confirm_password"
+                                            name="confirm_password" value="Password@123A"
+                                            placeholder="Confirm Password">
+                                        <label for="confirm_password">Confirm Password</label>
+                                    </div>
+                                </div> -->
+
+
+
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-floating theme-form-floating">
+                                        <input type="text" class="form-control" required id="manager_name"
+                                            name="manager_name" value="Manager Name" placeholder="Outlet Manager Name"
+                                            maxlength="30">
+                                        <label for="manager_name">Outlet Manager Name</label>
+                                    </div>
+                                </div>
+
+
+                                <!--  -->
+
+
+
+
+
+
+
+
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-floating theme-form-floating">
+
+
+                                        <div class="row">
+
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+
+                                                        <div class="col-md-2 col-2">
+                                                            <input id="seller_phone1" value="+971" class="form-control"
+                                                                readonly>
+
+                                                        </div>
+                                                        <div class="col-md-2 col-10">
+                                                            <select class="form-select" required>
+                                                                <option disabled selected value="">Area Code
+                                                                </option>
+
+                                                                <% for (let i=1; i <=9; i++) { %>
+                                                                    <option value="<%= i %>">
+                                                                        <%= i %>
+                                                                    </option>
+                                                                    <% } %>
+                                                            </select>
+
+                                                        </div>
+
+                                                        <div class="col-md-8 col-12">
+                                                            <div class="form-floating theme-form-floating">
+                                                                <input type="number" class="form-control" required
+                                                                    id="outlet_landline_no" value="133"
+                                                                    name="outlet_landline_no"
+                                                                    placeholder="Outlet Landline Number"
+                                                                    oninput="checkMaxLengths(this)">
+                                                                <label for="outlet_landline_no">Outlet Landline
+                                                                    Number</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-floating theme-form-floating">
+
+
+                                        <div class="row">
+
+
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="col-md-2 col-2">
+                                                            <input id="seller_phone1" value="+971" class="form-control"
+                                                                readonly>
+
+                                                        </div>
+                                                        <div class="col-md-2 col-10">
+                                                            <select class="form-select" required>
+                                                                <option disabled selected value="">Area Code
+                                                                </option>
+
+                                                                <% for (let i=50; i <=59; i++) { %>
+                                                                    <option value="<%= i %>">
+                                                                        <%= i %>
+                                                                    </option>
+                                                                    <% } %>
+                                                            </select>
+
+                                                        </div>
+
+                                                        <div class="col-md-8 col-12">
+                                                            <div class="form-floating theme-form-floating">
+                                                                <input type="number" class="form-control" required
+                                                                    id="outlet_manager_no" name="outlet_manager_no"
+                                                                    placeholder="Outlet Manager Mobile Number"
+                                                                    oninput="checkMaxLength(this)" value="124445678">
+                                                                <label for="outlet_manager_no">Outlet Manager Mobile
+                                                                    Number</label>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-floating theme-form-floating">
+
+
+                                        <div class="row">
+
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+
+                                                        <div class="col-md-2 col-2">
+                                                            <input type="text" id="seller_phone1" value="+971"
+                                                                class="form-control" readonly>
+
+                                                        </div>
+                                                        <div class="col-md-2 col-10">
+                                                            <select class="form-select" required>
+                                                                <option disabled selected value="">Area Code
+                                                                </option>
+
+                                                                <% for (let i=50; i <=59; i++) { %>
+                                                                    <option value="<%= i %>">
+                                                                        <%= i %>
+                                                                    </option>
+                                                                    <% } %>
+                                                            </select>
+
+                                                        </div>
+
+                                                        <div class="col-md-8 col-12">
+                                                            <div class="form-floating theme-form-floating">
+                                                                <input type="number" class="form-control" required
+                                                                    id="manager_whatsapp_no" value="12345678"
+                                                                    name="manager_whatsapp_no"
+                                                                    placeholder="Outlet Manager WhatsApp Number"
+                                                                    oninput="checkMaxLength(this)">
+                                                                <label for="manager_whatsapp_no">Outlet Manager WhatsApp
+                                                                    Number</label>
+                                                            </div>
+
+                                                        </div>
+
+
+
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-floating theme-form-floating">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+
+                                                        <div class="col-md-2 col-2">
+                                                            <input id="seller_phone1" value="+971" class="form-control"
+                                                                readonly>
+
+                                                        </div>
+                                                        <div class="col-md-2 col-10">
+                                                            <select class="form-select" required>
+                                                                <option disabled selected value="">Area Code
+                                                                </option>
+
+                                                                <% for (let i=50; i <=59; i++) { %>
+                                                                    <option value="<%= i %>">
+                                                                        <%= i %>
+                                                                    </option>
+                                                                    <% } %>
+                                                            </select>
+
+                                                        </div>
+
+                                                        <div class="col-md-8 col-12">
+                                                            <div class="form-floating theme-form-floating">
+                                                                <input type="number" class="form-control" required
+                                                                    id="outlet_mobile_no" value="1299678"
+                                                                    name="outlet_mobile_no"
+                                                                    placeholder="Outlet Mobile Number"
+                                                                    oninput="checkMaxLength(this)">
+                                                                <label for="outlet_mobile_no">Outlet Mobile
+                                                                    Number</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+
+
+                                <!--  -->
+
+
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-floating theme-form-floating">
+                                        <input type="text" value="Address" class="form-control" required
+                                            id="outlet_address" name="outlet_address" placeholder="Outlet Address">
+                                        <label for="outlet_address">Outlet Address</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-floating theme-form-floating">
+                                        <input type="text" class="form-control" value="test" required id="area"
+                                            name="area" placeholder="Area">
+                                        <label for="area">Area</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-floating theme-form-floating">
+                                        <input type="text" class="form-control" value="test" required id="country"
+                                            name="country" placeholder="Enter Country Name">
+                                        <label for="country">Enter Country Name</label>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-floating theme-form-floating">
+                                        <input type="text" class="form-control" value="test" required id="landmark"
+                                            name="landmark" placeholder="Landmark">
+                                        <label for="landmark">Landmark</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-floating theme-form-floating">
+                                        <input type="text" class="form-control" value="Emirate" required id="region"
+                                            name="region" placeholder="Region / Emirate">
+                                        <label for="region">Region / Emirate</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-floating theme-form-floating">
+                                        <input type="text" class="form-control" value="100" required id="pin_code"
+                                            name="pin_code" placeholder="PO Box No./Makani No." maxlength="10">
+                                        <label for="pin_code">PO Box No./Makani No.</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-floating theme-form-floating">
+                                        <select class="form-select" id="retailer_type" name="retailer_type" required>
+                                            <option selected disabled value="">Select Retailer Type</option>
+
+
+                                            <% get_channels_data.forEach(data=>{ %>
+
+                                                <option value="<%= data.module_type %>">
+                                                    <%= data.preview_channel %>
+                                                </option>
+
+                                                <% }) %>
+
+                                        </select>
+                                        <label for="retailer_type">Select Retailer Type</label>
+                                    </div>
+                                </div>
+
+
+                                <!--  -->
+
+
+
+
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-floating theme-form-floating">
+                                        <select class="form-select" id="security_question_id"
+                                            name="security_question_id" required>
+                                            <option selected disabled value="">Select Security Question</option>
+
+                                            <% security_question.forEach(data=>{ %>
+                                                <option value="<%= data.id %>">
+                                                    <%= data.question %>
+                                                </option>
+                                                <% }) %>
+                                        </select>
+                                        <label for="security_question_id">Select Security Question</label>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-floating theme-form-floating">
+                                        <input type="text" class="form-control" value="test" required
+                                            id="security_question_answer" name="security_question_answer"
+                                            placeholder="security question answer">
+                                        <label for="security_question_answer">security question answer</label>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-floating theme-form-floating">
+                                        <input type="text" value="12345678" class="form-control" required
+                                            id="trade_license_no" name="trade_license_no" placeholder="Trade License">
+                                        <label for="trade_license_no">Trade License</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-floating theme-form-floating">
+                                        <input type="file" accept="image/*" class="form-control" required
+                                            id="trade_license" name="trade_license">
+                                        <label for="trade_license">Upload Trade License</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-floating theme-form-floating">
+                                        <input type="text" class="form-control" value="120005678" required
+                                            id="vat_certificate_no" name="vat_certificate_no"
+                                            placeholder="VAT Certificate" maxlength="30">
+                                        <label for="vat_certificate_no">VAT Certificate number</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-floating theme-form-floating">
+                                        <input type="file" accept="image/*" class="form-control" required
+                                            id="vat_certificate" name="vat_certificate">
+                                        <label for="vat_certificate">Upload VAT Certificate</label>
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-floating theme-form-floating">
+                                        <input type="text" class="form-control" value="12345678" required
+                                            id="passport_no" name="passport_no"
+                                            placeholder="Passport/Power Attorney copy">
+                                        <label for="passport_no">Passport/Power Attorney
+                                            copy</label>
+                                    </div>
+                                </div>
+
+
+                                <!--  -->
+
+
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-floating theme-form-floating">
+                                        <input type="file" accept="image/*" class="form-control" required id="passport"
+                                            name="passport">
+                                        <label for="passport">Upload Passport/Power
+                                            Attorney</label>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="forgot-box">
+                                        <div class="form-check ps-0 m-0 remember-box">
+                                            <input class="checkbox_animated check-box" type="checkbox"
+                                                id="flexCheckDefaultone" data-bs-toggle="modal" data-bs-target="#one">
+                                            <label class="form-check-label" for="flexCheckDefaultone">Agree to
+                                                the Terms
+                                                and
+                                                Conditions</label>
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="forgot-box">
+                                        <div class="form-check ps-0 m-0 remember-box">
+                                            <input class="checkbox_animated check-box" type="checkbox"
+                                                id="flexCheckDefaulttwo" data-bs-toggle="modal" data-bs-target="#two">
+                                            <label class="form-check-label" for="flexCheckDefaulttwo">Agree
+                                                to the Privacy Policy</label>
+                                        </div>
+
+
+                                    </div>
+
+
+
+
+
+                                </div>
+
+                                <div class="col-md-4 col-sm-12">
+                                    <button id="loginButton" class="btn btn-animation w-100" type="submit" disabled>Sign
+                                        Up</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="sign-up-box">
+                            <h4>Already have an account?</h4>
+                            <a href="login">Log In</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xxl-7 col-xl-6 col-lg-6"></div>
+            </div>
+        </div>
+    </section>
+    <!-- log in section end -->
+
+
+
+
+    <!-- Quick View Modal Box Start -->
+    <div class="modal fade theme-modal view-modal" id="one" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl modal-fullscreen-sm-down">
+            <div class="modal-content">
+
+                <div class="modal-header p-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row g-sm-4 g-2">
+
+
+                        <div class="col-lg-12">
+                            <div class="right-sidebar-modal">
+                                <textarea id="app_content" style="position: absolute; visibility: hidden;"
+                                    class="edit"><%= app_content.terms %></textarea>
+
+
+                                <div class="output grid">
+                                    <iframe id="iframe_app_content"></iframe>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Quick View Modal Box End -->
+
+    <!-- Quick View Modal Box Start -->
+    <div class="modal fade theme-modal view-modal" id="two" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-header p-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row g-sm-4 g-2">
+                        <div class="col-lg-12">
+                            <div class="right-sidebar-modal">
+                                <textarea id="html" style="position: absolute; visibility: hidden;"
+                                    class="edit"><%= app_content.policy %></textarea>
+
+
+                                <div class="output grid">
+                                    <iframe id="output-iframe"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Quick View Modal Box End -->
+
+    <style>
+        textarea:hover {
+            background: #fff !important;
+        }
+
+        textarea:focus {
+            outline: none;
+            background: #fff !important;
+        }
+
+        .grid {
+            width: 100%;
+            float: left;
+            overflow: hidden;
+            box-sizing: border-box;
+            padding: 0 30px 0 0;
+        }
+
+        .edit {
+            background: #fff !important;
+            padding: 5px;
+        }
+
+        .output {
+            background: #fff;
+            border-left: 1px solid #f3f3f3;
+            overflow: hidden;
+            padding: 0 20px;
+            margin: 20px 0;
+        }
+
+        .output iframe {
+            border: none;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .output iframe::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+
+
+
+    <script>
+        // Function to handle checkbox state
+        function handleCheckboxState(id, isChecked) {
+            document.getElementById(id).checked = isChecked;
+        }
+
+        // Get the Accept button element
+        // const acceptButton = document.getElementById('acceptButton');
+
+        // // Add event listener to Accept button for click event
+        // acceptButton.addEventListener('click', function () {
+        //     // If Accept button is clicked after the checkbox is checked, close the modal
+        //     if (checkbox.checked) {
+        //         $('#two').modal('hide');
+        //     }
+        // });
+
+        // Get the checkboxes and the button
+        const checkboxOne = document.getElementById('flexCheckDefaultone');
+        const checkboxTwo = document.getElementById('flexCheckDefaulttwo');
+        const loginButton = document.getElementById('loginButton');
+
+        // Add event listener to checkboxes for change event
+        checkboxOne.addEventListener('change', checkButtonState);
+        checkboxTwo.addEventListener('change', checkButtonState);
+
+        // Function to check the state of checkboxes and enable/disable the button
+        function checkButtonState() {
+            // If both checkboxes are checked, enable the button
+            loginButton.disabled = !(checkboxOne.checked && checkboxTwo.checked);
+        }
+    </script>
+
+
+
+    <!-- log in section end -->
+
+
+    <%- include('../include/footer.ejs') %>
+
+
+        <script>
+
+            const form = document.getElementById('signupForm');
+            form.addEventListener('submit', async function (event) {
+                event.preventDefault(); // Prevent default form submission
+                const formData = new FormData(form); // Collect form data
+                formData.append('os_type', 'web com');
+                formData.append('os_version', '20.');
+                formData.append('device_name', 'device_name');
+                formData.append('retailer_type_id', 1);
+
+
+                try {
+                    const response = await axios.post('<%= REGISTER_URL_ %>', formData, {
+
+                    });
+
+                    if (response.data.status === true) {
+                        const inputElements = form.querySelectorAll('input');
+                        inputElements.forEach(input => {
+                            input.value = ''; // Reset the value of each input field
+                        });
+
+                        // Optionally, you can perform additional actions after successfully adding the item to cart
+                        $.notify({
+
+                            message: response.data.message,
+                        }, {
+                            element: "body",
+                            position: null,
+                            type: "success",
+                            allow_dismiss: true,
+                            newest_on_top: false,
+                            showProgressbar: true,
+                            placement: {
+                                from: "top",
+                                align: "right",
+                            },
+                            offset: 20,
+                            spacing: 10,
+                            z_index: 1031,
+                            delay: 5000,
+                            animate: {
+                                enter: "animated fadeInDown",
+                                exit: "animated fadeOutUp",
+                            },
+                            icon_type: "class",
+                            template: '<div data-notify="container" class="col-xxl-3 col-lg-5 col-md-6 col-sm-7 col-12 alert alert-{0}" role="alert">' +
+                                '<button type="button" aria-hidden="true" class="btn-close" data-notify="dismiss"></button>' +
+                                '<span data-notify="icon"></span> ' +
+                                '<span data-notify="title">{1}</span> ' +
+                                '<span data-notify="message">{2}</span>' +
+                                '<div class="progress" data-notify="progressbar">' +
+                                '<div class="progress-bar progress-bar-info progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+                                "</div>" +
+                                '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                                "</div>",
+                        });
+
+
+                    } else {
+
+                        // Optionally, you can perform additional actions after successfully adding the item to cart
+                        $.notify({
+
+                            message: response.data.message,
+                        }, {
+                            element: "body",
+                            position: null,
+                            type: "danger",
+                            allow_dismiss: true,
+                            newest_on_top: false,
+                            showProgressbar: true,
+                            placement: {
+                                from: "top",
+                                align: "right",
+                            },
+                            offset: 20,
+                            spacing: 10,
+                            z_index: 1031,
+                            delay: 1000,
+                            animate: {
+                                enter: "animated fadeInDown",
+                                exit: "animated fadeOutUp",
+                            },
+                            icon_type: "class",
+                            template: '<div data-notify="container" class="col-xxl-3 col-lg-5 col-md-6 col-sm-7 col-12 alert alert-{0}" role="alert">' +
+                                '<button type="button" aria-hidden="true" class="btn-close" data-notify="dismiss"></button>' +
+                                '<span data-notify="icon"></span> ' +
+                                '<span data-notify="title">{1}</span> ' +
+                                '<span data-notify="message">{2}</span>' +
+                                '<div class="progress" data-notify="progressbar">' +
+                                '<div class="progress-bar progress-bar-info progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+                                "</div>" +
+                                '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                                "</div>",
+                        });
+
+
+                    }
+
+                    //('Response from server:', response.data);
+
+
+
+
+
+                } catch (error) {
+
+
+                    // Optionally, you can perform additional actions after successfully adding the item to cart
+                    $.notify({
+
+                        message: error.message,
+                    }, {
+                        element: "body",
+                        position: null,
+                        type: "danger",
+                        allow_dismiss: true,
+                        newest_on_top: false,
+                        showProgressbar: true,
+                        placement: {
+                            from: "top",
+                            align: "right",
+                        },
+                        offset: 20,
+                        spacing: 10,
+                        z_index: 1031,
+                        delay: 1000,
+                        animate: {
+                            enter: "animated fadeInDown",
+                            exit: "animated fadeOutUp",
+                        },
+                        icon_type: "class",
+                        template: '<div data-notify="container" class="col-xxl-3 col-lg-5 col-md-6 col-sm-7 col-12 alert alert-{0}" role="alert">' +
+                            '<button type="button" aria-hidden="true" class="btn-close" data-notify="dismiss"></button>' +
+                            '<span data-notify="icon"></span> ' +
+                            '<span data-notify="title">{1}</span> ' +
+                            '<span data-notify="message">{2}</span>' +
+                            '<div class="progress" data-notify="progressbar">' +
+                            '<div class="progress-bar progress-bar-info progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+                            "</div>" +
+                            '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                            "</div>",
+                    });
+
+
+                }
+            });
+        </script>
+
+
+
+
+        <script>
+            (function () {
+                'use strict'
+                const forms = document.querySelectorAll('.requires-validation')
+                Array.from(forms)
+                    .forEach(function (form) {
+                        form.addEventListener('submit', function (event) {
+                            if (!form.checkValidity()) {
+                                event.preventDefault()
+                                event.stopPropagation()
+                            }
+
+                            form.classList.add('was-validated')
+                        }, false)
+                    })
+            })()
+        </script>
+
+
+
+
+        <script>
+            function checkMaxLength(input) {
+                if (input.value.length > 8) {
+                    input.value = input.value.slice(0, 8); // Trim the value to the maximum length
+                }
+            }
+            function checkMaxLengths(input) {
+                if (input.value.length > 7) {
+                    input.value = input.value.slice(0, 7); // Trim the value to the maximum length
+                }
+            }
+
+        </script>
+
+
+        <script>
+            (function () {
+                $(document).ready(function () {
+                    $(".grid").height($(window).height());
+
+                    var outputIframe = document.getElementById('output-iframe');
+                    outputIframe.contentDocument.designMode = 'on';
+
+                    var outputIframe__ = document.getElementById('iframe_app_content');
+                    outputIframe__.contentDocument.designMode = 'on';
+
+                    function updateIframeContent__() {
+                        var textareaVal = $("#app_content").val();
+                        outputIframe__.contentDocument.open();
+                        outputIframe__.contentDocument.write(textareaVal);
+                        outputIframe__.contentDocument.close();
+                    }
+
+                    function updateIframeContent() {
+                        var textareaVal = $("#html").val();
+                        outputIframe.contentDocument.open();
+                        outputIframe.contentDocument.write(textareaVal);
+                        outputIframe.contentDocument.close();
+                    }
+
+
+
+                    $(window).on("load", function () {
+                        $("textarea.edit").on("input", function () {
+                            updateIframeContent();
+                            updateIframeContent__();
+
+                        });
+                    });
+
+                    // Initial content update
+                    updateIframeContent();
+                    updateIframeContent__();
+
+                });
+            })();
+        </script>

@@ -1,0 +1,320 @@
+<%- include('../include/header.ejs') %>
+    <!-- Breadcrumb Section Start -->
+    <section class="breadcrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-contain">
+                        <h2 class="mb-2">Log In</h2>
+                        <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="/">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active">Log In</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- log in section start -->
+    <section class="log-in-section background-image-2 section-b-space">
+        <div class="container-fluid-lg w-100">
+            <div class="row">
+                <div class="col-xxl-6 col-xl-5 col-lg-6 d-lg-block d-none ms-auto">
+                    <div class="image-contain">
+                        <img src="<%= baseUrl %>/assets/images/inner-page/log-in.png" class="img-fluid" alt="">
+                    </div>
+                </div>
+
+                <div class="col-xxl-4 col-xl-5 col-lg-6 col-sm-8 mx-auto">
+                    <div class="log-in-box">
+                        <div class="log-in-title">
+
+                            <h3><strong>Welcome</strong> <br>Sign in to get started and experience great shopping deals
+                            </h3>
+                            <br>
+                        </div>
+
+
+                        <% if (messages && messages.length> 0) { %>
+                            <% messages.forEach(message=> { %>
+                                <div class="alert alert-danger flash-message" role="alert">
+                                    <%= message %>
+                                </div>
+                                <% }); %>
+                                    <% } %>
+
+
+                                        <div class="input-box">
+                                            <form action="" class="row g-4" method="post">
+                                                <div class="col-12">
+                                                    <div class="form-floating theme-form-floating log-in-form">
+                                                        <input type="text" value="4180" autocomplete="off" required
+                                                            class="form-control" id="login_id" name="login_id"
+                                                            placeholder="Your login_id.">
+                                                        <label for="login_id">Your login id.</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div class="form-floating theme-form-floating log-in-form">
+                                                        <input type="password" autocomplete="off" required
+                                                            class="form-control" id="password" value="12345aki"
+                                                            name="password" placeholder="Password">
+                                                        <label for="password">Password</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div class="forgot-box">
+                                                        <div class="form-check ps-0 m-0 remember-box">
+                                                            <input class="checkbox_animated check-box" type="checkbox"
+                                                                id="flexCheckDefaultone" data-bs-toggle="modal"
+                                                                data-bs-target="#one">
+                                                            <label class="form-check-label"
+                                                                for="flexCheckDefaultone">Agree to the Terms
+                                                                and
+                                                                Conditions</label>
+
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <div class="forgot-box">
+                                                        <div class="form-check ps-0 m-0 remember-box">
+                                                            <input class="checkbox_animated check-box" type="checkbox"
+                                                                id="flexCheckDefaulttwo" data-bs-toggle="modal"
+                                                                data-bs-target="#two">
+                                                            <label class="form-check-label"
+                                                                for="flexCheckDefaulttwo">Agree
+                                                                to the Privacy Policy</label>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+
+
+
+                                                <div class="col-12">
+                                                    <button id="loginButton"
+                                                        class="btn btn-animation w-100 justify-content-center"
+                                                        type="submit" disabled>Log
+                                                        In</button>
+
+
+                                                    <a href="forgot" class="forgot-password">Forgot Password?</a>
+
+                                                </div>
+                                            </form>
+                                        </div>
+
+
+                                        <div class="sign-up-box">
+                                            <h4>Don't have an account?</h4>
+                                            <a href="sign-up">Sign Up</a>
+                                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- log in section end -->
+
+    <!-- Quick View Modal Box Start -->
+    <div class="modal fade theme-modal view-modal" id="one" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-header p-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-sm-4 g-2">
+
+
+                        <div class="col-lg-12">
+                            <div class="right-sidebar-modal">
+
+
+
+                                <textarea id="app_content" style="position: absolute; visibility: hidden;"
+                                    class="edit"><%= app_content.terms %></textarea>
+
+
+                                <div class="output grid">
+                                    <iframe id="iframe_app_content"></iframe>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Quick View Modal Box End -->
+
+    <!-- Quick View Modal Box Start -->
+    <div class="modal fade theme-modal view-modal" id="two" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-header p-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-sm-4 g-2">
+                        <div class="col-lg-12">
+                            <div class="right-sidebar-modal">
+
+                                <textarea id="html" style="position: absolute; visibility: hidden;"
+                                    class="edit"><%= app_content.policy %></textarea>
+
+
+                                <div class="output grid">
+                                    <iframe id="output-iframe"></iframe>
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Quick View Modal Box End -->
+
+
+
+    <style>
+        textarea:hover {
+            background: #fff !important;
+        }
+
+        textarea:focus {
+            outline: none;
+            background: #fff !important;
+        }
+
+        .grid {
+            width: 100%;
+            float: left;
+            overflow: hidden;
+            box-sizing: border-box;
+            padding: 0 30px 0 0;
+        }
+
+        .edit {
+            background: #fff !important;
+            padding: 5px;
+        }
+
+        .output {
+            background: #fff;
+            border-left: 1px solid #f3f3f3;
+            overflow: hidden;
+            padding: 0 20px;
+            margin: 20px 0;
+        }
+
+        .output iframe {
+            border: none;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .output iframe::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+
+
+    <script>
+        // Function to handle checkbox state
+        function handleCheckboxState(id, isChecked) {
+            document.getElementById(id).checked = isChecked;
+        }
+
+
+
+        // Get the checkboxes and the button
+        const checkboxOne = document.getElementById('flexCheckDefaultone');
+        const checkboxTwo = document.getElementById('flexCheckDefaulttwo');
+        const loginButton = document.getElementById('loginButton');
+
+        // Add event listener to checkboxes for change event
+        checkboxOne.addEventListener('change', checkButtonState);
+        checkboxTwo.addEventListener('change', checkButtonState);
+
+        // Function to check the state of checkboxes and enable/disable the button
+        function checkButtonState() {
+            // If both checkboxes are checked, enable the button
+            loginButton.disabled = !(checkboxOne.checked && checkboxTwo.checked);
+        }
+    </script>
+
+
+    <%- include('../include/footer.ejs') %>
+
+
+        <script>
+            (function () {
+                $(document).ready(function () {
+                    $(".grid").height($(window).height());
+
+                    var outputIframe = document.getElementById('output-iframe');
+                    outputIframe.contentDocument.designMode = 'on';
+
+                    var outputIframe__ = document.getElementById('iframe_app_content');
+                    outputIframe__.contentDocument.designMode = 'on';
+
+                    function updateIframeContent__() {
+                        var textareaVal = $("#app_content").val();
+                        outputIframe__.contentDocument.open();
+                        outputIframe__.contentDocument.write(textareaVal);
+                        outputIframe__.contentDocument.close();
+                    }
+
+                    function updateIframeContent() {
+                        var textareaVal = $("#html").val();
+                        outputIframe.contentDocument.open();
+                        outputIframe.contentDocument.write(textareaVal);
+                        outputIframe.contentDocument.close();
+                    }
+
+
+
+                    $(window).on("load", function () {
+                        $("textarea.edit").on("input", function () {
+                            updateIframeContent();
+                            updateIframeContent__();
+
+                        });
+                    });
+
+                    // Initial content update
+                    updateIframeContent();
+                    updateIframeContent__();
+
+                });
+            })();
+        </script>

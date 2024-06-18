@@ -1,0 +1,180 @@
+<%- include('../include/header.ejs') %>
+    <!-- Breadcrumb Section Start -->
+    <section class="breadcrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-contain">
+                        <h2>Forgot Password</h2>
+                        <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="index.html">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active">Forgot Password</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+    <% if (errorMessages && errorMessages.length> 0) { %>
+        <div class="alert alert-danger" role="alert">
+            <% errorMessages.forEach(message=> { %>
+                <%= message %><br>
+                    <% }); %>
+        </div>
+        <% } %>
+
+            <% if (successMessages && successMessages.length> 0) { %>
+                <div class="alert alert-success" role="alert">
+                    <% successMessages.forEach(message=> { %>
+                        <%= message %><br>
+                            <% }); %>
+                </div>
+                <% } %>
+
+
+
+
+                    <!-- log in section start -->
+                    <section class="log-in-section section-b-space forgot-section">
+                        <div class="container-fluid-lg w-100">
+                            <div class="row">
+                                <div class="col-xxl-6 col-xl-5 col-lg-6 d-lg-block d-none ms-auto">
+                                    <div class="image-contain">
+                                        <img src="<%= baseUrl %>/assets/images/inner-page/forgot.png" class="img-fluid"
+                                            alt="">
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-xxl-4 col-xl-5 col-lg-6 col-sm-8 mx-auto">
+                                    <div class="d-flex align-items-center justify-content-center h-100">
+                                        <div class="log-in-box">
+                                            <div class="log-in-title">
+                                                <h3>Welcome </h3>
+                                                <h4>Forgot your password</h4>
+                                            </div>
+
+                                            <div class="input-box">
+                                                <form class="row g-4 requires-validation" action="./forgot"
+                                                    method="post" id="forgotForm" novalidate>
+                                                    <div class="col-12">
+                                                        <div class="form-floating theme-form-floating ">
+                                                            <input type="text" class="form-control" name="login_id"
+                                                                id="login_id" placeholder="login_id" required>
+                                                            <label for="login_id">Login ID</label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <button class="btn btn-animation w-100" type="submit">Forgot
+                                                            Password</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- log in section end -->
+                    <%- include('../include/footer.ejs') %>
+
+
+
+
+                        <script>
+                            function successful(status) {
+
+                                // Optionally, you can perform additional actions after successfully adding the item to cart
+                                $.notify({
+                                    icon: "fa fa-check",
+                                    title: "Success!",
+                                    message: status,
+                                }, {
+                                    element: "body",
+                                    position: null,
+                                    type: "success",
+                                    allow_dismiss: true,
+                                    newest_on_top: false,
+                                    showProgressbar: true,
+                                    placement: {
+                                        from: "top",
+                                        align: "right",
+                                    },
+                                    offset: 20,
+                                    spacing: 10,
+                                    z_index: 1031,
+                                    delay: 1000,
+                                    animate: {
+                                        enter: "animated fadeInDown",
+                                        exit: "animated fadeOutUp",
+                                    },
+                                    icon_type: "class",
+                                    template: '<div data-notify="container" class="col-xxl-3 col-lg-5 col-md-6 col-sm-7 col-12 alert alert-{0}" role="alert">' +
+                                        '<button type="button" aria-hidden="true" class="btn-close" data-notify="dismiss"></button>' +
+                                        '<span data-notify="icon"></span> ' +
+                                        '<span data-notify="title">{1}</span> ' +
+                                        '<span data-notify="message">{2}</span>' +
+                                        '<div class="progress" data-notify="progressbar">' +
+                                        '<div class="progress-bar progress-bar-info progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+                                        "</div>" +
+                                        '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                                        "</div>",
+                                });
+
+
+                            }
+                        </script>
+
+                        <script>
+                            function Faild(status) {
+
+                                // Optionally, you can perform additional actions after successfully adding the item to cart
+                                $.notify({
+                                    icon: "fa fa-times",
+                                    title: "Faild!",
+                                    message: status,
+                                }, {
+                                    element: "body",
+                                    position: null,
+                                    type: "danger",
+                                    allow_dismiss: true,
+                                    newest_on_top: false,
+                                    showProgressbar: true,
+                                    placement: {
+                                        from: "top",
+                                        align: "right",
+                                    },
+                                    offset: 20,
+                                    spacing: 10,
+                                    z_index: 1031,
+                                    delay: 1000,
+                                    animate: {
+                                        enter: "animated fadeInDown",
+                                        exit: "animated fadeOutUp",
+                                    },
+                                    icon_type: "class",
+                                    template: '<div data-notify="container" class="col-xxl-3 col-lg-5 col-md-6 col-sm-7 col-12 alert alert-{0}" role="alert">' +
+                                        '<button type="button" aria-hidden="true" class="btn-close" data-notify="dismiss"></button>' +
+                                        '<span data-notify="icon"></span> ' +
+                                        '<span data-notify="title">{1}</span> ' +
+                                        '<span data-notify="message">{2}</span>' +
+                                        '<div class="progress" data-notify="progressbar">' +
+                                        '<div class="progress-bar progress-bar-info progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+                                        "</div>" +
+                                        '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                                        "</div>",
+                                });
+
+
+                            }
+                        </script>

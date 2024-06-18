@@ -1,0 +1,312 @@
+<%- include('../include/header') %>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css'>
+
+
+    <style>
+        .bg-warning {
+            --bs-bg-opacity: 1;
+            background-color: #FF9800 !important;
+        }
+    </style>
+
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadcrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-contain">
+                        <h2>User Dashboard</h2>
+                        <!-- <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="/">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active">User Dashboard</li>
+                            </ol>
+                        </nav> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+
+    <section class="user-dashboard-section section-b-space">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-xxl-12 col-lg-12">
+
+
+                    <div class="dashboard-right-sidebar">
+                        <div class="tab-content" id="pills-tabContent">
+
+                            <div class="tab-pane fade tab-pane fade show active" id="pills-order" role="tabpanel">
+                                <div class="dashboard-order">
+                                    <div class="title">
+
+                                        <h2>Purchase Returns</h2>
+                                        <p> <img src="<%= baseUrl %>/assets/img/damage.png" class="img-fluid "
+                                                style="height: 40px;" alt="">Damage/Shortage/Expiry</p>
+
+
+
+
+
+
+                                    </div>
+                                    <div class="mb-3 col-md-6" style="float: inline-end;">
+                                        <label for="Validity" class="form-label">Select Date Range:</label>
+                                        <input type="text" id="Validity" class="form-control" required name="dates" />
+                                        <div class="invalid-feedback">
+                                            this field is required
+                                        </div>
+
+                                    </div>
+
+
+
+
+
+
+                                    <div class="col-12">
+                                        <div class="product-section-box">
+
+                                            <a href="ReturnRequest" class="href">
+                                                <button style="float: inline-end;"
+                                                    class="btn theme-bg-color text-white btn-sm fw-bold mt-lg-0 mt-3 "
+                                                    data-bs-toggle="modal" data-bs-target="#editCard"><svg
+                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-plus me-2">
+                                                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                                    </svg> New Request</button>
+                                            </a>
+                                            <ul class="nav nav-tabs custom-nav" id="myTab" role="tablist">
+
+                                                <a href="PurchaseReturns" class="href">
+
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link active" id="description-tab"
+                                                            type="button">Request in process</button>
+                                                    </li>
+
+
+                                                </a>
+
+
+                                                <a href="ApprovelRequest" class="href">
+                                                    <li class="nav-item">
+                                                        <button class="nav-link" id="info-tab" type="button">Approvel
+                                                            Request
+                                                        </button>
+                                                    </li>
+
+
+                                                </a>
+
+
+
+
+                                            </ul>
+
+
+                                            <div class="tab-content custom-tab" id="myTabContent">
+                                                <div class="tab-pane fade show active" id="description" role="tabpanel">
+                                                    <div class="product-description" id="category-list">
+
+
+
+                                                    </div>
+                                                </div>
+
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+    <%- include('../include/footer.ejs') %>
+
+        <script src='https://cdn.jsdelivr.net/momentjs/latest/moment.min.js'></script>
+        <script src='https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js'></script>
+
+        <script>
+            $(document).ready(function () {
+                // Initialize the date range picker
+                $('input[name="dates"]').daterangepicker();
+
+                // Variables to keep track of pagination and loading state
+                let nextPageNumber = 1;
+                let loading = false;
+                let currentStartDate = "";
+                let currentEndDate = "";
+
+                // Function to load data
+                function loadMore(startDate = "", endDate = "", page = 1, reset = false) {
+                    if (loading) return; // Prevent multiple simultaneous requests
+                    loading = true; // Set loading indicator to true
+                    $('#loader-overlay').fadeIn();
+
+                    // AJAX request
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', `/PurchaseReturnsAjex`);
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === XMLHttpRequest.DONE) {
+                            // Request completed
+                            if (xhr.status === 200) {
+                                // Success
+                                const responses = JSON.parse(xhr.responseText); // Update responses variable
+                                $('#loader-overlay').fadeOut();
+
+                                // Get the container element
+                                const CategoryList = document.getElementById('category-list');
+
+                                // Clear the category list if reset is true
+                                if (reset) {
+                                    CategoryList.innerHTML = '';
+                                }
+
+                                // Check if the table already exists
+                                let tableBody = CategoryList.querySelector('tbody');
+                                if (!tableBody) {
+                                    // Create the table and append it to the category list
+                                    const tableHTML = `
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped table-hover">
+                                                <thead class="table-dark">
+                                                    <tr>
+                                                        <th>Return id</th>
+                                                        <th>Return Amount</th>
+                                                        <th>Date</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                        </div>
+                                    `;
+                                    CategoryList.insertAdjacentHTML('beforeend', tableHTML);
+                                    tableBody = CategoryList.querySelector('tbody');
+                                }
+
+                                if (responses.data && responses.data.length > 0) {
+                                    responses.data.forEach(data => {
+                                        // Format date function
+                                        const formatDate = (dateString) => {
+                                            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                                            return new Date(dateString).toLocaleDateString(undefined, options);
+                                        };
+
+                                        // Create a row element
+                                        const rowHTML = `
+                                            <tr>
+                                                <td>${data.return_request_no}</td>
+                                                <td>AED ${data.total_return_amount}</td>
+                                                <td>${formatDate(data.created_date)}</td>
+                                                <td>
+                                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#Process${data.id}">
+                                                        <button class="btn bg-warning text-white btn-sm fw-bold mt-lg-0 mt-3">In-Progress</button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        `;
+                                        // Append the row HTML to the table body
+                                        tableBody.insertAdjacentHTML('beforeend', rowHTML);
+                                    });
+                                } else {
+                                    if (page === 1) { // Show "No data found" only if it's the first page
+                                        const noDataHTML = `
+                                            <tr>
+                                                <td colspan="4">No data found</td>
+                                            </tr>
+                                        `;
+                                        tableBody.insertAdjacentHTML('beforeend', noDataHTML);
+                                    }
+                                }
+
+                                loading = false; // Reset loading indicator
+                                nextPageNumber = page + 1; // Increment page number for next load
+                            } else {
+                                // Error loading more products
+                                console.error("Error loading more products:", xhr.statusText);
+                                // Handle errors appropriately (e.g., display an error message to the user)
+                                $('#loader-overlay').fadeOut(); // Hide loading indicator on error
+                                loading = false; // Reset loading indicator
+                            }
+                        }
+                    };
+
+                    // Send AJAX request
+                    xhr.send(`startDate=${startDate}&endDate=${endDate}&nextPageNumber=${page}&APPROVED=ALL`);
+                }
+
+                // Initial call to load data on page load
+                loadMore();
+
+                // Event listener for the apply button
+                $('input[name="dates"]').on('apply.daterangepicker', function (ev, picker) {
+                    //("Apply button clicked");
+                    //("Start date: " + picker.startDate.format('YYYY-MM-DD'));
+                    //("End date: " + picker.endDate.format('YYYY-MM-DD'));
+
+                    nextPageNumber = 1; // Reset page number on new date range selection
+                    currentStartDate = picker.startDate.format('YYYY-MM-DD');
+                    currentEndDate = picker.endDate.format('YYYY-MM-DD');
+                    loadMore(currentStartDate, currentEndDate, nextPageNumber, true);
+                });
+
+                // Event listener for the cancel button
+                $('input[name="dates"]').on('cancel.daterangepicker', function (ev, picker) {
+                    //("Cancel button clicked");
+                });
+
+                window.addEventListener('scroll', function () {
+                    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+                        // Load more products when user scrolls to bottom of page
+                        loadMore(currentStartDate, currentEndDate, nextPageNumber);
+                    }
+                });
+            });
+        </script>
+
+        <script>
+        <%
+                // Define the formatDate function
+                function formatDate(dateString) {
+                    const date = new Date(dateString); // Parse the date string
+                    const year = date.getFullYear(); // Get the year
+                    const month = String(date.getMonth() + 1).padStart(2, '0'); // Get the month (zero-based) and pad with zero if needed
+                    const day = String(date.getDate()).padStart(2, '0'); // Get the day of the month and pad with zero if needed
+                    return `${year}-${month}-${day}`; // Return the formatted date
+                }
+                %>
+
+        </script>

@@ -1,0 +1,249 @@
+<%- include('../include/header') %>
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadcrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-contain">
+                        <h2>User Dashboard</h2>
+                        <!-- <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="/">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active">User Dashboard</li>
+                            </ol>
+                        </nav> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+
+    <section class="user-dashboard-section section-b-space">
+        <div class="container-fluid-lg">
+            <div class="row">
+
+
+
+
+                <div class="col-xxl-12 col-lg-12">
+
+                    <div class="dashboard-right-sidebar">
+                        <div class="dashboard-home">
+                            <div class="title">
+                                <h2>My Dashboard</h2>
+                                <span class="title-leaf">
+
+                                </span>
+                            </div>
+
+                            <div class="row g-4">
+                                <div class="col-xxl-6">
+                                    <div class="dashboard-content-title">
+                                        <h4>Account Information <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                data-bs-target="#editProfile">Edit</a>
+                                        </h4>
+                                    </div>
+
+                                </div>
+
+
+
+
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table info-table">
+                                    <tbody>
+                                        <tr>
+                                            <td>Email</td>
+                                            <td><%- Profile.email %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shop Mobile Number</td>
+                                            <td><%- Profile.mobile_no %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shop Name</td>
+                                            <td><%- Profile.details.shop_name %></td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>Shop Landline No</td>
+                                            <td><%- Profile.email %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shop Manager Name</td>
+                                            <td><%- Profile.details.manager_name %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shop Manager Mobile No</td>
+                                            <td><%- Profile.details.manager_mobile_no %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shop Manager WhatsApp No</td>
+                                            <td><%- Profile.details.manager_whatsapp_no %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Outlet Address</td>
+                                            <td><%- Profile.address1 %></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Pincode</td>
+                                            <td><%- Profile.details.pincode %></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Area</td>
+                                            <td><%- Profile.area %></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Country</td>
+                                            <td><%- Profile.details.country %></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Landmark</td>
+                                            <td><%- Profile.landmark %></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Region/Emirate</td>
+                                            <td><%- Profile.email %></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Dashboard Section Start -->
+    <!-- User Dashboard Section End -->
+
+
+    <div class="modal fade theme-modal" id="editProfile" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">Edit Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <form action="./update_user" method="post">
+
+                    <div class="modal-body">
+                        <div class="row g-4">
+                            <div class="col-xxl-12">
+
+                                <div class="form-floating theme-form-floating">
+                                    <input type="text" class="form-control" maxlength="20" id="pname"
+                                        name="manager_name" value="<%- Profile.details.manager_name %>">
+                                    <label for="pname">Outlet Manager Name</label>
+                                </div>
+
+                            </div>
+
+                            <div class="col-xxl-6">
+
+                                <div class="form-floating theme-form-floating">
+                                    <input type="tel" maxlength="10" max="10" class="form-control" id="landline_no"
+                                        name="landline_no" value="<%- Profile.details.landline_no %>">
+                                    <label for="landline_no">Outlet Landline Number</label>
+                                </div>
+
+                            </div>
+
+                            <div class="col-xxl-6">
+
+                                <div class="form-floating theme-form-floating">
+                                    <input class="form-control" type="tel"
+                                        value="<%- Profile.details.manager_mobile_no %>" name="manager_mobile_no"
+                                        id="mobile" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value =
+                                                this.value.slice(0, this.maxLength);">
+                                    <label for="mobile">Outlet Manager Mobile Number</label>
+                                </div>
+
+                            </div>
+
+                            <div class="col-6">
+
+                                <div class="form-floating theme-form-floating">
+                                    <input type="tel" maxlength="10" class="form-control" name="manager_whatsapp_no"
+                                        id="manager_whatsapp_no" value="<%- Profile.details.manager_whatsapp_no %>">
+                                    <label for="manager_whatsapp_no">Outlet Manager WhatsApp Number</label>
+                                </div>
+
+                            </div>
+
+                            <div class="col-6">
+
+                                <div class="form-floating theme-form-floating">
+                                    <input type="text" maxlength="10" class="form-control" id="security_question_answer"
+                                        name="security_question_answer"
+                                        value="<%- Profile.details.security_question_answer %>">
+                                    <label for="security_question_answer">Your Answer</label>
+                                </div>
+
+                            </div>
+
+                            <div class="col-xxl-4">
+
+                                <div class="form-floating theme-form-floating">
+                                    <select class="form-select" id="floatingSelect1" name="security_question_id">
+
+                                        <% get_security_question.forEach(data=> { %>
+                                            <option value="<%= data.id %>" <% if
+                                                (data.id===Profile.details.security_question_id) { %> selected <% } %>>
+                                                    <%= data.question %>
+                                            </option>
+                                            <% }); %>
+
+                                    </select>
+                                    <label for="floatingSelect">Select Security Question</label>
+                                </div>
+
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-animation btn-md fw-bold"
+                            data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn theme-bg-color btn-md fw-bold text-light">Save changes</button>
+                    </div>
+
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <%- include('../include/footer') %>

@@ -1,0 +1,156 @@
+<%- include('../include/header') %>
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadcrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-contain">
+                        <h2>Categories</h2>
+                        <!-- <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="/">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active">Categories</li>
+                            </ol>
+                        </nav> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+
+    <section class="section-b-space shop-section">
+        <div class="container-fluid-lg">
+
+            <div class="title">
+                <h2>Categories</h2>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="row g-sm-4 g-3 row-cols-xxl-4 row-cols-xl-3 row-cols-lg-2 row-cols-md-3 row-cols-2 product-list-section text"
+                        id="category-list">
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+    <%- include('../include/footer.ejs') %>
+
+
+        <script>
+            let nextPageNumber = 1; // Initialize nextPageNumber outside the loadMore function
+            let loading = false; // Initialize loading indicator
+            function loadMore() {
+                if (loading) return; // Prevent multiple simultaneous requests
+                loading = true; // Set loading indicator to true
+                $('#loader-overlay').fadeIn();
+                // AJAX request
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', `/category`);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        // Request completed
+                        if (xhr.status === 200) {
+                            // Success
+                            const responses = JSON.parse(xhr.responseText); // Update responses variable
+                            $('#loader-overlay').fadeOut();
+                            nextPageNumber += 1;
+                            // Get the container element
+                            const CategoryList = document.getElementById('category-list');
+                            responses.data.forEach(category => {
+                                // Create a product box element
+                                const productBoxHTML = `
+                        <div>
+                            <div class="product-box-3 h-100 wow fadeInUp">
+                                <div class="product-header">
+                                    <div class="product-image">
+                    
+
+                                        <!-- Link to category details page -->
+                        <a href="category-details/${category.id}">
+                            <!-- Use category image -->
+                            ${category ? `
+  
+        <img src="${category.image}" class="img-fluid blur-up lazyload" alt="Product Image" onerror="handleImageError(this)">
+` :
+                                        `
+        <img src="https://shopmefast.com/images/product-no-image.jpg" class="img-fluid blur-up lazyload" alt="Default Image" onerror="handleImageError(this)">
+    `
+                                    }
+
+                   
+                                </a>
+
+
+                                    </div>
+                                </div>
+                                <div class="product-footer">
+                                    <div class="product-detail">
+                                        <!-- <span class="span-name">Vegetable</span> -->
+
+
+                                        <a href="category-details/${category.id}">
+                                        <!-- Category description or additional information -->
+                                        <div class="blog-list">
+                                            <button
+                                                class="btn theme-bg-color mt-sm-4 btn-md mx-auto text-white fw-bold">
+                                                ${category.name}
+                                            </button>
+                                        </div>
+                                    </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+               
+        
+
+
+         `;
+                                // Append the product box HTML to the product list container
+                                CategoryList.insertAdjacentHTML('beforeend', productBoxHTML);
+                            });
+
+                            loading = false; // Reset loading indicator
+                        } else {
+                            // Error loading more products
+                            console.error("Error loading more products:", xhr.statusText);
+                            // Handle errors appropriately (e.g., display an error message to the user)
+                            $('#loader-overlay').fadeOut(); // Hide loading indicator on error
+                        }
+                    }
+                };
+
+                // Send AJAX request
+                xhr.send(`nextPageNumber=${nextPageNumber}`);
+            }
+
+            // Initial call to loadMore (optional, depending on your setup)
+            loadMore();
+
+            window.addEventListener('scroll', function () {
+                if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+                    // Load more products when user scrolls to bottom of page
+                    loadMore();
+                }
+            });
+
+        </script>
